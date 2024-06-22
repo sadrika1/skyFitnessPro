@@ -7,10 +7,16 @@ export default {
   plugins: [],
 }
 
-// module.exports= {
-//   content: ["./src/*.tsx"],
+
+
+// module.exports = {
 //   theme: {
-//     extend: {},
-//   },
-//   plugins: [],
+//     fontSize: {
+//       s:'0.4rem',
+//       sm: '0.8rem',
+//       base: '1rem',
+//       xl: '1.25rem',
+    
+//     }
+//   }
 // }

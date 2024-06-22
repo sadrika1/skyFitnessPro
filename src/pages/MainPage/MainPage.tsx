@@ -5,12 +5,16 @@ export default function MainPage() {
     return (
         <>
             <div>
-                <h1 >Начните заниматься спортом и улучшите качество жизни</h1>
-                <div className=" bg-yellow-100 ">
-                    <h6>Измени своё тело за полгода!</h6>
+                <div className="grid grid-cols-2 gap-10">
+                    <div className="font-bold text-[60px] mw-[900px]" >Начните заниматься спортом и улучшите качество жизни</div>
+                    <div className=" bg-BCEC30 ">Измени своё тело за полгода!</div>
                 </div>
                 <Courses />
-            
+                <Courses />
+                <Courses />
+                <Courses />
+                <Courses />
+
                 <button className=" bg-yellow-400 ">Наверх ↑</button>
             </div>
         </>
