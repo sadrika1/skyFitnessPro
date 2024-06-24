@@ -1,7 +1,14 @@
 import "./App.css";
+import ChosenCoursePage from "./pages/ChosenCoursePage";
 
 function App() {
-  return <h1>hey!</h1>;
+  return( 
+<>
+  <h1 className="text-3xl text-red font-bold underline">hey!</h1>
+  
+  <ChosenCoursePage />
+  </>
+  )
 }
 
 export default App;
