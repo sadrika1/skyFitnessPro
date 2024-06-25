@@ -9,14 +9,12 @@ export default {
 
 
 
-// module.exports = {
-//   theme: {
-//     fontSize: {
-//       s:'0.4rem',
-//       sm: '0.8rem',
-//       base: '1rem',
-//       xl: '1.25rem',
-    
-//     }
-//   }
-// }
+module.exports = {
+  theme: {
+      colors: {
+        'green': '#BCEC30',
+        'white': '#ffffff',
+        'gray':'#FAFAFA'
+      },
+  },
+}
