@@ -1,11 +1,8 @@
-
 import imgYoga from "/images/yoga.png"
-import imgBodyflex from "/images/bodyflex.png"
+import imgBodyflex from "/images/bodyflex.png";
 import imgStep from "/images/step.png"
 import imgStretching from "/images/stretching.png"
 import imgZumba from "/images/zumba.png"
-
-
 
 
 
@@ -13,8 +10,6 @@ import Course from "../../components/Courses/Course"
 
 
 export default function MainPage() {
-
-
     const courses = [
         {
             id: 1,
@@ -61,11 +56,10 @@ export default function MainPage() {
 
     return (
         <>
-            <div className="bg-gray-100 grid place-content-center">
+            <div className="font-roboto bg-gray-100 grid place-content-center">
                 <div className="mx-[140px] max-w-[1440px]">
                     <div className="flex justify-between my-[50px] relative">
                         <div className="font-semibold text-[60px] h-[120px] text-pretty inline-block align-middle" >Начните заниматься спортом и улучшите качество жизни</div>
-
                         <div className="mt-6  p-4 text-[32px] bg-green  min-w-[288px] max-h-[125px] rounded-md ">Измени своё тело за полгода!</div>
                         <div className="absolute top-[134px] right-[150px]">
                             <img src="images/polygon.png" alt="polygon" />
@@ -80,9 +74,7 @@ export default function MainPage() {
                     <div className="grid-cols-1 sm:grid md:grid-cols-3 -mr-10">
                         {courses.map(course =>
                             <Course course={course} key={course.id} />
-
                         )}
-
                     </div>
 
 

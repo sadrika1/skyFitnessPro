@@ -18,12 +18,12 @@ export type CourseOneType = {
     course: courseType,
 }
 export default function Course({ course }: CourseOneType) {
-    const { name, duration, timeaday, level } = course
+    const { name, duration, timeaday, level, src } = course
     return (
         <>
             <div className="relative shadow-lg max-w-[360px] mt-8 mb-2 flex flex-col self-start rounded-3xl bg-white sm:shrink-0 sm:grow sm:basis-0 box-border">
                 <div className="  mx-0 mt-0">
-                    <img className="rounded-3xl" src="images/zumba.png"></img>
+                    <img className="rounded-3xl" src={src}></img>
                     <img className="absolute top-[20px] right-[20px]" src={plusIcon} alt="add icon" />
                 </div>
                 <div className="p-6 mb-4 text-base grid md:gap-3 ">
