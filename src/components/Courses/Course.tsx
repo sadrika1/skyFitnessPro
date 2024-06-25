@@ -1,7 +1,7 @@
 import calendarIcon from "/icons/icon-calendar.svg"
 import timeIcon from "/icons/icon-time.svg"
 import difficultyIcon from "/icons/level.png"
-
+import plusIcon from "/icons/icon-plus.svg"
 
 
 
@@ -21,9 +21,10 @@ export default function Course({ course }: CourseOneType) {
     const { name, duration, timeaday, level } = course
     return (
         <>
-            <div className="shadow-lg max-w-[360px] mt-8 mb-2 flex flex-col self-start rounded-3xl bg-white sm:shrink-0 sm:grow sm:basis-0 box-border">
+            <div className="relative shadow-lg max-w-[360px] mt-8 mb-2 flex flex-col self-start rounded-3xl bg-white sm:shrink-0 sm:grow sm:basis-0 box-border">
                 <div className="  mx-0 mt-0">
                     <img className="rounded-3xl" src="images/zumba.png"></img>
+                    <img className="absolute top-[20px] right-[20px]" src={plusIcon} alt="add icon" />
                 </div>
                 <div className="p-6 mb-4 text-base grid md:gap-3 ">
                     <h6 className="font-bold text-[32px] my-6">{name}</h6>

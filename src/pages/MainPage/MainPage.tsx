@@ -4,7 +4,7 @@ import imgBodyflex from "/images/bodyflex.png"
 import imgStep from "/images/step.png"
 import imgStretching from "/images/stretching.png"
 import imgZumba from "/images/zumba.png"
-import plus from "/icons/icon-plus.svg"
+
 
 
 

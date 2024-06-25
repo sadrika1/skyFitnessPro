@@ -570,6 +570,30 @@ video {
   top: 134px;
 }
 
+.top-\[4px\] {
+  top: 4px;
+}
+
+.right-\[4px\] {
+  right: 4px;
+}
+
+.top-\[20px\] {
+  top: 20px;
+}
+
+.top-\[15px\] {
+  top: 15px;
+}
+
+.right-\[15px\] {
+  right: 15px;
+}
+
+.right-\[20px\] {
+  right: 20px;
+}
+
 .mx-0 {
   margin-left: 0px;
   margin-right: 0px;
