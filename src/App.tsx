@@ -4,7 +4,7 @@ import ChosenCoursePage from "./pages/ChosenCoursePage";
 function App() {
   return( 
 <>
-  <h1 className="text-3xl text-red font-bold underline">hey!</h1>
+  <h1 className="text-3xl text-red-500 font-bold underline">hey!</h1>
   
   <ChosenCoursePage />
   </>
