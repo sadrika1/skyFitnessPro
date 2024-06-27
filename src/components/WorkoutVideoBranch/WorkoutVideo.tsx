@@ -2,9 +2,9 @@ export function WorkoutVideo() {
   return (
     <>
       <section>
-        <div>
+        <div className="flex flex-col">
           {/* workoutHeader */}
-          <h1 className="font-sans">Йога</h1>
+          <h1 className="text">Йога</h1>
           <div>
             <span>
               <span>Красота и здоровье </span>/
@@ -13,7 +13,7 @@ export function WorkoutVideo() {
           </div>
         </div>
       </section>
-      <section>Тут видево</section>
+      <section className="h-h639px bg-black"></section>
     </>
   );
 }

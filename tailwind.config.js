@@ -3,8 +3,11 @@ export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["Roboto", "ui-sans-serif", "system-ui"],
+      height: {
+        h639px: "639px",
+      },
+      rounded: {
+        radiusVideo: "30px",
       },
     },
   },
