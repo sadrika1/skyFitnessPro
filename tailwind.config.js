@@ -15,6 +15,7 @@ export default {
         'h-15': '3.25rem', /* 52px */
         'h-35':	'8.8rem', /* 141px */
         'h-37':	'9.1rem', /* 146px */
+        'h-79': '19.38rem', /* 310px */
         'h-103': '30.3rem', /* 486px */
       },
       width: {
@@ -47,6 +48,10 @@ export default {
         'custom-black2': '#1E212E',
         'custom-green': '#BCEC30',
         'custom-green-hover': '#C6FF00',
+        'custom-purple': '#7D458C',
+        'custom-pink': '#FF7E65',
+        'custom-orange': '#F7A012',
+        'custom-blue': '#2491D2',
 
       }
     },

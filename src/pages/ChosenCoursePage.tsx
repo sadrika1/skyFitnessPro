@@ -1,21 +1,20 @@
+import BodyFlex from "../components/skillCards/BodyFlex";
+import StepAerobics from "../components/skillCards/StepAerobics";
+import Stretching from "../components/skillCards/Stretching";
+import Yoga from "../components/skillCards/Yoga";
+import Zumba from "../components/skillCards/Zumba";
+
 export default function ChosenCoursePage() {
   return (
     <div>
       {/* <Header /> */}
 
       <div className="flex flex-col ">
-        <div className=" flex flex-row justify-between rounded-lg  bg-gradient-to-r from-yellow-400 to-custom-yellow">
-          <div className="mt-10 ml-10">
-            <p className="text-white text-6xl font-medium leading-16">Йога</p>
-          </div>
-          <img
-            className="rounded-lg"
-            src="/images/yoga.png"
-            alt="course_picture"
-            width="1160px"
-            height="310px"
-          />
-        </div>
+        <Yoga />
+        {/* <Stretching /> */}
+        {/* <Zumba /> */}
+        {/* <StepAerobics /> */}
+        {/* <BodyFlex /> */}
 
         <div className="mt-9 flex flex-col">
           <p className="text-black text-4xl font-semibold leading-11">
@@ -145,28 +144,35 @@ export default function ChosenCoursePage() {
                 Войдите, чтобы добавить курс
               </button>
             </div>
-            <div className="position3">
-            <img
-              className="rotation position1 "
-              src="/images/crouching_man.png"
-              alt="course_advert"
-              // width="487px"
-              // height="542.49px"
-            />
-            <img
-              className="rotation-2 position2"
-              src="/images/Vector Black.png"
-              alt="course_advert"
-              width="50px"
-              height="42.5px"
-            />
-            <img className="rotation-1 border-none"
-            // src="/images/Vector_Green.png"
-            // alt="course_advert"
-            width="670.18px"
-            height="390.98px"
-          />
-           </div>
+            <div id="fotos">
+              <div id="foto1">
+                <img
+                  className="rotation-1 position4"
+                  src="/images/Vector_Green.png"
+                  alt="course_advert"
+                  width="670.18px"
+                  height="390.98px"
+                />
+              </div>
+              <div id="foto2">
+                <img
+                  className="rotation position1 "
+                  src="/images/crouching_man.png"
+                  alt="course_advert"
+                  // width="487px"
+                  // height="542.49px"
+                />
+              </div>
+              <div id="foto3">
+                <img
+                  className="rotation-2 position2"
+                  src="/images/Vector Black.png"
+                  alt="course_advert"
+                  width="50px"
+                  height="42.5px"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

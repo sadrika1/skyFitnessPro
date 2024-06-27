@@ -22,6 +22,9 @@ body {
 .h-37 {
   height: 9.1rem; /* 146px */
 }
+.h-79 {
+  	height: 19.38rem; /* 310px */
+}
 .h-103 {
   height: 30.3rem; /* 486px */
 }
@@ -61,27 +64,52 @@ body {
 }
 
 .position3 {
-  background-image: url(/images/Vector_Green.jpg);
+  /* background-image: url(/images/Vector_Green.jpg); */
   /* top: 1271.32px;
   left: 680.06px; */
   
-  /* position: relative; */
+  position: relative;
   /* width: 670px;
   height: 391px; */
   /* position: absolute;
   top: 1271.32px;
   left: 660.06px; */
 }
-.position1 {
+/* .position1 {
   position: absolute;
-    left: 820.99px;
-    top: 1020.9px;
+    left: 1825.99px;
+    top: 1048.9px;
 }
 .position2 {
   position: absolute;
-  top: 1149.59px;
-  left: 892px;
+  top: 1177.59px;
+  left: 1897px;
 }
+.position4 {
+  position: absolute;
+  top: 1177.59px;
+  left: 1897px;
+} */
+ #foto1, #foto2, #foto3, #fotos {
+  position: relative;
+ }
+ #foto1 {
+  right: -10px;
+  top: +40px;
+  z-index: 1;
+
+ }
+ #foto2 {
+  top: -585px;
+  left: +150px;
+  z-index: 1;
+
+ }
+ #foto3 {
+  left: +220px;
+  top: -990px;
+  z-index: 2;
+ }
 .leading-15 {
   line-height: 3.75rem; /*60px */
 }
