@@ -1,10 +1,97 @@
 // import { WorkoutProgressBars } from "../../components/WorkoutVideoBranch/WorkoutProgressBars";
 // import { WorkoutVideo } from "../../components/WorkoutVideoBranch/WorkoutVideo";
 
+import { useState } from "react";
+
 export function WorkoutVideoPage() {
+  const [modalMyProgress, setModalMyProgress] = useState(false);
+  const [progressIsSave, setProgressIsSave] = useState(false);
+
+  const handleSetModalMyProgress = () => {
+    setModalMyProgress((prev) => !prev);
+  };
+
+  const handleSetProgressIsSave = () => {
+    setModalMyProgress(false);
+    setProgressIsSave((prev) => !prev);
+  };
+
   return (
     <div className="bg-slate-50 flex justify-center h-screen">
       <div className="w-full max-w-screen-xl mx-4">
+        {modalMyProgress && (
+          <div
+            onClick={handleSetModalMyProgress}
+            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex items-center justify-center"
+          >
+            <div
+              className="bg-white p-10 rounded-3xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="text-4xl font-normal mb-12">Мой прогресс</h2>
+
+              <div className="flex flex-col gap-5 mb-9">
+                <div className="flex flex-col gap-2.5">
+                  <span className="text-lg font-normal">
+                    Сколько раз вы сделали наклоны вперед?
+                  </span>
+                  <input
+                    className="py-4 px-5 outline-none border-solid border-2 rounded-lg text-lg"
+                    type="number"
+                    placeholder="0"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2.5">
+                  <span className="text-lg font-normal">
+                    Сколько раз вы сделали наклоны назад?
+                  </span>
+                  <input
+                    className="py-4 px-5 outline-none border-solid border-2 rounded-lg text-lg"
+                    type="number"
+                    placeholder="0"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2.5">
+                  <span className="text-lg font-normal">
+                    Сколько раз вы сделали поднятие ног, согнутых в коленях?
+                  </span>
+                  <input
+                    className="py-4 px-5 outline-none border-solid border-2 rounded-lg text-lg"
+                    type="number"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+
+              <button
+                onClick={handleSetProgressIsSave}
+                className="w-full bg-lime-400 py-4 font-normal rounded-full"
+              >
+                Сохранить
+              </button>
+            </div>
+          </div>
+        )}
+
+        {progressIsSave && (
+          <div
+            onClick={handleSetProgressIsSave}
+            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex items-center justify-center"
+          >
+            <div
+              className="bg-white p-10 rounded-3xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex flex-col justify-center items-center">
+                <h1 className="text-5xl w-80 text-center mb-8">Ваш прогресс засчитан!</h1>
+                <img className="w-16 h-16" src="./public/progressDone.png" alt="progressDone" />
+              </div>
+            </div>
+          </div>
+        )}
+
         <section className="mb-10">
           <div>
             {/* workoutHeader */}
@@ -102,7 +189,10 @@ export function WorkoutVideoPage() {
                 </div>
               </div>
             </div>
-            <button className="bg-lime-400 w-80 py-4 font-normal rounded-full">
+            <button
+              onClick={handleSetModalMyProgress}
+              className="bg-lime-400 w-80 py-4 font-normal rounded-full"
+            >
               Заполнить свой прогресс
             </button>
           </section>
