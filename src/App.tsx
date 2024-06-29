@@ -1,7 +1,8 @@
 import "./App.css";
+import { WorkoutVideoPage } from "./pages/WorkoutVideoPage/WorkoutVideoPage";
 
 function App() {
-  return <h1>hey!</h1>;
+  return <WorkoutVideoPage />;
 }
 
 export default App;
