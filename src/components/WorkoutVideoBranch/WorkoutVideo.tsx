@@ -7,7 +7,7 @@ export function WorkoutVideo() {
           <h1 className="text">Йога</h1>
           <div>
             <span>
-              <span>Красота и здоровье </span>/
+              <span>Красота и здоровье </span> /
               <span> Йога на каждый день </span>/<span> 2 день </span>
             </span>
           </div>

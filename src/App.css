@@ -1,0 +1,152 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Roboto", sans-serif;
+  /* margin: 50px 140px; */
+  background-color: rgb(30, 138, 210);
+}
+.center {
+  padding-left: calc(50% - 600px);
+  padding-right: calc(50% - 600px);
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.mobile {
+  display: none;
+}
+.rounded-lg {
+  border-radius: 2rem;
+}
+.h-7-2 {
+  height: 1.97rem; /* 30px */
+}
+.h-15 {
+  height: 3.25rem; /* 52px */
+}
+.h-35 {
+  height: 8.8rem; /* 141px */
+}
+.h-37 {
+  height: 9.1rem; /* 146px */
+}
+.h-79 {
+  height: 19.38rem; /* 310px */
+}
+.h-100 {
+  height: 25.7rem; /* 412px */
+}
+.h-103 {
+  height: 30.3rem; /* 486px */
+}
+.w-7-2 {
+  width: 1.97rem; /* 30px */
+}
+.w-82 {
+  width: 21.5rem; /* 343px */
+}
+.w-84 {
+  width: 23rem; /* 368px */
+}
+.w-88 {
+  width: 26.75rem; /* 431px */
+}
+
+.p-8-2 {
+  padding: 1.97rem; /* 30px*/
+}
+.pt-15 {
+  padding-top: 3.75rem; /* 60px */
+}
+.pt-26 {
+  padding-top: 6.37rem; /* 102px */
+}
+.pt-38 {
+  padding-top: 9.75rem; /* 156px */
+}
+.gap-17 {
+  gap: 1.06rem; /*17px */
+}
+.gap-8-05 {
+  gap: 1.88rem; /* 30px */
+}
+.gap-8-1 {
+  gap: 2.1rem; /* 34px */
+}
+.gap-31 {
+  gap: 7.8rem; /* 124px */
+}
+.rotation {
+  transform: rotate(357deg); /*rotation 2.99*/
+}
+.rotation-1 {
+  transform: rotate(355deg); /*rotation 12.38*/
+}
+.rotation-2 {
+  transform: rotate(350deg); /*rotation 3.99*/
+}
+#foto1,
+#foto2,
+#foto3,
+#fotos {
+  position: relative;
+}
+#foto1 {
+  right: -10px;
+  top: +40px;
+  z-index: 1;
+}
+#foto2 {
+  top: -585px;
+  left: +150px;
+  z-index: 1;
+}
+#foto3 {
+  left: +220px;
+  top: -990px;
+  z-index: 2;
+}
+.leading-15 {
+  line-height: 3.75rem; /*60px */
+}
+.font-medium {
+  font-weight: 500;
+}
+.text-3-1xl {
+  font-size: 1.975rem; /* 32px */
+}
+
+@media (max-width: 426px) {
+  .center {
+    padding: 30px 16px;
+    /* width: fit-content; */
+  }
+  .laptop {
+    display: none;
+  }
+  .mobile {
+    display: flex;
+    direction: column;
+  }
+
+  #fotos,
+  #new_way {
+    position: relative;
+  }
+  #fotos {
+    width: 482.41px;
+    height: 455.5px;
+    left: -18px;
+    top: -535px;
+    z-index: 1;
+  }
+  #new_way {
+    top: +142px;
+    left: +1px;
+    z-index: 2;
+  }
+  .custom-green-hover {
+    background-color: #C6FF00;
+  }
+}
