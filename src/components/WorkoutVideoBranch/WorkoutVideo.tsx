@@ -6,14 +6,14 @@ export function WorkoutVideo() {
           {/* workoutHeader */}
           <h1 className="text">Йога</h1>
           <div>
-            <span>
-              <span>Красота и здоровье </span> /
-              <span> Йога на каждый день </span>/<span> 2 день </span>
-            </span>
+            <div>
+              <span>Красота и здоровье </span>
+              <span> Йога на каждый день </span><span> 2 день </span>
+            </div>
           </div>
         </div>
       </section>
-      <section className="h-h639px bg-black"></section>
+      <section className="h-[639px] bg-black"></section>
     </>
   );
 }
