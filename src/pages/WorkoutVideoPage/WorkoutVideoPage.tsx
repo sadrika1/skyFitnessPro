@@ -30,7 +30,7 @@ export function WorkoutVideoPage() {
             >
               <h2 className="text-4xl font-normal mb-12">Мой прогресс</h2>
 
-              <div className="flex flex-col gap-5 mb-9">
+              <div className="flex flex-col gap-5 mb-9 overflow-auto h-80">
                 <div className="flex flex-col gap-2.5">
                   <span className="text-lg font-normal">
                     Сколько раз вы сделали наклоны вперед?
@@ -45,6 +45,28 @@ export function WorkoutVideoPage() {
                 <div className="flex flex-col gap-2.5">
                   <span className="text-lg font-normal">
                     Сколько раз вы сделали наклоны назад?
+                  </span>
+                  <input
+                    className="py-4 px-5 outline-none border-solid border-2 rounded-lg text-lg"
+                    type="number"
+                    placeholder="0"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2.5">
+                  <span className="text-lg font-normal">
+                    Сколько раз вы сделали поднятие ног, согнутых в коленях?
+                  </span>
+                  <input
+                    className="py-4 px-5 outline-none border-solid border-2 rounded-lg text-lg"
+                    type="number"
+                    placeholder="0"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2.5">
+                  <span className="text-lg font-normal">
+                    Сколько раз вы сделали поднятие ног, согнутых в коленях?
                   </span>
                   <input
                     className="py-4 px-5 outline-none border-solid border-2 rounded-lg text-lg"
@@ -86,7 +108,7 @@ export function WorkoutVideoPage() {
             >
               <div className="flex flex-col justify-center items-center">
                 <h1 className="text-5xl w-80 text-center mb-8">Ваш прогресс засчитан!</h1>
-                <img className="w-16 h-16" src="./public/progressDone.png" alt="progressDone" />
+                <img className="w-16 h-16" src="./progressDone.png" alt="progressDone" />
               </div>
             </div>
           </div>
