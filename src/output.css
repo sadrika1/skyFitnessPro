@@ -1,4 +1,4 @@
-/*
+/* 
 ! tailwindcss v3.4.4 | MIT License | https://tailwindcss.com
 */
 
@@ -67,26 +67,6 @@ body {
   line-height: inherit;
   /* 2 */
 }
-  /* .roboto-regular {
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
-  .roboto-medium {
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-  }
-  
-  .roboto-bold {
-    font-family: "Roboto", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-  } */
-  
-
-
 /*
 1. Add the correct height in Firefox.
 2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)

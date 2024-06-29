@@ -2,10 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+* {
   margin: 0;
+  padding: 0;
+}
+body {
   font-family: "Roboto", sans-serif;
-  margin: 50px 140px;
+  /* margin: 50px 140px; */
+  background-color: rgb(30, 138, 210);
+}
+.center {
+  padding-left: calc(50% - 600px);
+  padding-right: calc(50% - 600px);
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.mobile {
+  display: none;
 }
 .rounded-lg {
   border-radius: 2rem;
@@ -13,7 +26,7 @@ body {
 .h-7-2 {
   height: 1.97rem; /* 30px */
 }
-.h-15	{
+.h-15 {
   height: 3.25rem; /* 52px */
 }
 .h-35 {
@@ -23,13 +36,19 @@ body {
   height: 9.1rem; /* 146px */
 }
 .h-79 {
-  	height: 19.38rem; /* 310px */
+  height: 19.38rem; /* 310px */
+}
+.h-100 {
+  height: 25.7rem; /* 412px */
 }
 .h-103 {
   height: 30.3rem; /* 486px */
 }
 .w-7-2 {
   width: 1.97rem; /* 30px */
+}
+.w-82 {
+  width: 21.5rem; /* 343px */
 }
 .w-84 {
   width: 23rem; /* 368px */
@@ -41,11 +60,20 @@ body {
 .p-8-2 {
   padding: 1.97rem; /* 30px*/
 }
+.pt-15 {
+  padding-top: 3.75rem; /* 60px */
+}
 .pt-26 {
   padding-top: 6.37rem; /* 102px */
 }
+.pt-38 {
+  padding-top: 9.75rem; /* 156px */
+}
 .gap-17 {
   gap: 1.06rem; /*17px */
+}
+.gap-8-05 {
+  gap: 1.88rem; /* 30px */
 }
 .gap-8-1 {
   gap: 2.1rem; /* 34px */
@@ -62,54 +90,67 @@ body {
 .rotation-2 {
   transform: rotate(350deg); /*rotation 3.99*/
 }
-
-.position3 {
-  /* background-image: url(/images/Vector_Green.jpg); */
-  /* top: 1271.32px;
-  left: 680.06px; */
-  
+#foto1,
+#foto2,
+#foto3,
+#fotos {
   position: relative;
-  /* width: 670px;
-  height: 391px; */
-  /* position: absolute;
-  top: 1271.32px;
-  left: 660.06px; */
 }
-/* .position1 {
-  position: absolute;
-    left: 1825.99px;
-    top: 1048.9px;
-}
-.position2 {
-  position: absolute;
-  top: 1177.59px;
-  left: 1897px;
-}
-.position4 {
-  position: absolute;
-  top: 1177.59px;
-  left: 1897px;
-} */
- #foto1, #foto2, #foto3, #fotos {
-  position: relative;
- }
- #foto1 {
+#foto1 {
   right: -10px;
   top: +40px;
   z-index: 1;
-
- }
- #foto2 {
+}
+#foto2 {
   top: -585px;
   left: +150px;
   z-index: 1;
-
- }
- #foto3 {
+}
+#foto3 {
   left: +220px;
   top: -990px;
   z-index: 2;
- }
+}
 .leading-15 {
   line-height: 3.75rem; /*60px */
+}
+.font-medium {
+  font-weight: 500;
+}
+.text-3-1xl {
+  font-size: 1.975rem; /* 32px */
+}
+
+@media (max-width: 426px) {
+  .center {
+    padding: 30px 16px;
+    /* width: fit-content; */
+  }
+  .laptop {
+    display: none;
+  }
+  .mobile {
+    display: flex;
+    direction: column;
+  }
+
+  #fotos,
+  #new_way {
+    position: relative;
+  }
+  #fotos {
+    width: 482.41px;
+    height: 455.5px;
+    left: -18px;
+    top: -535px;
+    z-index: 1;
+  }
+  #new_way {
+    top: +142px;
+    left: +1px;
+    z-index: 2;
+  }
+  .custom-green-hover {
+    background-color: #C6FF00;
+  }
 }
