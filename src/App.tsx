@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path={appRoutes.MAIN} element={<MainPage />}>
 
-          
+
         </Route>
       </Routes>
     </>

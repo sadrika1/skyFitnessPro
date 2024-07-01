@@ -1,58 +1,17 @@
-import imgYoga from "/images/yoga.png"
-import imgBodyflex from "/images/bodyflex.png";
-import imgStep from "/images/step.png"
-import imgStretching from "/images/stretching.png"
-import imgZumba from "/images/zumba.png"
-
-
-
 import Course from "../../components/Courses/Course"
+import {getCourses} from "../../api/api";
+import {useEffect, useState} from "react";
+import {CourseType} from "../../types";
 
 
 export default function MainPage() {
-    const courses = [
-        {
-            id: 1,
-            name: "Йога",
-            src: imgYoga,
-            duration: "25дней",
-            timeaday: "20-25минут/день",
-            level: "Средняя сложность",
-        },
-        {
-            id: 2,
-            name: "Стретчинг",
-            src: imgStretching,
-            duration: "25дней",
-            timeaday: "20-25минут/день",
-            level: "Средняя сложность",
-        },
-        {
-            id: 3,
-            name: "Зумба",
-            src: imgZumba,
-            duration: "25дней",
-            timeaday: "20-25минут/день",
-            level: "Низкая сложность",
-        },
-        {
-            id: 4,
-            name: "Степ-аэробика",
-            src: imgStep,
-            duration: "25дней",
-            timeaday: "20-25минут/день",
-            level: "Высокая сложность",
-        },
-        {
-            id: 5,
-            name: "Бодифлекс",
-            src: imgBodyflex,
-            duration: "25дней",
-            timeaday: "20-25минут/день",
-            level: "Средняя сложность",
-        }
-    ]
+    const [courses, setCourses] = useState<CourseType[]>()
 
+    useEffect(() => {
+        getCourses().then((data) => {
+            setCourses(data);
+        })
+    }, []);
 
     return (
         <>
@@ -72,8 +31,8 @@ export default function MainPage() {
 
 
                     <div className="grid-cols-1 sm:grid md:grid-cols-3 -mr-10">
-                        {courses.map(course =>
-                            <Course course={course} key={course.id} />
+                        {courses?.map(course =>
+                            <Course course={course} key={course._id} />
                         )}
                     </div>
 
