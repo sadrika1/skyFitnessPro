@@ -233,6 +233,6 @@ export function WorkoutVideoPage() {
           {/* <WorkoutProgressBars /> */}
         </div>
       </div>
-  </>
+    </>
   );
 }
