@@ -3,9 +3,9 @@ import timeIcon from "/icons/icon-time.svg"
 import difficultyIcon from "/icons/level.png"
 import plusIcon from "/icons/icon-plus.svg"
 import {CourseType} from "../../types";
-import imgZumba from "/images/zumba.png"
+import fit from "/images/bgYellow.jpg"
 import {useEffect, useState} from "react";
-import {getImageUrl} from "../../api/api";
+import {fetchAndProcessImage} from "../../api/api";
 
 export type CourseProps = {
     course: CourseType,
@@ -14,13 +14,14 @@ export type CourseProps = {
 export default function Course({ course }: CourseProps) {
     const { nameRU, duration, timeaday, level, src } = course;
 
-    const [imageUrl, setImageUrl] = useState(imgZumba);
+    const [imageUrl, setImageUrl] = useState(fit);
 
-    console.log(imageUrl);
+
 
     useEffect(() => {
-        const url = getImageUrl(src);
-        setImageUrl(url)
+        fetchAndProcessImage(src).then((data) => {
+            setImageUrl(data);
+        })
     }, [])
 
     console.log(imageUrl);

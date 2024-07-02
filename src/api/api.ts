@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, query, collection, getDocs } from "firebase/firestore";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { CourseType} from "../types";
+import { getStorage, ref, getDownloadURL, getBlob } from "firebase/storage";
+import { CourseType } from "../types";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCZ-T7GGXFj79VGYQYB6Ff4E-vddPHVb8Q",
@@ -15,7 +15,7 @@ const firebaseConfig = {
 
 
 const firebaseApp = initializeApp(firebaseConfig);
-const storage = getStorage();
+
 const db = getFirestore(firebaseApp)
 
 const coursesCollection = 'courses';
@@ -29,36 +29,31 @@ export const getCourses = async () => {
 
         documents.forEach((document) => {
             result.push(document.data() as CourseType)
+
         });
     } catch (e) {
         console.error(e)
     }
 
+
     return result;
+    // console.log(result);
 }
 
-export const getImageUrl = (src: string) => {
-    let result = '';
 
-    getDownloadURL(ref(storage, src))
-        .then((url) => {
-            // TODO: тут вариант с генерацией ссылки, а еще можно попробовать с генерацией base64
-            const xhr = new XMLHttpRequest();
-            xhr.responseType = 'blob';
-            xhr.open('GET', url, true);
-            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-            xhr.onload = (event) => {
-                const blob = xhr.response;
-                result = window.URL.createObjectURL(blob);
-            };
-            xhr.send();
 
-            result = url;
-        })
-        .catch((e) => {
-            console.error(e)
-        });
+// const src = "images/bodyflex.png"
+export const fetchAndProcessImage = async (src:string) => {
 
-    return result;
+    const storage = getStorage();
+    const storageRef = ref(storage, `gs://fitnes-bro.appspot.com/${src}`)
+    const blob = await getBlob(storageRef)
+
+    const url = URL.createObjectURL(blob)
+    // const url=URL.revokeObjectURL(urlBlob)
+    // window.open(url)
+
+
+    console.log(url);
+    return url
 }
