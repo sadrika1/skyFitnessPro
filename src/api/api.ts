@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, query, collection, getDocs } from "firebase/firestore";
-import { getStorage, ref, getDownloadURL, getBlob } from "firebase/storage";
+import { getStorage, ref, getBlob } from "firebase/storage";
 import { CourseType } from "../types";
 
 const firebaseConfig = {
@@ -37,12 +37,12 @@ export const getCourses = async () => {
 
 
     return result;
-    // console.log(result);
+  
 }
 
 
 
-// const src = "images/bodyflex.png"
+
 export const fetchAndProcessImage = async (src:string) => {
 
     const storage = getStorage();
