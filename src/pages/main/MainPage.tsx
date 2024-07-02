@@ -1,86 +1,51 @@
-import imgYoga from "/images/yoga_main.png";
-import imgBodyflex from "/images/bodyflex_main.png";
-import imgStep from "/images/step.png";
-import imgStretching from "/images/stretching_main.png";
-import imgZumba from "/images/zumba_main.png";
-
-import Course from "../../components/Courses/Course";
+import Course from "../../components/Courses/Course"
+import {getCourses} from "../../api/api";
+import {useEffect, useState} from "react";
+import {CourseType} from "../../types";
 import Header from "../../components/header/Header";
 
+
 export default function MainPage() {
-  const courses = [
-    {
-      id: 1,
-      name: "Йога",
-      src: imgYoga,
-      duration: "25 дней",
-      timeaday: "20-25 минут/день",
-      level: "Средняя сложность",
-    },
-    {
-      id: 2,
-      name: "Стретчинг",
-      src: imgStretching,
-      duration: "25 дней",
-      timeaday: "20-25 минут/день",
-      level: "Средняя сложность",
-    },
-    {
-      id: 3,
-      name: "Зумба",
-      src: imgZumba,
-      duration: "25 дней",
-      timeaday: "20-25 минут/день",
-      level: "Низкая сложность",
-    },
-    {
-      id: 4,
-      name: "Степ-аэробика",
-      src: imgStep,
-      duration: "25 дней",
-      timeaday: "20-25 минут/день",
-      level: "Высокая сложность",
-    },
-    {
-      id: 5,
-      name: "Бодифлекс",
-      src: imgBodyflex,
-      duration: "25 дней",
-      timeaday: "20-25 минут/день",
-      level: "Средняя сложность",
-    },
-  ];
+    const [courses, setCourses] = useState<CourseType[]>()
 
-  return (
-    <>
-      <Header />
-      <div className="font-roboto bg-gray-100 grid place-content-center">
-        <div className="mx-[140px] max-w-[1440px]">
-          <div className="flex justify-between my-[50px] relative">
-            <div className="font-semibold text-[60px] h-[120px] text-pretty inline-block align-middle">
-              Начните заниматься спортом и улучшите качество жизни
-            </div>
-            <div className="mt-6  p-4 text-[32px] bg-green  min-w-[288px] max-h-[125px] rounded-md ">
-              Измени своё тело за полгода!
-            </div>
-            <div className="absolute top-[134px] right-[150px]">
-              <img src="images/polygon.png" alt="polygon" />
-            </div>
-          </div>
+    useEffect(() => {
+        getCourses().then((data) => {
+            setCourses(data);
+        })
+    }, []);
 
-          <div className="grid-cols-1 sm:grid md:grid-cols-3 -mr-10">
-            {courses.map((course) => (
-              <Course course={course} key={course.id} />
-            ))}
-          </div>
+    return (
+        <>
+        <Header/>
+            <div className="font-roboto bg-gray-100 grid place-content-center">
+                <div className="mx-[140px] max-w-[1440px]">
+                    <div className="flex justify-between my-[50px] relative">
+                        <div className="font-semibold text-[60px] h-[120px] text-pretty inline-block align-middle" >Начните заниматься спортом и улучшите качество жизни</div>
+                        <div className="mt-6  p-4 text-[32px] bg-green  min-w-[288px] max-h-[125px] rounded-md ">Измени своё тело за полгода!</div>
+                        <div className="absolute top-[134px] right-[150px]">
+                            <img src="images/polygon.png" alt="polygon" />
+                        </div>
 
-          <div className="flex justify-center ">
-            <button className="mt-8 mb-[80px] rounded-3xl bg-green w-[127px] h-[52px] ">
-              Наверх ↑
-            </button>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+
+
+                    </div>
+
+
+
+                    <div className="grid-cols-1 sm:grid md:grid-cols-3 -mr-10">
+                        {courses?.map(course =>
+                            <Course course={course} key={course._id} />
+                        )}
+                    </div>
+
+
+
+                    <div className="flex justify-center ">
+                        <button className="mt-8 mb-[80px] rounded-3xl bg-green w-[127px] h-[52px] ">Наверх ↑</button>
+                    </div>
+                </div>
+            </div>
+        </>
+
+    )
 }
