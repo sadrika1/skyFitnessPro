@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import LoginBtn from "../button/LoginBtn";
 
 export default function Header() {
@@ -5,7 +6,9 @@ export default function Header() {
     // указать проверку авторизации и условие
     <div className="flex justify-around items-center">
       <div>
-        <img src="../public/images/logo.svg" alt="Logo" />
+        <Link to="/">
+          <img src="../public/images/logo.svg" alt="Logo" />
+        </Link>
         <p>Онлайн-тренировки для занятий дома</p>
       </div>
       <LoginBtn />

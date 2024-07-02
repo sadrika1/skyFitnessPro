@@ -3,15 +3,10 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { FC, useState } from "react";
+import { useState } from "react";
 import { setUser } from "../../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/redux-hooks";
-// import { Link } from "react-router-dom";
-
-// interface FormProps {
-//   handleLogin: (email: string, pass: string) => void;
-// }
 
 const ModalLogin = () => {
   // const [isReg, setIsReg] = useState(false);

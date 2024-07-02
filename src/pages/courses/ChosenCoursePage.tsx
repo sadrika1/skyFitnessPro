@@ -1,13 +1,15 @@
 // import BodyFlex from "../components/skillCards/BodyFlex";
 // import StepAerobics from "../components/skillCards/StepAerobics";
-// import Stretching from "../components/skillCards/Stretching";
-import Yoga from "../components/skillCards/Yoga";
+
+import Header from "../../components/header/Header";
+// import Stretching from "../../components/skillCards/Stretching";
+import Yoga from "../../components/skillCards/Yoga";
 // import Zumba from "../components/skillCards/Zumba";
 
 export default function ChosenCoursePage() {
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
 
       <div className="flex flex-col ">
         <Yoga />
@@ -35,8 +37,8 @@ export default function ChosenCoursePage() {
                 2
               </div>
               <div className="pl-5 text-white text-lg lg:text-2xl font-normal leading-5 lg:leading-6-1 text-start flex items-center">
-                Хотите укрепить позвоночник, избавиться от болей в спине
-                и суставах
+                Хотите укрепить позвоночник, избавиться от болей в спине и
+                суставах
               </div>
             </div>
 
@@ -130,7 +132,7 @@ export default function ChosenCoursePage() {
           <div className="mobile mt-6 lg:mt-10 p-8-2 flex flex-col gap-8-05 bg-custom-green text-black-400 rounded-lg">
             <div className="flex flex-col gap-8-05">
               <div className="flex flex-row">
-                <div >
+                <div>
                   <svg className="h-7-2 w-7-2">
                     <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
                   </svg>
@@ -169,9 +171,7 @@ export default function ChosenCoursePage() {
                     <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
                   </svg>
                 </div>
-                <div className="text-lg font-normal leading-5">
-                  Йогатерапия
-                </div>
+                <div className="text-lg font-normal leading-5">Йогатерапия</div>
               </div>
             </div>
 
@@ -182,9 +182,7 @@ export default function ChosenCoursePage() {
                     <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
                   </svg>
                 </div>
-                <div className="text-lg font-normal leading-5">
-                  Хатха-йога
-                </div>
+                <div className="text-lg font-normal leading-5">Хатха-йога</div>
               </div>
               <div className="flex flex-row">
                 <div className="h-7-2 w-7-2">
@@ -249,32 +247,34 @@ export default function ChosenCoursePage() {
           </div>
         </div>
 
-          <div id="new_way" className="mobile  h-100 p-8-2 flex flex-row justify-between  bg-white shadow-2xl rounded-lg">
-            <div className="flex flex-col gap-7">
-              <p className="text-3-1xl lg:text-6xl font-medium leading-8-9 lg:leading-15">
-                Начните путь <br />к новому телу
-              </p>
-              <img
-                className=""
-                src="/images/text_advert.png"
-                alt="course_advert"
-                // width="437px"
-                // height="178px"
-              />
-              <button className="h-15 bg-custom-green hover:bg-custom-green-hover text-black text-base font-normal leading-4-1 rounded-full">
-                Войдите, чтобы добавить курс
-              </button>
-            </div>
-            </div>
+        <div
+          id="new_way"
+          className="mobile  h-100 p-8-2 flex flex-row justify-between  bg-white shadow-2xl rounded-lg"
+        >
+          <div className="flex flex-col gap-7">
+            <p className="text-3-1xl lg:text-6xl font-medium leading-8-9 lg:leading-15">
+              Начните путь <br />к новому телу
+            </p>
+            <img
+              className=""
+              src="/images/text_advert.png"
+              alt="course_advert"
+              // width="437px"
+              // height="178px"
+            />
+            <button className="h-15 bg-custom-green hover:bg-custom-green-hover text-black text-base font-normal leading-4-1 rounded-full">
+              Войдите, чтобы добавить курс
+            </button>
+          </div>
+        </div>
 
-            <div id="fotos" className="mobile">
-                <img
-                  className=""
-                  src="/images/crouching_man_vectors.png"
-                  alt="course_advert"
-                />
-            </div>
-
+        <div id="fotos" className="mobile">
+          <img
+            className=""
+            src="/images/crouching_man_vectors.png"
+            alt="course_advert"
+          />
+        </div>
       </div>
     </div>
   );

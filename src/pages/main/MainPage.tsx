@@ -1,8 +1,8 @@
-import imgYoga from "/images/yoga.png";
-import imgBodyflex from "/images/bodyflex.png";
+import imgYoga from "/images/yoga_main.png";
+import imgBodyflex from "/images/bodyflex_main.png";
 import imgStep from "/images/step.png";
-import imgStretching from "/images/stretching.png";
-import imgZumba from "/images/zumba.png";
+import imgStretching from "/images/stretching_main.png";
+import imgZumba from "/images/zumba_main.png";
 
 import Course from "../../components/Courses/Course";
 import Header from "../../components/header/Header";
@@ -21,7 +21,7 @@ export default function MainPage() {
       id: 2,
       name: "Стретчинг",
       src: imgStretching,
-      duration: "25дней",
+      duration: "25 дней",
       timeaday: "20-25 минут/день",
       level: "Средняя сложность",
     },
