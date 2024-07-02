@@ -13,7 +13,7 @@ export default function LoginBtn() {
     <>
       <button
         onClick={() => setLoginModal(!loginModal)}
-        className="mt-8 mb-[30px] rounded-3xl bg-green w-[103px] h-[52px] text-xl"
+        className="mt-8 mb-[30px] rounded-3xl bg-custom-green w-[103px] h-[52px] text-xl"
       >
         Войти
       </button>

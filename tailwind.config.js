@@ -27,11 +27,6 @@ module.exports = {
         radiusVideo: "30px",
       },
 
-      colors: {
-        green: "#BCEC30",
-        white: "#ffffff",
-        gray: "#FAFAFA",
-      },
       padding: {
         "p-8-2": "1.97rem" /*30px*/,
         "pt-15": "3.75rem" /* 60px */,
@@ -76,6 +71,8 @@ module.exports = {
         "custom-pink": "#FF7E65",
         "custom-orange": "#F7A012",
         "custom-blue": "#2491D2",
+        white: "#ffffff",
+        gray: "#FAFAFA",
       },
     },
   },
