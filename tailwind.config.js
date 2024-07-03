@@ -73,6 +73,8 @@ module.exports = {
         "custom-blue": "#2491D2",
         white: "#ffffff",
         gray: "#FAFAFA",
+        "custom-progress-gray": "#F7F7F7",
+        "custom-progress-blue": "#00C1FF",
       },
     },
   },
