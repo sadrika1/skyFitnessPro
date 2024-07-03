@@ -38,6 +38,7 @@ export const getCourses = async () => {
 
 
     return result;
+    
 
 }
 
