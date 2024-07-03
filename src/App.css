@@ -1,11 +1,15 @@
-* {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* * {
   margin: 0;
   padding: 0;
-}
+} */
 body {
   font-family: "Roboto", sans-serif;
   /* margin: 50px 140px; */
-  background-color: rgb(30, 138, 210);
+  /* background-color: rgb(209, 61, 68); */
 }
 .center {
   padding-left: calc(50% - 600px);
@@ -119,6 +123,8 @@ body {
 
 @media (max-width: 426px) {
   .center {
+    /* padding-left: calc(50% - 100px); */
+    /* padding-right: calc(50% - 100px); */
     padding: 30px 16px;
     /* width: fit-content; */
   }
@@ -147,6 +153,6 @@ body {
     z-index: 2;
   }
   .custom-green-hover {
-    background-color: #C6FF00;
+    background-color: #c6ff00;
   }
 }

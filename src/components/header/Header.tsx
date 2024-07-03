@@ -1,14 +1,17 @@
 import Button from "../button/Button";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
     // указать проверку авторизации и условие
-    <div className="flex justify-around items-center h-[145px]">
+    <div className="flex justify-around center items-center h-[145px]">
       <div>
-        <img src="../public/images/logo.svg" alt="Logo" />
-        <p>Онлайн-тренировки для занятий дома</p>
+        <Link to="/">
+          <img src="../public/images/logo.svg" alt="Logo" />
+        </Link>
+        <p className="laptop">Онлайн-тренировки для занятий дома</p>
       </div>
-      <Button fullWidth={false} type="primary">
+      <Button classNames="w-[103px]" type="primary">
         Войти
       </Button>
     </div>

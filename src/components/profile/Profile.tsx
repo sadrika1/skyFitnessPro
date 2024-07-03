@@ -1,35 +1,38 @@
 import Course from "../Courses/Course";
 import Button from "../button/Button";
 import Heading from "../heading/Heading";
-import imgYoga from "/images/yoga.png";
-import imgStretching from "/images/stretching.png";
-import imgZumba from "/images/zumba.png";
+import imgYoga from "/images/yoga_main.png";
+import imgStretching from "/images/stretching_main.png";
+import imgZumba from "/images/zumba_main.png";
 
 const Profile = () => {
   const courses = [
     {
-      id: 1,
-      name: "Йога",
+      _id: "1",
+      nameRU: "Йога",
       src: imgYoga,
-      duration: "25 дней",
+      duration: 25,
       timeaday: "20-25 минут/день",
       level: "Средняя сложность",
+      order: 3,
     },
     {
-      id: 2,
-      name: "Стретчинг",
+      _id: "2",
+      nameRU: "Стретчинг",
       src: imgStretching,
-      duration: "25дней",
+      duration: 25,
       timeaday: "20-25 минут/день",
       level: "Средняя сложность",
+      order: 3,
     },
     {
-      id: 3,
-      name: "Зумба",
+      _id: "3",
+      nameRU: "Зумба",
       src: imgZumba,
-      duration: "25 дней",
+      duration: 25,
       timeaday: "20-25 минут/день",
       level: "Низкая сложность",
+      order: 3,
     },
   ];
   return (
@@ -49,10 +52,10 @@ const Profile = () => {
               <p>Пароль:</p>
             </div>
             <div className="flex gap-2.5">
-              <Button fullWidth type="primary">
+              <Button classNames="w-[192px]" type="primary">
                 Изменить пароль
               </Button>
-              <Button fullWidth type="secondary">
+              <Button classNames="w-[192px]" type="secondary">
                 Выйти
               </Button>
             </div>
@@ -62,7 +65,7 @@ const Profile = () => {
         <div className="mb-10 gap-x-16">
           <div className="grid-cols-1 sm:grid md:grid-cols-3 -mr-10">
             {courses.map((course) => (
-              <Course course={course} key={course.id} />
+              <Course isProfile course={course} key={course._id} />
             ))}
           </div>
         </div>
