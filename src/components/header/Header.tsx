@@ -1,14 +1,16 @@
-import LoginBtn from "../button/LoginBtn";
+import Button from "../button/Button";
 
 export default function Header() {
   return (
     // указать проверку авторизации и условие
-    <div className="flex justify-around items-center">
+    <div className="flex justify-around items-center h-[145px]">
       <div>
         <img src="../public/images/logo.svg" alt="Logo" />
         <p>Онлайн-тренировки для занятий дома</p>
       </div>
-      <LoginBtn />
+      <Button fullWidth={false} type="primary">
+        Войти
+      </Button>
     </div>
     // если пользователь авторизован показываем это:
     /*

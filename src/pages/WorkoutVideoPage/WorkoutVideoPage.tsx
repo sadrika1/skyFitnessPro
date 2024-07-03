@@ -2,7 +2,6 @@
 // import { WorkoutVideo } from "../../components/WorkoutVideoBranch/WorkoutVideo";
 
 import { useState } from "react";
-import Header from "../../components/header/Header";
 
 export function WorkoutVideoPage() {
   const [modalMyProgress, setModalMyProgress] = useState(false);
@@ -19,7 +18,6 @@ export function WorkoutVideoPage() {
 
   return (
     <>
-      <Header />
       <div className="bg-slate-50 flex justify-center h-screen">
         <div className="w-full max-w-screen-xl mx-4">
           {modalMyProgress && (
