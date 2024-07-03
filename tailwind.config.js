@@ -3,6 +3,10 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./index.html"],
   theme: {
+    fontSize: {
+      "4xl": "40px",
+    },
+
     extend: {
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],
@@ -74,6 +78,8 @@ module.exports = {
         "custom-blue": "#2491D2",
         white: "#ffffff",
         gray: "#FAFAFA",
+        "custom-progress-gray": "#F7F7F7",
+        "custom-progress-blue": "#00C1FF",
       },
     },
   },
