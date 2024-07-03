@@ -1,3 +1,4 @@
+
 import Profile from "../../components/profile/Profile"
 
 const ProfilePage = () => {
@@ -7,3 +8,4 @@ const ProfilePage = () => {
 }
 
 export default ProfilePage
+

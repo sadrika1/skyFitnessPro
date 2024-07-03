@@ -69,4 +69,3 @@ export const fetchAddFavoriteCourseToUser = async (userId: string, courseId: str
 }
 
 
-

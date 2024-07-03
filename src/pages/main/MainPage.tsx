@@ -3,7 +3,6 @@ import Course from "../../components/Courses/Course"
 import {fetchAddFavoriteCourseToUser, getCourses} from "../../api/api";
 import {useContext, useEffect, useState} from "react";
 import {CourseType} from "../../types";
-import Header from "../../components/header/Header";
 import {LoginModalContext} from "../../contexts";
 import {useAppSelector} from "../../hooks/redux-hooks";
 

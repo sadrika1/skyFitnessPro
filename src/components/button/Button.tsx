@@ -1,5 +1,7 @@
+
 import clsx from "clsx";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
+import { ModalLogin } from "../modalItem/modal";
 
 enum ButtonType {
   primary = "bg-custom-green",
@@ -18,18 +20,26 @@ export default function Button({
   fullWidth?: boolean;
   classNames?: string;
 }) {
+
+
+  const [loginModal, setLoginModal] = useState(false);
   return (
-    <button
-      className={clsx(
-        `rounded-3xl h-[52px] text-lg px-5`,
-        classNames,
-        ButtonType[type],
-        {
-          "w-full": fullWidth,
-        }
-      )}
-    >
-      {children}
-    </button>
+    <>
+      <button
+        onClick={() => setLoginModal(!loginModal)}
+        className={clsx(
+          `rounded-3xl h-[52px] text-lg px-5`,
+          classNames,
+          ButtonType[type],
+          {
+            "w-full": fullWidth,
+          }
+        )}
+      >
+        {children}
+      </button>
+      {loginModal && <ModalLogin />}
+    </>
   );
 }
+

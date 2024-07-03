@@ -1,9 +1,12 @@
+
 import Course from "../Courses/Course";
 import Button from "../button/Button";
 import Heading from "../heading/Heading";
 import imgYoga from "/images/yoga_main.png";
 import imgStretching from "/images/stretching_main.png";
 import imgZumba from "/images/zumba_main.png";
+import { fetchAddFavoriteCourseToUser } from "../../api/api";
+import { useAppSelector } from "../../hooks/redux-hooks";
 
 const Profile = () => {
   const courses = [
@@ -35,6 +38,19 @@ const Profile = () => {
       order: 3,
     },
   ];
+
+   const user = useAppSelector(state => state.user);
+
+    const addCourse = (courseId: string) => {
+        if (user.id) {
+            // делаем запрос на добавление курса юзеру
+            fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
+                console.log('Курс добавлен в избранное!')
+            })
+        } else {
+            
+        }
+    }
   return (
     <div className="bg-slate-50 flex justify-center h-screen">
       <div className="w-full max-w-screen-xl mx-4">
@@ -65,7 +81,7 @@ const Profile = () => {
         <div className="mb-10 gap-x-16">
           <div className="grid-cols-1 sm:grid md:grid-cols-3 -mr-10">
             {courses.map((course) => (
-              <Course isProfile course={course} key={course._id} />
+              <Course isProfile course={course} key={course._id} onAddCourse={addCourse} />
             ))}
           </div>
         </div>
@@ -76,4 +92,3 @@ const Profile = () => {
 
 export default Profile;
 
-// relative shadow-lg mt-8 mb-2 flex flex-col self-start rounded-3xl bg-white sm:shrink-0 sm:grow sm:basis-0 box-border
