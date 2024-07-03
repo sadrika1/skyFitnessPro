@@ -1,14 +1,21 @@
-import "./App.css";
-import ChosenCoursePage from "./pages/ChosenCoursePage";
+import { Route, Routes } from "react-router-dom";
 
-function App() {
-  return( 
-<>
-  <h1 className="text-3xl text-red-500 font-bold underline">hey!</h1>
-  
-  <ChosenCoursePage />
-  </>
-  )
+import MainPage from "./pages/MainPage/MainPage";
+import { WorkoutVideoPage } from "./pages/WorkoutVideoPage/WorkoutVideoPage";
+import { appRoutes } from "./route/appRoutes";
+import ProtectedRoute from "./route/protectedRoute";
+
+export default function App() {
+  return (
+    <Routes>
+      <Route element={<ProtectedRoute />}>
+        {/* <Route path={appRoutes.USER_PAGE} element={<UserPage />}></Route> */}
+        <Route
+          path={appRoutes.WORKOUT_VIDEO_PAGE}
+          element={<WorkoutVideoPage />}
+        ></Route>
+      </Route>
+      <Route path={appRoutes.MAIN} element={<MainPage />}></Route>
+    </Routes>
+  );
 }
-
-export default App;
