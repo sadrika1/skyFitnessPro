@@ -3,10 +3,11 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { useState } from "react";
+import {useContext, useState} from "react";
 import { setUser } from "../../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/redux-hooks";
+import {LoginModalContext} from "../../contexts";
 
 const ModalLogin = () => {
   // const [isReg, setIsReg] = useState(false);
@@ -15,12 +16,13 @@ const ModalLogin = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const { setIsLoginModalOpened } = useContext(LoginModalContext);
+
   const handleLogin = (email: string, password: string) => {
     const auth = getAuth();
 
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        console.log(user);
         dispatch(
           setUser({
             email: user.email,
@@ -28,6 +30,7 @@ const ModalLogin = () => {
             token: user.refreshToken,
           })
         );
+        setIsLoginModalOpened(false);
         navigate("/");
       })
       .catch(() => alert("Invalid user!"));

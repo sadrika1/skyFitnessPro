@@ -7,9 +7,16 @@ import ProtectedRoute from "./route/protectedRoute";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import Layout from "./components/layout/Layout";
 import ChosenCoursePage from "./pages/courses/ChosenCoursePage";
+import  { useState } from "react";
+import { LoginModalContext } from './contexts';
+import { ModalLogin} from "./components/modalItem/modal";
 
 export default function App() {
+  const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
+
   return (
+
+<LoginModalContext.Provider value={{ isLoginModalOpened, setIsLoginModalOpened }}>
     <Routes>
       <Route element={<Layout />}>
         <Route element={<ProtectedRoute />}>
@@ -27,5 +34,8 @@ export default function App() {
       ></Route>
       <Route path={appRoutes.MAIN} element={<MainPage />}></Route>
     </Routes>
+   {isLoginModalOpened && <ModalLogin />}
+  </LoginModalContext.Provider>
+
   );
 }
