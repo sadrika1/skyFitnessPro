@@ -1,12 +1,28 @@
 import Course from "../../components/Courses/Course"
-import {getCourses} from "../../api/api";
-import {useEffect, useState} from "react";
+import {fetchAddFavoriteCourseToUser, getCourses} from "../../api/api";
+import {useContext, useEffect, useState} from "react";
 import {CourseType} from "../../types";
 import Header from "../../components/header/Header";
+import {LoginModalContext} from "../../contexts";
+import {useAppSelector} from "../../hooks/redux-hooks";
 
 
 export default function MainPage() {
-    const [courses, setCourses] = useState<CourseType[]>()
+    const [courses, setCourses] = useState<CourseType[]>();
+
+    const { setIsLoginModalOpened } = useContext(LoginModalContext);
+    const user = useAppSelector(state => state.user);
+
+    const addCourse = (courseId: string) => {
+        if (user.id) {
+            // делаем запрос на добавление курса юзеру
+            fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
+                console.log('Курс добавлен в избранное!')
+            })
+        } else {
+            setIsLoginModalOpened(true);
+        }
+    }
 
     useEffect(() => {
         getCourses().then((data) => {
@@ -34,7 +50,7 @@ export default function MainPage() {
 
                     <div className="grid-cols-1 sm:grid md:grid-cols-3 -mr-10">
                         {courses?.map(course =>
-                            <Course course={course} key={course._id} />
+                            <Course course={course} key={course._id} onAddCourse={addCourse}/>
                         )}
                     </div>
 

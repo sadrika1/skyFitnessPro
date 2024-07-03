@@ -2,23 +2,22 @@
 // import { useAuth } from "../hooks/use-auth";
 // import { removeUser } from "../store/slices/userSlice";
 // import { useAppDispatch } from "../hooks/redux-hooks";
-import {  useState } from "react";
-import { ModalLogin } from "../modalItem/modal";
+import {useContext} from "react";
+import {LoginModalContext} from "../../contexts";
 
 
 export default function LoginBtn() {
-  const [loginModal, setLoginModal] = useState(false);
+  // const [loginModal, setLoginModal] = useState(false);
+    const { setIsLoginModalOpened } = useContext(LoginModalContext);
 
   return (
     <>
       <button
-        onClick={() => setLoginModal(!loginModal)}
+        onClick={() => setIsLoginModalOpened((prevValue) => !prevValue)}
         className="mt-8 mb-[30px] rounded-3xl bg-custom-green w-[83px] lg:w-[103px] h-[36px] lg:h-[52px] text-xl"
       >
         Войти
       </button>
-
-      {loginModal && <ModalLogin />}
     </>
   );
 }

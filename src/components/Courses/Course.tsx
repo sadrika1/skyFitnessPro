@@ -9,14 +9,17 @@ import {fetchAndProcessImage} from "../../api/api";
 
 export type CourseProps = {
     course: CourseType,
+    onAddCourse: (courseId: string) => void;
 }
 
-export default function Course({ course }: CourseProps) {
-    const { nameRU, duration, timeaday, level, src } = course;
+export default function Course({ course, onAddCourse }: CourseProps) {
+    const { nameRU, duration, timeaday, level, src, _id } = course;
 
     const [imageUrl, setImageUrl] = useState(fit);
 
-
+    const handleAddCourse = () => {
+        onAddCourse(_id);
+    }
 
     useEffect(() => {
         fetchAndProcessImage(src).then((data) => {
@@ -27,7 +30,7 @@ export default function Course({ course }: CourseProps) {
     return (
         <>
             <div className="relative shadow-lg max-w-[360px] mt-8 mb-2 flex flex-col self-start rounded-3xl bg-white sm:shrink-0 sm:grow sm:basis-0 box-border">
-                <div className="  mx-0 mt-0">
+                <div className="mx-0 mt-0" onClick={handleAddCourse}>
                     <img className="rounded-3xl" src={imageUrl} cross-origin="use-credentials"></img>
                     <img className="absolute top-[20px] right-[20px]" src={plusIcon} alt="add icon" />
                 </div>
@@ -48,7 +51,6 @@ export default function Course({ course }: CourseProps) {
                         <img className="w-[18px] h-[18px]" src={difficultyIcon} alt="level icon" />
                         <div className="pl-2 ">{level}</div>
                     </div>
-
                 </div>
             </div>
 
