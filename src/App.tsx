@@ -7,25 +7,21 @@ import ProtectedRoute from "./route/protectedRoute";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import Layout from "./components/layout/Layout";
 import ChosenCoursePage from "./pages/courses/ChosenCoursePage";
-
 import { useState } from "react";
-import { LoginModalContext } from './contexts';
+import { LoginModalContext } from "./contexts";
 import { ModalLogin } from "./components/modalItem/modal";
-import Layout from "./components/layout/Layout";
-import ProfilePage from "./pages/profilePage/ProfilePage";
-
-
 
 export default function App() {
   const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
 
   return (
-
-    <LoginModalContext.Provider value={{ isLoginModalOpened, setIsLoginModalOpened }}>
+    <LoginModalContext.Provider
+      value={{ isLoginModalOpened, setIsLoginModalOpened }}
+    >
       <Routes>
         <Route element={<Layout />}>
           <Route element={<ProtectedRoute />}>
-          <Route path={appRoutes.USER_PAGE} element={<ProfilePage />}></Route>
+            <Route path={appRoutes.USER_PAGE} element={<ProfilePage />}></Route>
             <Route
               path={appRoutes.WORKOUT_VIDEO_PAGE}
               element={<WorkoutVideoPage />}
@@ -42,6 +38,5 @@ export default function App() {
 
       {isLoginModalOpened && <ModalLogin />}
     </LoginModalContext.Provider>
-
   );
 }
