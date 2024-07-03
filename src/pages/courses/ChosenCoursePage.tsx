@@ -11,7 +11,7 @@ export default function ChosenCoursePage() {
     <div>
       <Header />
 
-      <div className="flex flex-col ">
+      <div className="flex flex-col font-roboto bg-gray-100 center">
         <Yoga />
         {/* <Stretching /> */}
         {/* <Zumba /> */}
@@ -129,7 +129,7 @@ export default function ChosenCoursePage() {
             </div>
           </div>
 
-          <div className="mobile mt-6 lg:mt-10 p-8-2 flex flex-col gap-8-05 bg-custom-green text-black-400 rounded-lg">
+          <div className="mobile center mt-6 lg:mt-10 p-8-2 flex flex-col gap-8-05 bg-custom-green text-black-400 rounded-lg">
             <div className="flex flex-col gap-8-05">
               <div className="flex flex-row">
                 <div>
@@ -249,7 +249,7 @@ export default function ChosenCoursePage() {
 
         <div
           id="new_way"
-          className="mobile  h-100 p-8-2 flex flex-row justify-between  bg-white shadow-2xl rounded-lg"
+          className="mobile center h-100 p-8-2 flex flex-row justify-between  bg-white shadow-2xl rounded-lg"
         >
           <div className="flex flex-col gap-7">
             <p className="text-3-1xl lg:text-6xl font-medium leading-8-9 lg:leading-15">
