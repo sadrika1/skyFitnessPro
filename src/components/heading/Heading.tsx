@@ -1,3 +1,4 @@
+
 import clsx from "clsx";
 import { FC, PropsWithChildren } from "react";
 
@@ -12,3 +13,4 @@ const Heading: FC<PropsWithChildren<Props>> = ({ children, classNames }) => {
 };
 
 export default Heading;
+

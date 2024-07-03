@@ -1,3 +1,4 @@
+
 import Course from "../Courses/Course";
 import Button from "../button/Button";
 import Heading from "../heading/Heading";
@@ -91,4 +92,3 @@ const Profile = () => {
 
 export default Profile;
 
-// relative shadow-lg mt-8 mb-2 flex flex-col self-start rounded-3xl bg-white sm:shrink-0 sm:grow sm:basis-0 box-border
