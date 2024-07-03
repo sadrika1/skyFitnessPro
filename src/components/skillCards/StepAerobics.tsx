@@ -1,7 +1,7 @@
 export default function StepAerobics() {
   return (
     <>
-      <div className="h-79 flex flex-row justify-between rounded-lg  bg-custom-pink">
+      <div className=" laptop h-79 flex flex-row justify-between rounded-lg  bg-custom-pink">
         <div className="mt-10 ml-10">
           <p className="text-white text-6xl font-medium leading-16">
             Степ-аэробика
@@ -11,10 +11,17 @@ export default function StepAerobics() {
           className="rounded-lg"
           src="/images/step-aerobics.png"
           alt="course_picture"
-          width="531px"
-          height="310px"
+          // width="531px"
+          // height="310px"
         />
       </div>
+      <div className="mobile">
+      <img
+          className="rounded-lg"
+          src="/images/step-aerobics_short.png"
+          alt="course_picture"
+        />
+        </div>
     </>
   );
 }

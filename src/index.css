@@ -9,7 +9,7 @@
 body {
   font-family: "Roboto", sans-serif;
   /* margin: 50px 140px; */
-  background-color: rgb(30, 138, 210);
+  /* background-color: rgb(209, 61, 68); */
 }
 .center {
   padding-left: calc(50% - 600px);
@@ -93,7 +93,8 @@ body {
 #foto1,
 #foto2,
 #foto3,
-#fotos {
+#fotos 
+{
   position: relative;
 }
 #foto1 {
