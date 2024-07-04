@@ -1,7 +1,7 @@
 
 import clsx from "clsx";
 import { ReactNode, useState } from "react";
-import { ModalLogin } from "../modalItem/modal";
+import { ModalLogin } from "../modalItem/Modal";
 
 enum ButtonType {
   primary = "bg-custom-green",
