@@ -4,7 +4,7 @@ import LoginBtn from "../button/LoginBtn";
 export default function Header() {
   return (
     // указать проверку авторизации и условие
-    <div className="flex justify-between px-[30px] lg:px-[140px] py-[16px] lg:py-[50px] items-center">
+    <div className="flex justify-around center items-center h-[145px]">
       <div>
         <Link to="/">
           <img src="/images/logo.svg" alt="Logo" />
