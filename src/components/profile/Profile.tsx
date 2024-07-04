@@ -42,7 +42,6 @@ const Profile = () => {
 
   const addCourse = (courseId: string) => {
     if (user.id) {
-      // делаем запрос на добавление курса юзеру
       fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
         console.log("Курс добавлен в избранное!");
       });
