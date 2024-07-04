@@ -1,5 +1,4 @@
-
-import Course from "../Courses/Course";
+import Course from "../course/Course";
 import Button from "../button/Button";
 import Heading from "../heading/Heading";
 import imgYoga from "/images/yoga_main.png";
@@ -39,18 +38,17 @@ const Profile = () => {
     },
   ];
 
-   const user = useAppSelector(state => state.user);
+  const user = useAppSelector((state) => state.user);
 
-    const addCourse = (courseId: string) => {
-        if (user.id) {
-            // делаем запрос на добавление курса юзеру
-            fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
-                console.log('Курс добавлен в избранное!')
-            })
-        } else {
-            
-        }
+  const addCourse = (courseId: string) => {
+    if (user.id) {
+      // делаем запрос на добавление курса юзеру
+      fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
+        console.log("Курс добавлен в избранное!");
+      });
+    } else {
     }
+  };
   return (
     <div className="bg-slate-50 flex justify-center h-screen">
       <div className="w-full max-w-screen-xl mx-4">
@@ -81,7 +79,12 @@ const Profile = () => {
         <div className="mb-10 gap-x-16">
           <div className="grid-cols-1 sm:grid md:grid-cols-3 -mr-10">
             {courses.map((course) => (
-              <Course isProfile course={course} key={course._id} onAddCourse={addCourse} />
+              <Course
+                isProfile
+                course={course}
+                key={course._id}
+                onAddCourse={addCourse}
+              />
             ))}
           </div>
         </div>
@@ -91,4 +94,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
