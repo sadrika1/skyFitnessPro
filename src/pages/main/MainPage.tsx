@@ -1,4 +1,4 @@
-import Course from "../../components/Courses/Course";
+import Course from "../../components/course/Course";
 import { fetchAddFavoriteCourseToUser, getCourses } from "../../api/api";
 import { useContext, useEffect, useState } from "react";
 import { CourseType } from "../../types";
