@@ -1,7 +1,5 @@
 // import BodyFlex from "../components/skillCards/BodyFlex";
 // import StepAerobics from "../components/skillCards/StepAerobics";
-
-import Header from "../../components/header/Header";
 // import Stretching from "../../components/skillCards/Stretching";
 import Yoga from "../../components/skillCards/Yoga";
 // import Zumba from "../components/skillCards/Zumba";
@@ -9,8 +7,6 @@ import Yoga from "../../components/skillCards/Yoga";
 export default function ChosenCoursePage() {
   return (
     <div>
-      <Header />
-
       <div className="flex flex-col font-roboto bg-gray-100 center">
         <Yoga />
         {/* <Stretching /> */}
