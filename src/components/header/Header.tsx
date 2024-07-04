@@ -11,9 +11,9 @@ export default function Header() {
     <div className="flex justify-around center items-center h-[145px]">
       <div>
         <Link to="/">
-          <img src="../public/images/logo.svg" alt="Logo" />
+          <img src="/images/logo.svg" alt="Logo" />
         </Link>
-        <p className="laptop">Онлайн-тренировки для занятий дома</p>
+        <p className="sm:hidden lg:flex font-roboto">Онлайн-тренировки для занятий дома</p>
       </div>
       <Button classNames="w-[103px]" type="primary">
         Войти
