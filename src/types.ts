@@ -6,4 +6,6 @@ export interface CourseType {
     timeaday: string;
     src: string;
     _id: string;
+    fitting: string;
+    directions: string;
 }

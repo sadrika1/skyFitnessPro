@@ -1,4 +1,3 @@
-
 import clsx from "clsx";
 import { ReactNode, useState } from "react";
 import { ModalLogin } from "../modalItem/Modal";
@@ -20,8 +19,6 @@ export default function Button({
   fullWidth?: boolean;
   classNames?: string;
 }) {
-
-
   const [loginModal, setLoginModal] = useState(false);
   return (
     <>
@@ -42,4 +39,3 @@ export default function Button({
     </>
   );
 }
-

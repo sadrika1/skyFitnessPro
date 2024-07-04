@@ -1,9 +1,19 @@
-export default function Yoga() {
+import { CourseType } from "../../types";
+
+type SkillCardType = {
+  skillcard: CourseType;
+};
+
+export default function SkillCard({ skillcard }: SkillCardType) {
+  const { nameRU, fitting, directions } = skillcard;
+
   return (
     <>
       <div className=" h-[19.38rem] sm:hidden lg:flex flex-row  justify-between rounded-[2rem]  bg-custom-yellow">
         <div className="mt-10 ml-10">
-          <p className="text-white text-6xl font-medium leading-[4rem]">Йога</p>
+          <p className="text-white text-6xl font-medium leading-[4rem]">
+            {nameRU}
+          </p>
         </div>
         <img
           className="rounded-[2rem]"
@@ -31,7 +41,7 @@ export default function Yoga() {
               1
             </div>
             <div className="pl-5 text-white text-lg lg:text-2xl font-normal leading-5 lg:leading-[26,4px] text-start flex items-center">
-              Давно хотели попробовать йогу, но не решались начать
+              {fitting[0]}
             </div>
           </div>
 
@@ -40,8 +50,7 @@ export default function Yoga() {
               2
             </div>
             <div className="pl-5 text-white text-lg lg:text-2xl font-normal leading-5 lg:leading-[26,4px] text-start flex items-center">
-              Хотите укрепить позвоночник, избавиться от болей в спине и
-              суставах
+              {fitting[1]}
             </div>
           </div>
 
@@ -50,7 +59,7 @@ export default function Yoga() {
               3
             </div>
             <div className="pl-5 text-white text-lg lg:text-2xl font-normal leading-5 lg:leading-[26,4px] text-start flex items-center">
-              Ищете активность, полезную для тела и души
+              {fitting[2]}
             </div>
           </div>
         </div>
@@ -70,8 +79,8 @@ export default function Yoga() {
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                Йога для новичков
-                {/* {directions[0]} */}
+                {/* Йога для новичков */}
+                {directions[0]}
               </div>
             </div>
 
@@ -82,8 +91,8 @@ export default function Yoga() {
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                Классическая йога
-                {/* {directions[1]} */}
+                {/* Классическая йога */}
+                {directions[1]}
               </div>
             </div>
           </div>
@@ -96,8 +105,8 @@ export default function Yoga() {
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                Кундалини-йога
-                {/* {directions[2]}  */}
+                {/* Кундалини-йога */}
+                {directions[2]}
               </div>
             </div>
             <div className="flex flex-row">
@@ -107,8 +116,8 @@ export default function Yoga() {
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                Йогатерапия
-                {/* {directions[3]} */}
+                {/* Йогатерапия */}
+                {directions[3]}
               </div>
             </div>
           </div>
@@ -121,8 +130,8 @@ export default function Yoga() {
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                Хатха-йога
-                {/* {directions[4]} */}
+                {/* Хатха-йога */}
+                {directions[4]}
               </div>
             </div>
             <div className="flex flex-row">
@@ -132,8 +141,8 @@ export default function Yoga() {
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                Аштанга-йога
-                {/* {directions[5]} */}
+                {/* Аштанга-йога */}
+                {directions[5]}
               </div>
             </div>
           </div>
@@ -148,8 +157,8 @@ export default function Yoga() {
                 </svg>
               </div>
               <div className="text-lg font-normal leading-5">
-                Йога для новичков
-                {/* {directions[0]} */}
+                {/* Йога для новичков */}
+                {directions[0]}
               </div>
             </div>
 
@@ -160,8 +169,8 @@ export default function Yoga() {
                 </svg>
               </div>
               <div className="text-lg font-normal leading-5">
-                Классическая йога
-                {/* {directions[1]} */}
+                {/* Классическая йога */}
+                {directions[1]}
               </div>
             </div>
           </div>
@@ -174,8 +183,8 @@ export default function Yoga() {
                 </svg>
               </div>
               <div className="text-lg font-normal leading-5">
-                Кундалини-йога
-                {/* {directions[2]} */}
+                {/* Кундалини-йога */}
+                {directions[2]}
               </div>
             </div>
             <div className="flex flex-row">
@@ -185,8 +194,8 @@ export default function Yoga() {
                 </svg>
               </div>
               <div className="text-lg font-normal leading-5">
-                Йогатерапия
-                {/* {directions[3]} */}
+                {/* Йогатерапия */}
+                {directions[3]}
               </div>
             </div>
           </div>
@@ -199,8 +208,8 @@ export default function Yoga() {
                 </svg>
               </div>
               <div className="text-lg font-normal leading-5">
-                Хатха-йога
-                {/* {directions[4]} */}
+                {/* Хатха-йога */}
+                {directions[4]}
               </div>
             </div>
             <div className="flex flex-row">
@@ -210,8 +219,8 @@ export default function Yoga() {
                 </svg>
               </div>
               <div className="text-lg font-normal leading-5">
-                Аштанга-йога
-                {/* {directions[5]} */}
+                {/* Аштанга-йога */}
+                {directions[5]}
               </div>
             </div>
           </div>
