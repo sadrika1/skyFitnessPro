@@ -1,7 +1,11 @@
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Button from "../button/Button";
 import { Link } from "react-router-dom";
 
 export default function Header() {
+
+
+
   return (
     // указать проверку авторизации и условие
     <div className="flex justify-around center items-center h-[145px]">
