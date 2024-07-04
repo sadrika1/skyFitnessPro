@@ -4,6 +4,18 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./index.html"],
   theme: {
     extend: {
+      // customForms: (theme) => ({
+      //   scrollbar: {
+      //     track: {
+      //       backgroundColor: theme("colors.gray.300"),
+      //     },
+      //     thumb: {
+      //       backgroundColor: theme("colors.black"),
+      //       borderRadius: theme("borderRadius.lg"),
+      //     },
+      //   },
+      // }),
+
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],
       },
@@ -22,7 +34,7 @@ module.exports = {
         "w-84": "23rem" /* 368px */,
         "w-88": "26.75rem" /* 431px */,
         container: "22rem" /*353px*/,
-        "w340px": "21.25rem"
+        w340px: "21.25rem",
       },
       rounded: {
         radiusVideo: "30px",
@@ -77,5 +89,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };
