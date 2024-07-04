@@ -9,7 +9,7 @@ import Layout from "./components/layout/Layout";
 import ChosenCoursePage from "./pages/courses/ChosenCoursePage";
 import { useState } from "react";
 import { LoginModalContext } from "./contexts";
-import { ModalLogin } from "./components/modalItem/modal";
+import { ModalLogin } from "./components/modalItem/Modal";
 
 export default function App() {
   const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
