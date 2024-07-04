@@ -33,7 +33,7 @@ export function WorkoutVideoPage() {
               >
                 <h2 className="text-4xl font-normal mb-12">Мой прогресс</h2>
 
-                <div className="flex flex-col gap-5 mb-9 pr-5 h-80 w-w340px overflow-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-gray-200">
+                <div className="flex flex-col gap-5 mb-9 pr-5 h-80 w-w340px overflow-auto">
                   <div className="flex flex-col gap-2.5">
                     <span className="text-lg font-normal">
                       Сколько раз вы сделали наклоны вперед?
