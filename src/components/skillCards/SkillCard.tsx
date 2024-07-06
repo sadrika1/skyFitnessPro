@@ -227,8 +227,8 @@ export default function SkillCard({ skillcard }: SkillCardType) {
         </div>
       </div>
       {/* див с рекламой */}
-      <div className="sm:hidden lg:flex flex-row pt-[102px]">
-        <div className="h-[486px] p-10 flex flex-row justify-between  bg-white shadow-2xl rounded-[2rem]">
+      <div className="sm:hidden lg:flex flex-row justify- bg-white shadow-2xl rounded-[2rem] pt-[102px]">
+        <div className="h-[486px] p-10 flex flex-row justify-between">
           <div className="flex flex-col gap-7">
             <p className="text-6xl font-medium leading-[60px]">
               Начните путь <br />к новому телу
@@ -247,6 +247,8 @@ export default function SkillCard({ skillcard }: SkillCardType) {
               Добавить курс
             </button>
           </div>
+        </div>
+
           <div className="relative">
             <div className="z-0 -right-[10px] top-[40px]">
               <img
@@ -276,7 +278,6 @@ export default function SkillCard({ skillcard }: SkillCardType) {
               />
             </div>
           </div>
-        </div>
       </div>
 
       <div className="lg:hidden relative bg-gray-100">

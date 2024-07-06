@@ -5,6 +5,7 @@ import { WorkoutVideoPage } from "./pages/workout/WorkoutVideoPage";
 import { appRoutes } from "./route/appRoutes";
 import ProtectedRoute from "./route/protectedRoute";
 import ChosenCoursePage from "./pages/courses/ChosenCoursePage";
+import { CourseType } from "./types";
 
 export default function App() {
   return (

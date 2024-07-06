@@ -16,10 +16,10 @@ module.exports = {
         // "h-103": "30.3rem" /* 486px */,
       },
       width: {
-        "w-7-2": "1.97rem" /* 30px */,
-        "w-84": "23rem" /* 368px */,
-        "w-88": "26.75rem" /* 431px */,
-        container: "22rem" /*353px*/,
+        // "w-7-2": "1.97rem" /* 30px */,
+        // "w-84": "23rem" /* 368px */,
+        // "w-88": "26.75rem" /* 431px */,
+        // container: "22rem" /*353px*/,
         "w340px": "21.25rem"
       },
       rounded: {
