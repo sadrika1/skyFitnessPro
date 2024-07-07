@@ -50,13 +50,13 @@ export default function Course({
               <img
                 className="absolute top-[20px] right-[20px]"
                 src={plusIcon}
-                alt="add icon"
+                alt="добавить курс"
               />
             ) : (
               <img
                 className="absolute top-[20px] right-[20px]"
                 src={minusIcon}
-                alt="add icon"
+                alt="курс добавлен"
               />
             )}
           </div>
@@ -68,7 +68,7 @@ export default function Course({
               <img
                 className="w-[18px] h-[18px]"
                 src={calendarIcon}
-                alt=" calendar icon"
+                alt="длительность курса"
               />
               <div className="pl-2">{duration}</div>
             </div>
@@ -76,7 +76,7 @@ export default function Course({
               <img
                 className="w-[18px] h-[18px]"
                 src={timeIcon}
-                alt=" time icon"
+                alt="длительность занятия"
               />
               <div className="pl-2">{timeaday}</div>
             </div>
@@ -85,7 +85,7 @@ export default function Course({
             <img
               className="w-[18px] h-[18px]"
               src={difficultyIcon}
-              alt="level icon"
+              alt="сложность"
             />
             <div className="pl-2 ">{level}</div>
           </div>
