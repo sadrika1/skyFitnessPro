@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, query, collection, getDocs } from "firebase/firestore";
+import { getFirestore, query, collection, getDocs, addDoc } from "firebase/firestore";
 import { getStorage, ref, getBlob } from "firebase/storage";
 import { CourseType } from "../types";
 
@@ -19,6 +19,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp)
 
 const coursesCollection = 'courses';
+const userFavoriteCourses = 'favorite-courses';
 
 export const getCourses = async () => {
     const result: CourseType[] = [];
@@ -37,7 +38,7 @@ export const getCourses = async () => {
 
 
     return result;
-  
+
 }
 
 
@@ -52,3 +53,19 @@ export const fetchAndProcessImage = async (src:string) => {
     // window.open(url)
     return url
 }
+
+export const fetchAddFavoriteCourseToUser = async (userId: string, courseId: string) => {
+    const db = getFirestore();
+
+    try {
+        await addDoc(collection(db, userFavoriteCourses), {
+            userId,
+            courseId,
+        });
+    } catch (error) {
+        return Promise.reject(error);
+    }
+
+}
+
+

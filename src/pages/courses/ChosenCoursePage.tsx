@@ -5,6 +5,7 @@ import { getCourses } from "../../api/api";
 import SkillCard from "../../components/skillCards/SkillCard";
 import Yoga from "../../components/skillCards/Yoga";
 
+
 type ChosenCoursePageType = {
   skillcard: CourseType;
 }

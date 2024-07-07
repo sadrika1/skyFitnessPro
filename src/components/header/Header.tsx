@@ -1,7 +1,11 @@
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Button from "../button/Button";
 import { Link } from "react-router-dom";
-import LoginBtn from "../button/LoginBtn";
 
 export default function Header() {
+
+
+
   return (
     // указать проверку авторизации и условие
     <div className="flex justify-around center items-center h-[145px]">
@@ -11,7 +15,9 @@ export default function Header() {
         </Link>
         <p className="sm:hidden lg:flex font-roboto">Онлайн-тренировки для занятий дома</p>
       </div>
-      <LoginBtn />
+      <Button classNames="w-[103px]" type="primary">
+        Войти
+      </Button>
     </div>
     // если пользователь авторизован показываем это:
     /*

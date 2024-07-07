@@ -2,7 +2,6 @@
 // import { WorkoutVideo } from "../../components/WorkoutVideoBranch/WorkoutVideo";
 
 import { useState } from "react";
-import Header from "../../components/header/Header";
 
 export function WorkoutVideoPage() {
   const [modalMyProgress, setModalMyProgress] = useState(false);
@@ -19,7 +18,6 @@ export function WorkoutVideoPage() {
 
   return (
     <>
-      <Header />
       <div className="bg-slate-50 flex justify-center h-screen">
         <div className="w-full max-w-screen-xl mx-4">
           {modalMyProgress && (
@@ -33,13 +31,13 @@ export function WorkoutVideoPage() {
               >
                 <h2 className="text-4xl font-normal mb-12">Мой прогресс</h2>
 
-                <div className="flex flex-col gap-5 mb-9 overflow-auto h-80">
+                <div className="flex flex-col gap-5 mb-9 pr-5 h-80 w-w340px overflow-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-gray-200">
                   <div className="flex flex-col gap-2.5">
                     <span className="text-lg font-normal">
                       Сколько раз вы сделали наклоны вперед?
                     </span>
                     <input
-                      className="py-4 px-5 outline-none border-solid border-2 rounded-lg text-lg"
+                      className="py-4 px-5 outline-none border-slate-300 border-2 rounded-lg text-lg"
                       type="number"
                       placeholder="0"
                     />
@@ -50,7 +48,7 @@ export function WorkoutVideoPage() {
                       Сколько раз вы сделали наклоны назад?
                     </span>
                     <input
-                      className="py-4 px-5 outline-none border-solid border-2 rounded-lg text-lg"
+                      className="py-4 px-5 outline-none border-solid border-slate-300 border-2 rounded-lg text-lg"
                       type="number"
                       placeholder="0"
                     />
@@ -61,7 +59,7 @@ export function WorkoutVideoPage() {
                       Сколько раз вы сделали поднятие ног, согнутых в коленях?
                     </span>
                     <input
-                      className="py-4 px-5 outline-none border-solid border-2 rounded-lg text-lg"
+                      className="py-4 px-5 outline-none border-solid border-slate-300 border-2 rounded-lg text-lg"
                       type="number"
                       placeholder="0"
                     />
@@ -72,7 +70,7 @@ export function WorkoutVideoPage() {
                       Сколько раз вы сделали поднятие ног, согнутых в коленях?
                     </span>
                     <input
-                      className="py-4 px-5 outline-none border-solid border-2 rounded-lg text-lg"
+                      className="py-4 px-5 outline-none border-solid border-slate-300 border-2 rounded-lg text-lg"
                       type="number"
                       placeholder="0"
                     />
@@ -83,7 +81,7 @@ export function WorkoutVideoPage() {
                       Сколько раз вы сделали поднятие ног, согнутых в коленях?
                     </span>
                     <input
-                      className="py-4 px-5 outline-none border-solid border-2 rounded-lg text-lg"
+                      className="py-4 px-5 outline-none border-solid border-slate-300 border-2 rounded-lg text-lg"
                       type="number"
                       placeholder="0"
                     />
@@ -123,7 +121,7 @@ export function WorkoutVideoPage() {
             </div>
           )}
 
-          <section className="mb-10">
+          <section className="mb-10 mt-5">
             <div>
               {/* workoutHeader */}
               <h1 className="text-6xl mb-6 font-medium">Йога</h1>
