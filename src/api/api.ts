@@ -1,8 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getStorage, ref as storageRef, getBlob } from "firebase/storage";
-import { CourseType } from "../types";
+import { CourseIDType, CourseType } from "../types";
 import { getDatabase, ref, get, child, push } from "firebase/database";
-import {compareByOrder} from "./utils"; // REALTIME DB
+import { compareByOrder } from "./utils"; // REALTIME DB
 
 const firebaseConfig = {
     apiKey: "AIzaSyCZ-T7GGXFj79VGYQYB6Ff4E-vddPHVb8Q",
@@ -38,7 +38,7 @@ const database = getDatabase(firebaseApp);
 // }
 
 
-export const fetchAndProcessImage = async (src:string) => {
+export const fetchAndProcessImage = async (src: string) => {
 
     const storage = getStorage();
     const stRef = storageRef(storage, `gs://fitnes-bro.appspot.com/${src}`)
@@ -83,3 +83,65 @@ export const getCourses = async () => {
 
     return result;
 }
+
+
+
+
+
+
+
+// export const fetchAddFavoriteCourseToUser = async (userId: string, courseId: string) => {
+//     let result: string[] = [];
+//     const courseid = await get(child(ref(database), `users/${userId}/courses`));
+//     if (courseid.exists()) {
+//         Object.keys(courseid.val()).forEach((key) => {
+//             result.push(courseid.val()[key])
+//         })
+//         result = result
+//         if (result.includes(courseId)) {
+//             console.log("уже добавлен");
+
+
+//         } else {
+//             push(ref(database, `users/${userId}/courses`), {
+//                 courseId,
+//             })
+//         }
+//     }
+// }
+
+export const getFavoriteCourseOfUser = async (userId: string) => {
+    let result: CourseIDType[] = [];
+
+
+    try {
+        const snapshot = await get(child(ref(database), `users/${userId}/courses`));
+
+        if (snapshot.exists()) {
+            Object.keys(snapshot.val()).forEach((key) => {
+                result.push(snapshot.val()[key])
+            })
+
+            result = result;
+        }
+    } catch (e) {
+        console.error(e)
+    }
+
+    return result
+
+}
+
+
+
+
+        // if (result.includes(courseId)) {
+        //     console.log("уже добавлен");
+
+
+        // } else {
+        //     push(ref(database, `users/${userId}/courses`), {
+        //         courseId,
+        //     })
+        // }
+    

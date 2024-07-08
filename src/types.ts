@@ -9,3 +9,9 @@ export interface CourseType {
     fitting: string;
     directions: string;
 }
+
+export interface CourseIDType {
+   
+    courseId: string;
+    
+}

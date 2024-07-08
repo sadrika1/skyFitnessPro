@@ -1,5 +1,5 @@
 import Course from "../../components/course/Course";
-import {fetchAddFavoriteCourseToUser, getCourses} from "../../api/api";
+import { fetchAddFavoriteCourseToUser, getCourses, getFavoriteCourseOfUser } from "../../api/api";
 import { useContext, useEffect, useState } from "react";
 import { CourseType } from "../../types";
 import { LoginModalContext } from "../../contexts";
@@ -13,12 +13,38 @@ export default function MainPage() {
   const user = useAppSelector((state) => state.user);
 
   const addCourse = (courseId: string) => {
+
     if (user.id) {
-      // делаем запрос на добавление курса юзеру
-      fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
-        console.log("Курс добавлен в избранное!");
-        
-      });
+
+      console.log("сейчас кликаем на этот курс", courseId);
+
+      getFavoriteCourseOfUser(user.id).then((data) => {
+
+
+        console.log("это данные вернувшиеся с бэкенда по избранным курсам этого пользователя", data);
+        console.log("длина массива", data.length);
+
+        const element = data?.some(function (el) {
+          return el.courseId == courseId
+        });
+        console.log(element);
+
+        if (!element) {
+
+
+          console.log("элемента нет");
+          // // делаем запрос на добавление курса юзеру
+          fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
+            //   console.log("Курс добавлен в избранное!");
+          })
+        } else {
+
+          console.log("вот он уже добавлен был и нашелся в массиве", element);
+
+        }
+      })
+
+
     } else {
       setIsLoginModalOpened(true);
     }
