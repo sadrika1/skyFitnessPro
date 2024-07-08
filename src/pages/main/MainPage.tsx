@@ -21,8 +21,8 @@ export default function MainPage() {
       getFavoriteCourseOfUser(user.id).then((data) => {
 
 
-        console.log("это данные вернувшиеся с бэкенда по избранным курсам этого пользователя", data);
-        console.log("длина массива", data.length);
+        // console.log("это данные вернувшиеся с бэкенда по избранным курсам этого пользователя", data);
+        // console.log("длина массива", data.length);
 
         const element = data?.some(function (el) {
           return el.courseId == courseId

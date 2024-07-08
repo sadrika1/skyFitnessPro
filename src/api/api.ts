@@ -85,31 +85,6 @@ export const getCourses = async () => {
 }
 
 
-
-
-
-
-
-// export const fetchAddFavoriteCourseToUser = async (userId: string, courseId: string) => {
-//     let result: string[] = [];
-//     const courseid = await get(child(ref(database), `users/${userId}/courses`));
-//     if (courseid.exists()) {
-//         Object.keys(courseid.val()).forEach((key) => {
-//             result.push(courseid.val()[key])
-//         })
-//         result = result
-//         if (result.includes(courseId)) {
-//             console.log("уже добавлен");
-
-
-//         } else {
-//             push(ref(database, `users/${userId}/courses`), {
-//                 courseId,
-//             })
-//         }
-//     }
-// }
-
 export const getFavoriteCourseOfUser = async (userId: string) => {
     let result: CourseIDType[] = [];
 
@@ -131,17 +106,3 @@ export const getFavoriteCourseOfUser = async (userId: string) => {
     return result
 
 }
-
-
-
-
-        // if (result.includes(courseId)) {
-        //     console.log("уже добавлен");
-
-
-        // } else {
-        //     push(ref(database, `users/${userId}/courses`), {
-        //         courseId,
-        //     })
-        // }
-    
