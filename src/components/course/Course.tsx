@@ -48,13 +48,13 @@ export default function Course({
           <div>
             {!isProfile ? (
               <img
-                className="absolute top-[20px] right-[20px]"
+                className="absolute top-[20px] right-[20px] cursor-pointer"
                 src={plusIcon}
                 alt="добавить курс"
               />
             ) : (
               <img
-                className="absolute top-[20px] right-[20px]"
+                className="absolute top-[20px] right-[20px] cursor-pointer"
                 src={minusIcon}
                 alt="курс добавлен"
               />

@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getStorage, ref as storageRef, getBlob } from "firebase/storage";
 import { CourseType } from "../types";
-import { getDatabase, ref, set, get, child, update, push } from "firebase/database";
+import { getDatabase, ref, get, child, push } from "firebase/database";
 import {compareByOrder} from "./utils"; // REALTIME DB
 
 const firebaseConfig = {
