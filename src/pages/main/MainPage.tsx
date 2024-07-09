@@ -28,7 +28,7 @@ export default function MainPage() {
         setAddedCourses(data)
       })
    
-  },[user]);
+  },[user.id]);
 
   const addCourse = (courseId: string) => {
 
@@ -108,7 +108,7 @@ export default function MainPage() {
                 x-transition:leave-start="opacity-100 transform translate-y-0"
                 x-transition:leave-end="opacity-0 transform translate-y-2 ">
             <Button  
-          onClick={()=>window.scrollTo({ top: 0, behavior: 'smooth' })} type="primary">
+              onClick={()=>window.scrollTo({ top: 0, behavior: 'smooth' })} type="primary">
               Наверх ↑
             </Button>
           </div>
