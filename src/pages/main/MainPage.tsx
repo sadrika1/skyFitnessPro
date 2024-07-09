@@ -1,16 +1,34 @@
 import Course from "../../components/course/Course";
 import { fetchAddFavoriteCourseToUser, getCourses, getFavoriteCourseOfUser } from "../../api/api";
 import { useContext, useEffect, useState } from "react";
-import { CourseType } from "../../types";
+import { CourseIDType, CourseType } from "../../types";
 import { LoginModalContext } from "../../contexts";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import Button from "../../components/button/Button";
 
+
 export default function MainPage() {
+
   const [courses, setCourses] = useState<CourseType[]>();
+  const [addedCourses, setAddedCourses] = useState<CourseIDType[]>([]);
+
 
   const { setIsLoginModalOpened } = useContext(LoginModalContext);
   const user = useAppSelector((state) => state.user);
+
+
+  useEffect(() => {
+    getCourses().then((data) => {
+      setCourses(data);
+    });
+  }, []);
+
+  useEffect(() => {
+      getFavoriteCourseOfUser(user.id).then((data) => {
+        setAddedCourses(data)
+      })
+   
+  },[user]);
 
   const addCourse = (courseId: string) => {
 
@@ -20,7 +38,8 @@ export default function MainPage() {
 
       getFavoriteCourseOfUser(user.id).then((data) => {
 
-
+        // dispatch(setAddedCourses(data))
+        // console.log(dispatch(setAddedCourses(data)));
         // console.log("это данные вернувшиеся с бэкенда по избранным курсам этого пользователя", data);
         // console.log("длина массива", data.length);
 
@@ -36,6 +55,8 @@ export default function MainPage() {
           // // делаем запрос на добавление курса юзеру
           fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
             //   console.log("Курс добавлен в избранное!");
+            // dispatch(setAddedCourses(courseId))
+            // console.log(dispatch(setAddedCourses(courseId)));
           })
         } else {
 
@@ -50,11 +71,6 @@ export default function MainPage() {
     }
   };
 
-  useEffect(() => {
-    getCourses().then((data) => {
-      setCourses(data);
-    });
-  }, []);
 
   return (
     <>
@@ -75,6 +91,7 @@ export default function MainPage() {
             {courses?.map((course) => (
               <Course
                 course={course}
+                addedCourses={addedCourses}
                 key={course._id}
                 onAddCourse={addCourse}
               />

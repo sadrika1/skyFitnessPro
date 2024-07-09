@@ -2,17 +2,21 @@ import calendarIcon from "/icons/icon-calendar.svg";
 import timeIcon from "/icons/icon-time.svg";
 import difficultyIcon from "/icons/level.png";
 import plusIcon from "/icons/icon-plus.svg";
+import addIcon from "/icons/add.svg";
+
 import minusIcon from "/icons/icon-minus.svg";
-import { CourseType } from "../../types";
+import { CourseIDType, CourseType } from "../../types";
 import fit from "/images/bgYellow.jpg";
 
 import { useEffect, useState } from "react";
 import { fetchAndProcessImage } from "../../api/api";
 import Button from "../button/Button";
+import {useAppSelector } from "../../hooks/redux-hooks";
 
 export type CourseProps = {
   course: CourseType;
   onAddCourse: (courseId: string) => void;
+  addedCourses:CourseIDType[],
 
   isProfile?: boolean;
 };
@@ -21,13 +25,33 @@ export default function Course({
   course,
   onAddCourse,
   isProfile,
+  addedCourses,
 }: CourseProps) {
   const { nameRU, duration, timeaday, level, src, _id } = course;
 
   const [imageUrl, setImageUrl] = useState(fit);
+  const [isAddedCourse, setIsAddedCourse] = useState<boolean>(true)
+  const user = useAppSelector((state) => state.user);
+  // const addedCourses = useAppSelector((state) => state.user.addedCourses);
+
+  console.log(isAddedCourse);
+  console.log(addedCourses);
+  const isAdded = Boolean(addedCourses ? addedCourses?.find((el) => el.courseId === course._id) : [])
+
+  useEffect(() => {
+    if(user.id){
+      setIsAddedCourse(isAdded)
+
+    }
+    
+}, [user,addedCourses]);
+
+
 
   const handleAddCourse = () => {
     onAddCourse(_id);
+   setIsAddedCourse(true)
+   //не уверена,что так будет работать,когда курсы будут удаляться на странице пользователя, нужен тест,когда страница пользователя будет готова
   };
 
   useEffect(() => {
@@ -46,19 +70,32 @@ export default function Course({
             cross-origin="use-credentials"
           ></img>
           <div>
-            {!isProfile ? (
-              <img
-                className="absolute top-[20px] right-[20px] cursor-pointer"
-                src={plusIcon}
-                alt="добавить курс"
-              />
-            ) : (
-              <img
-                className="absolute top-[20px] right-[20px] cursor-pointer"
-                src={minusIcon}
-                alt="курс добавлен"
-              />
-            )}
+{!isProfile ? (
+isAddedCourse ? (
+  <img
+    className="absolute top-[20px] right-[20px] cursor-pointer"
+    src={plusIcon}
+    alt="добавить курс"
+  />
+) : (
+  <img
+    className="absolute top-[20px] right-[20px] cursor-pointer"
+    src={addIcon}
+    alt="курс добавлен"
+  />
+)
+) : (
+  <img
+  className="absolute top-[20px] right-[20px] cursor-pointer"
+  src={minusIcon}
+  alt="курс добавлен"
+/>
+)}
+
+            
+
+
+
           </div>
         </div>
         <div className="p-6 mb-4 text-base grid md:gap-3 ">
