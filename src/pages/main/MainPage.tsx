@@ -97,8 +97,18 @@ export default function MainPage() {
               />
             ))}
           </div>
-          <div className="flex justify-center mt-6 mb-20 ">
-            <Button type="primary">
+          <div className="flex justify-center mt-6 mb-20"
+                x-data="{ isVisible: false }"
+                x-init="window.addEventListener('scroll', () => { isVisible = window.scrollY > 100; })"
+                x-show="isVisible"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform translate-y-2"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-in duration-300"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform translate-y-2 ">
+            <Button  
+          onClick={()=>window.scrollTo({ top: 0, behavior: 'smooth' })} type="primary">
               Наверх ↑
             </Button>
           </div>
