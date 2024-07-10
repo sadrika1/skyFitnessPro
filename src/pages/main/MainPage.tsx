@@ -5,7 +5,8 @@ import { CourseIDType, CourseType } from "../../types";
 import { LoginModalContext } from "../../contexts";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import Button from "../../components/button/Button";
-
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function MainPage() {
 
@@ -54,6 +55,10 @@ export default function MainPage() {
           console.log("элемента нет");
           // // делаем запрос на добавление курса юзеру
           fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
+          
+              toast("Курс добавлен!");
+          
+        
             //   console.log("Курс добавлен в избранное!");
             // dispatch(setAddedCourses(courseId))
             // console.log(dispatch(setAddedCourses(courseId)));
@@ -96,6 +101,20 @@ export default function MainPage() {
                 onAddCourse={addCourse}
               />
             ))}
+              <ToastContainer 
+                style={{ width: "300px", }}
+                bodyClassName={() => "text-[26px]"}
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                transition={Bounce}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
           </div>
           <div className="flex justify-center mt-6 mb-20"
                 x-data="{ isVisible: false }"
