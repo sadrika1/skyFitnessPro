@@ -1,8 +1,12 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Button from "../button/Button";
 import { Link } from "react-router-dom";
+import {useContext} from "react";
+import {LoginModalContext} from "../../contexts";
 
 export default function Header() {
+
+  const { isLoginModalOpened, setIsLoginModalOpened } = useContext(LoginModalContext);
+
   return (
     // указать проверку авторизации и условие
 
@@ -16,7 +20,7 @@ export default function Header() {
             Онлайн-тренировки для занятий дома
           </p>
         </div>
-        <Button classNames="w-[103px]" type="primary">
+        <Button classNames="w-[103px]" type="primary" onClick={() => setIsLoginModalOpened(!isLoginModalOpened)}>
           Войти
         </Button>
       </div>
@@ -30,7 +34,7 @@ export default function Header() {
       </div>
     <UserName />
     </div>
-    
+
     */
   );
 }
