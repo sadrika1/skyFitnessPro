@@ -7,7 +7,7 @@ export default function Yoga() {
         </div>
         <img
           className="rounded-[2rem]"
-          src="/images/yoga.png"
+          src="/images/yoga_laptop.png"
           alt="course_picture"
         />
       </div>

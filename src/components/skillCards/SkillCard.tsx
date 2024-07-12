@@ -1,38 +1,131 @@
+import { useEffect, useState } from "react";
 import { CourseType } from "../../types";
+import { useNavigate } from "react-router-dom";
+import { appRoutes } from "../../route/appRoutes";
+import { getAuth } from "firebase/auth";
+import {
+  fetchAddFavoriteCourseToUser,
+  fetchAndProcessImage,
+  fetchAndProcessImageLaptop,
+  getCourses,
+} from "../../api/api";
+import fit from "/images/bgYellow.jpg";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
+import clsx from "clsx";
+import { bgColors, courseColor } from "./bgColors";
+import { courseList } from "./courseData";
+import { setChosenCourse } from "../../store/slices/courseSlice";
 
 type SkillCardType = {
-  skillcard: CourseType;
+  course: CourseType;
+
 };
 
-export default function SkillCard({ skillcard }: SkillCardType) {
-  const { nameRU, fitting, directions } = skillcard;
+export default function SkillCard({ course }: SkillCardType) {
+  const { nameRU, fitting, directions, src, src_laptop, _id, color } = course;
+
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const [imageUrl, setImageUrl] = useState(fit);
+  const [imageUrlLaptop, setImageUrlLaptop] = useState(fit);
+
+  // Проверка аутентификации пользователя
+  const user = useAppSelector((state) => state.user);
+
+  const auth = getAuth();
+  const newUser = auth.currentUser;
+
+  useEffect(() => {
+if (newUser) {
+  setIsAuth(true);
+}
+  }, []);
+
+// Попытка брать directions из массива курса
+
+// const dispatch = useAppDispatch();
+//   const isChosen = useAppSelector((state) => state.course.isChosenCourse);
+//   const handleDirectionsChange =() => {
+//     if (isChosen === true) {
+//       dispatch(set())
+//     }
+//   }
+
+  //Добавление картинок курсов из Firestore и Storage
+  useEffect(() => {
+    fetchAndProcessImage(src).then((data) => {
+      setImageUrl(data);
+    });
+  }, []);
+
+  useEffect(() => {
+    fetchAndProcessImageLaptop(src_laptop).then((data) => {
+      setImageUrlLaptop(data);
+    });
+  }, []);
+
+  
+  const addChosenCourse = async (
+    courseId: string,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.stopPropagation();
+    if (user?.id) {
+      if (isAuth === true)
+        await fetchAddFavoriteCourseToUser(user.id, courseId)
+          .then(() => {
+            alert("Курс успешно добавлен на вашу страницу!");
+            navigate(appRoutes.USER_PAGE);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+    } else {
+      // User is signed out
+      alert("Для добавления курса, пожалуйста, авторизуйтесь!");
+
+      navigate(appRoutes.MAIN);
+    }
+  };
+
+  // function getColor(id: string) {
+  //   const cosColor = courseList.find((el) => {
+  //     el._id === id;
+  //   })
+  //     ? courseList.find((el) => {
+  //         el._id === id;
+  //       })
+  //     : {
+  //         _id: "ab1c3f",
+  //         nameRU: "Йога",
+  //       };
+  //       return courseColor[cosColor.nameRU];
+  // }
 
   return (
     <>
-      <div className=" h-[19.38rem] sm:hidden lg:flex flex-row  justify-between rounded-[2rem]  bg-custom-yellow">
-        <div className="mt-10 ml-10">
+      <div className="h-[19.38rem]  sm:hidden lg:flex rounded-[2rem]">
+      {/* <div className={clsx("h-[19.38rem] sm:hidden lg:flex flex-row justify-between rounded-[2rem]", {color})}> */}
+
+        {/* <div className="mt-10 ml-10">
           <p className="text-white text-6xl font-medium leading-[4rem]">
             {nameRU}
           </p>
-        </div>
+        </div> */}
         <img
-          className="rounded-[2rem]"
-          src="/images/yoga.png"
+          className="rounded-[2rem] "
+          src={imageUrlLaptop}
           alt="course_picture"
         />
       </div>
 
       <div className="lg:hidden">
-        <img
-          className="rounded-[2rem]"
-          src="/images/yoga_full.png"
-          alt="course_picture"
-        />
+        <img className="rounded-[2rem]" src={imageUrl} alt="course_picture" />
       </div>
 
       {/* див с рекламными фиттингами */}
       <div className="mt-10 lg:mt-15 flex flex-col ">
-        <p className="text-black text-2xl lg:text-4xl font-medium lg:font-semibold leading-[1.6rem] lg:leading-[2.75rem]">
+        <p className="text-black text-[24px] lg:text-4xl font-[500] lg:font-semibold leading-[1.6rem] lg:leading-[2.75rem]">
           Подойдёт для вас, если:
         </p>
         <div className="mt-6 lg:mt-10 gap-[17px] flex flex-col lg:flex-row justify-between  ">
@@ -66,8 +159,8 @@ export default function SkillCard({ skillcard }: SkillCardType) {
       </div>
 
       {/* див с directions */}
-      <div className="mt-10 lg:mt-15 flex flex-col ">
-        <p className="text-black text-2xl lg:text-4xl font-medium lg:font-semibold leading-[26,4px] lg:leading-[44px]">
+      <div className="mt-10 mb-[172px] lg:mt-15 flex flex-col ">
+        <p className="text-black text-[24px] lg:text-4xl font-[500] lg:font-semibold leading-[26,4px] lg:leading-[44px]">
           Направления
         </p>
         <div className="mt-6 lg:mt-10 p-[30px] sm:hidden lg:flex flex-row justify-around gap-[124px] bg-custom-green text-black-400 rounded-[2rem]">
@@ -227,7 +320,7 @@ export default function SkillCard({ skillcard }: SkillCardType) {
         </div>
       </div>
       {/* див с рекламой */}
-      <div className="sm:hidden lg:flex flex-row justify- bg-white shadow-2xl rounded-[2rem] pt-[102px]">
+      <div className="sm:hidden lg:flex flex-row justify-between bg-white shadow-2xl rounded-[2rem] ">
         <div className="h-[486px] p-10 flex flex-row justify-between">
           <div className="flex flex-col gap-7">
             <p className="text-6xl font-medium leading-[60px]">
@@ -240,48 +333,59 @@ export default function SkillCard({ skillcard }: SkillCardType) {
               width="437px"
               height="178px"
             />
-            <button className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black font-bold py-2 px-4 rounded-full">
-              Войдите, чтобы добавить курс
-            </button>
-            <button className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black font-bold py-2 px-4 rounded-full">
-              Добавить курс
-            </button>
+            {!isAuth && (
+              <button
+                onClick={() => setIsAuth(true)}
+                className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black font-bold py-2 px-4 rounded-full"
+              >
+                Войдите, чтобы добавить курс
+              </button>
+            )}
+            {isAuth && (
+              <button
+              onClick={() => addChosenCourse}
+
+                className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black font-bold py-2 px-4 rounded-full"
+              >
+                Добавить курс
+              </button>
+            )}
           </div>
         </div>
 
-          <div className="relative">
-            <div className="z-0 -right-[10px] top-[40px]">
-              <img
-                className="rotate-[355deg]"
-                src="/images/Vector_Green.png"
-                alt="course_advert"
-                width="670.18px"
-                height="390.98px"
-              />
-            </div>
-            <div className="absolute z-10 -top-[145px] left-[150px]">
-              <img
-                className="rotate-[357deg] "
-                src="/images/crouching_man.png"
-                alt="course_advert"
-                width="487px"
-                height="542.49px"
-              />
-            </div>
-            <div className="absolute z-10 -top-[10px] left-[220px]">
-              <img
-                className="rotate-[350deg]"
-                src="/images/Vector Black.png"
-                alt="course_advert"
-                width="50px"
-                height="42.5px"
-              />
-            </div>
+        <div className="relative">
+          <div className="z-0 -right-[10px] top-[40px]">
+            <img
+              className="rotate-[355deg]"
+              src="/images/Vector_Green.png"
+              alt="course_advert"
+              width="670.18px"
+              height="390.98px"
+            />
           </div>
+          <div className="absolute z-10 -top-[145px] left-[150px]">
+            <img
+              className="rotate-[357deg] "
+              src="/images/crouching_man.png"
+              alt="course_advert"
+              width="487px"
+              height="542.49px"
+            />
+          </div>
+          <div className="absolute z-10 -top-[10px] left-[220px]">
+            <img
+              className="rotate-[350deg]"
+              src="/images/Vector Black.png"
+              alt="course_advert"
+              width="50px"
+              height="42.5px"
+            />
+          </div>
+        </div>
       </div>
 
       <div className="lg:hidden relative bg-gray-100">
-        <div className="absolute z-10 top-[162px] lg:hidden  h-[412px] p-[30px] sm:flex flex-row justify-between  bg-white shadow-2xl rounded-[2rem]">
+        <div className="absolute z-10 -top-[52px] lg:hidden  h-[412px] p-[30px] sm:flex flex-row justify-between  bg-white shadow-2xl rounded-[2rem]">
           <div className=" flex flex-col gap-7">
             <p className="text-[32px] lg:text-6xl font-medium leading-[35,2px] lg:leading-15">
               Начните путь <br />к новому телу
@@ -291,18 +395,26 @@ export default function SkillCard({ skillcard }: SkillCardType) {
               src="/images/text_advert.png"
               alt="course_advert"
             />
-            <button className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black text-base font-normal leading-[17,6px] rounded-full">
+             {!isAuth && (
+            <button 
+            onClick={() => setIsAuth(true)}
+            className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black text-base font-normal leading-[17,6px] rounded-full">
               Войдите, чтобы добавить курс
             </button>
-            <button className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black text-base font-normal leading-[17,6px] rounded-full">
+             )}
+             {isAuth && (
+            <button 
+                onClick={() => addChosenCourse}
+                className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black text-base font-normal leading-[17,6px] rounded-full">
               Добавить курс
             </button>
+             )}
           </div>
         </div>
 
         <div className="lg:hidden relative">
           <img
-            className="absolute z-0 -top-[90px] -left-[4px]"
+            className="absolute z-0 -top-[270px] -left-[4px]"
             src="/images/crouching_man_vectors.png"
             alt="course_advert"
           />

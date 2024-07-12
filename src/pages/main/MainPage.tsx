@@ -4,18 +4,26 @@ import { useContext, useEffect, useState } from "react";
 import { CourseType } from "../../types";
 import { LoginModalContext } from "../../contexts";
 import { useAppSelector } from "../../hooks/redux-hooks";
+import { useNavigate } from "react-router-dom";
+import { appRoutes } from "../../route/appRoutes";
 
 export default function MainPage() {
   const [courses, setCourses] = useState<CourseType[]>();
 
   const { setIsLoginModalOpened } = useContext(LoginModalContext);
   const user = useAppSelector((state) => state.user);
+  const navigate = useNavigate();
+
 
   const addCourse = (courseId: string) => {
     if (user.id) {
       // делаем запрос на добавление курса юзеру
       fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
         console.log("Курс добавлен в избранное!");
+      })
+      .then(() => {
+        navigate(appRoutes.USER_PAGE);
+    
       });
     } else {
       setIsLoginModalOpened(true);
@@ -46,10 +54,11 @@ export default function MainPage() {
           <div className="grid-cols-1 sm:grid md:grid-cols-3 -mr-10">
             {courses?.map((course) => (
               <Course
+                courses={courses}
                 course={course}
                 key={course._id}
                 onAddCourse={addCourse}
-              />
+                isChosenCourse={false}              />
             ))}
           </div>
           <div className="flex justify-center ">

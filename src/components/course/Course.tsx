@@ -7,11 +7,17 @@ import { CourseType } from "../../types";
 import fit from "/images/bgYellow.jpg";
 
 import { useEffect, useState } from "react";
-import { fetchAndProcessImage } from "../../api/api";
+import { fetchAndProcessImage, getCourses } from "../../api/api";
 import Button from "../button/Button";
+import { useAppDispatch } from "../../hooks/redux-hooks";
+import { setChosenCourse } from "../../store/slices/courseSlice";
+import { useNavigate } from "react-router-dom";
+import { appRoutes } from "../../route/appRoutes";
 
 export type CourseProps = {
   course: CourseType;
+  courses: CourseType[];
+  isChosenCourse: boolean;
   onAddCourse: (courseId: string) => void;
 
   isProfile?: boolean;
@@ -19,12 +25,22 @@ export type CourseProps = {
 
 export default function Course({
   course,
+  courses,
+  isChosenCourse,
   onAddCourse,
   isProfile,
 }: CourseProps) {
   const { nameRU, duration, timeaday, level, src, _id } = course;
 
   const [imageUrl, setImageUrl] = useState(fit);
+  const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
+
+ const handleCourseChose = () => {
+  dispatch(setChosenCourse({courses, course, isChosenCourse}));
+  navigate(appRoutes.COURSE_PAGE);
+ }
 
   const handleAddCourse = () => {
     onAddCourse(_id);
@@ -61,7 +77,10 @@ export default function Course({
             )}
           </div>
         </div>
-        <div className="p-6 mb-4 text-base grid md:gap-3 ">
+        <div
+          onClick={handleCourseChose}
+          className="p-6 mb-4 text-base grid md:gap-3 "
+        >
           <h6 className="font-bold text-[32px] my-6">{nameRU}</h6>
           <div className="flex justify-start">
             <div className="flex justify-start rounded-3xl bg-gray px-3 py-3 mr-2">
