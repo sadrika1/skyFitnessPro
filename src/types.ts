@@ -11,3 +11,9 @@ export interface CourseType {
   directions: string;
   color: string;
 }
+
+export interface CourseIDType {
+   
+    courseId: string;
+    
+}

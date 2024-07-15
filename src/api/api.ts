@@ -1,13 +1,8 @@
 import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  query,
-  collection,
-  getDocs,
-  addDoc,
-} from "firebase/firestore";
-import { getStorage, ref, getBlob } from "firebase/storage";
-import { CourseType } from "../types";
+import { getStorage, ref as storageRef, getBlob } from "firebase/storage";
+import { CourseIDType, CourseType } from "../types";
+import { getDatabase, ref, get, child, push } from "firebase/database";
+import { compareByOrder } from "./utils"; // REALTIME DB
 
 const firebaseConfig = {
   apiKey: "AIzaSyCZ-T7GGXFj79VGYQYB6Ff4E-vddPHVb8Q",
@@ -21,34 +16,37 @@ const firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
+const database = getDatabase(firebaseApp);
 
-const db = getFirestore(firebaseApp);
+// export const getCourses = async () => {
+//     const result: CourseType[] = [];
+//
+//     try {
+//         const q = query(collection(db, coursesCollection));
+//         const documents = await getDocs(q);
+//
+//         documents.forEach((document) => {
+//             result.push(document.data() as CourseType)
+//         });
+//     } catch (e) {
+//         console.error(e)
+//     }
+//
+//
+//     return result;
+//
+// }
 
-const coursesCollection = "courses";
-const userFavoriteCourses = "favorite-courses";
-
-export const getCourses = async () => {
-  const result: CourseType[] = [];
-
-  try {
-    const q = query(collection(db, coursesCollection));
-
-    const documents = await getDocs(q);
-   
-
-    documents.forEach((document) => {
-      result.push(document.data() as CourseType);
-    });
-  } catch (e) {
-    console.error(e);
-  }
-  return result;
-};
 
 export const fetchAndProcessImage = async (src: string) => {
   const storage = getStorage();
   const storageRef = ref(storage, `gs://fitnes-bro.appspot.com/${src}`);
   const blob = await getBlob(storageRef);
+export const fetchAndProcessImage = async (src: string) => {
+
+    const storage = getStorage();
+    const stRef = storageRef(storage, `gs://fitnes-bro.appspot.com/${src}`)
+    const blob = await getBlob(stRef)
 
   const url = URL.createObjectURL(blob);
   // const url=URL.revokeObjectURL(urlBlob)
@@ -69,13 +67,59 @@ export const fetchAddFavoriteCourseToUser = async (
   courseId: string
 ) => {
   const db = getFirestore();
+export const fetchAddFavoriteCourseToUser = async (userId: string, courseId: string) => {
+    push(ref(database, `users/${userId}/courses`), {
+        courseId,
+    })
+}
 
-  try {
-    await addDoc(collection(db, userFavoriteCourses), {
-      userId,
-      courseId,
-    });
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
+// export function writeUserData(userId, name, email, imageUrl) {
+//     set(ref(database, 'users/' + userId), {
+//         username: name,
+//         email: email,
+//         profile_picture : imageUrl
+//     });
+// }
+
+export const getCourses = async () => {
+    let result: CourseType[] = [];
+
+    try {
+        const snapshot = await get(child(ref(database), `courses`));
+
+        if (snapshot.exists()) {
+            Object.keys(snapshot.val()).forEach((key) => {
+                result.push(snapshot.val()[key])
+            })
+
+            result = result.sort(compareByOrder);
+        }
+    } catch (e) {
+        console.error(e)
+    }
+
+    return result;
+}
+
+
+export const getFavoriteCourseOfUser = async (userId: string) => {
+    let result: CourseIDType[] = [];
+
+
+    try {
+        const snapshot = await get(child(ref(database), `users/${userId}/courses`));
+
+        if (snapshot.exists()) {
+            Object.keys(snapshot.val()).forEach((key) => {
+                result.push(snapshot.val()[key])
+            })
+
+            result = result;
+        }
+    } catch (e) {
+        console.error(e)
+    }
+
+    return result
+
+}
