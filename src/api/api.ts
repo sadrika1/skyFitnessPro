@@ -18,25 +18,6 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const database = getDatabase(firebaseApp);
 
-// export const getCourses = async () => {
-//     const result: CourseType[] = [];
-//
-//     try {
-//         const q = query(collection(db, coursesCollection));
-//         const documents = await getDocs(q);
-//
-//         documents.forEach((document) => {
-//             result.push(document.data() as CourseType)
-//         });
-//     } catch (e) {
-//         console.error(e)
-//     }
-//
-//
-//     return result;
-//
-// }
-
 export const fetchAndProcessImage = async (src: string) => {
   const storage = getStorage();
   const stRef = storageRef(storage, `gs://fitnes-bro.appspot.com/${src}`);
@@ -85,18 +66,38 @@ export const getCourses = async () => {
   return result;
 };
 
-export const getFavoriteCourseOfUser = async (userId: string) => {
-  let result: CourseIDType[] = [];
+export const getCourse = async (courseId: string) => {
+  let result: CourseType[] = [];
 
   try {
-    const snapshot = await get(child(ref(database), `users/${userId}/courses`));
+    const snapshot = await get(child(ref(database), `courses/${courseId}`));
 
     if (snapshot.exists()) {
-      Object.keys(snapshot.val()).forEach((key) => {
-        result.push(snapshot.val()[key]);
-      });
+      result = snapshot.val();
+    }
+  } catch (e) {
+    console.error(e);
+  }
 
-      result = result;
+  return result;
+};
+
+export const getFavoriteCourseOfUser = async (userId: string) => {
+  let result: any[] = [];
+
+  try {
+    const snapshot = await get(child(ref(database), `users/${userId}`));
+
+    if (snapshot.exists()) {
+      Object.keys(snapshot.val()).forEach(async (key) => {
+        const data = await getCourse(key);
+        const dataWithProgress = {
+          ...data,
+          progress: snapshot.val()[key].progress,
+        };
+        result.push(dataWithProgress);
+        console.log(dataWithProgress);
+      });
     }
   } catch (e) {
     console.error(e);
