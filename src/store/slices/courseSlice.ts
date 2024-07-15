@@ -17,6 +17,12 @@ const courseSlice = createSlice({
   name: "course",
   initialState,
   reducers: {
+    setInitialCourses: (state, action: PayloadAction<{courses: CourseType[]}>) => {
+      state.courses = action.payload.courses;
+     
+      console.log(state.courses, "Hiii!");
+
+    },
     setChosenCourse: (
       state,
       action: PayloadAction<{
@@ -26,12 +32,16 @@ const courseSlice = createSlice({
       }>
     ) => {
       state.chosenCourse = action.payload.course;
-      state.courses = action.payload.courses;
       const courses = state.courses;
-      const chosenCourseIndex = courses.findIndex(
-        (course) => course._id === state.chosenCourse?._id
+      const foundCourse = courses.find(
+        (course) =>
+         { console.log(foundCourse, "Hiii!");
+        return  course._id === state.chosenCourse?._id}
       );
-      const newChosenCourse = courses[chosenCourseIndex];
+
+      console.log(foundCourse, "Hiii!");
+
+      const newChosenCourse = foundCourse;
       if (newChosenCourse) {
         state.chosenCourse = newChosenCourse;
       } else {
@@ -43,5 +53,5 @@ const courseSlice = createSlice({
   },
 });
 
-export const { setChosenCourse } = courseSlice.actions;
+export const { setChosenCourse, setInitialCourses } = courseSlice.actions;
 export const courseReducer = courseSlice.reducer;

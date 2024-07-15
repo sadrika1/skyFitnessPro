@@ -38,10 +38,12 @@ const database = getDatabase(firebaseApp);
 // }
 
 
-export const fetchAndProcessImage = async (src: string) => {
-  const storage = getStorage();
-  const storageRef = ref(storage, `gs://fitnes-bro.appspot.com/${src}`);
-  const blob = await getBlob(storageRef);
+// export const fetchAndProcessImage = async (src: string) => {
+//   const storage = getStorage();
+//   const storageRef = ref(storage, `gs://fitnes-bro.appspot.com/${src}`);
+//   const blob = await getBlob(storageRef);
+
+
 export const fetchAndProcessImage = async (src: string) => {
 
     const storage = getStorage();
@@ -55,18 +57,20 @@ export const fetchAndProcessImage = async (src: string) => {
 };
 export const fetchAndProcessImageLaptop = async (src_laptop: string) => {
   const storage = getStorage();
-  const storageRef = ref(storage, `gs://fitnes-bro.appspot.com/${src_laptop}`);
-  const blob = await getBlob(storageRef);
+  const stRef_laptop = storageRef(storage, `gs://fitnes-bro.appspot.com/${src_laptop}`);
+  const blob = await getBlob(stRef_laptop);
   const url_laptop = URL.createObjectURL(blob);
   return url_laptop;
 };
 
 
-export const fetchAddFavoriteCourseToUser = async (
-  userId: string,
-  courseId: string
-) => {
-  const db = getFirestore();
+// export const fetchAddFavoriteCourseToUser = async (
+//   userId: string,
+//   courseId: string
+// ) => {
+//   const db = getFirestore();
+
+
 export const fetchAddFavoriteCourseToUser = async (userId: string, courseId: string) => {
     push(ref(database, `users/${userId}/courses`), {
         courseId,

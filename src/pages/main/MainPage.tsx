@@ -1,6 +1,6 @@
 import Course from "../../components/course/Course";
 import { fetchAddFavoriteCourseToUser, getCourses, getFavoriteCourseOfUser } from "../../api/api";
-import { useContext, useEffect, useState } from "react";
+import { SetStateAction, useContext, useEffect, useState } from "react";
 import { CourseIDType, CourseType } from "../../types";
 import { LoginModalContext } from "../../contexts";
 import { useAppSelector } from "../../hooks/redux-hooks";
@@ -16,23 +16,23 @@ export default function MainPage() {
 
   const { setIsLoginModalOpened } = useContext(LoginModalContext);
   const user = useAppSelector((state) => state.user);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
 
-  const addCourse = (courseId: string) => {
-    if (user.id) {
-      // делаем запрос на добавление курса юзеру
-      fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
-        console.log("Курс добавлен в избранное!");
-      })
-      .then(() => {
-        navigate(appRoutes.USER_PAGE);
+  // const addCourse = (courseId: string) => {
+  //   if (user.id) {
+  //     // делаем запрос на добавление курса юзеру
+  //     fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
+  //       console.log("Курс добавлен в избранное!");
+  //     })
+  //     .then(() => {
+  //       navigate(appRoutes.USER_PAGE);
     
-      });
-    } else {
-      setIsLoginModalOpened(true);
-    }
-  };
+  //     });
+  //   } else {
+  //     setIsLoginModalOpened(true);
+  //   }
+  // };
 
   useEffect(() => {
     getCourses().then((data) => {
@@ -41,7 +41,7 @@ export default function MainPage() {
   }, []);
 
   useEffect(() => {
-      getFavoriteCourseOfUser(user.id).then((data) => {
+      getFavoriteCourseOfUser(user.id).then((data: SetStateAction<CourseIDType[]>) => {
         setAddedCourses(data)
       })
    
@@ -53,7 +53,7 @@ export default function MainPage() {
 
       console.log("сейчас кликаем на этот курс", courseId);
 
-      getFavoriteCourseOfUser(user.id).then((data) => {
+      getFavoriteCourseOfUser(user.id).then((data: any[]) => {
 
         // dispatch(setAddedCourses(data))
         // console.log(dispatch(setAddedCourses(data)));

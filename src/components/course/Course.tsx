@@ -39,8 +39,8 @@ export default function Course({
   const user = useAppSelector((state) => state.user);
 
 
-  console.log(isAddedCourse);
-  console.log(addedCourses);
+  // console.log(isAddedCourse);
+  // console.log(addedCourses);
   const isAdded = Boolean(addedCourses ? addedCourses?.find((el) => el.courseId === course._id) : [])
 
   useEffect(() => {

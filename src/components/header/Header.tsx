@@ -30,7 +30,7 @@ export default function Header() {
     /*
     <div className="flex justify-around items-center">
       <div>
-        <img src="../public/images/logo.svg" alt="Logo" />
+        <img src="/images/logo.svg" alt="Logo" />
       </div>
     <UserName />
     </div>

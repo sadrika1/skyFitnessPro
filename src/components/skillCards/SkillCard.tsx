@@ -30,16 +30,16 @@ export default function SkillCard({ course }: SkillCardType) {
   const [imageUrlLaptop, setImageUrlLaptop] = useState(fit);
 
   // Проверка аутентификации пользователя
-  const user = useAppSelector((state) => state.user);
+//   const user = useAppSelector((state) => state.user);
 
-  const auth = getAuth();
-  const newUser = auth.currentUser;
+//   const auth = getAuth();
+//   const newUser = auth.currentUser;
 
-  useEffect(() => {
-if (newUser) {
-  setIsAuth(true);
-}
-  }, []);
+//   useEffect(() => {
+// if (newUser) {
+//   setIsAuth(true);
+// }
+//   }, []);
 
 // Попытка брать directions из массива курса
 
@@ -65,28 +65,28 @@ if (newUser) {
   }, []);
 
   
-  const addChosenCourse = async (
-    courseId: string,
-    e: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    e.stopPropagation();
-    if (user?.id) {
-      if (isAuth === true)
-        await fetchAddFavoriteCourseToUser(user.id, courseId)
-          .then(() => {
-            alert("Курс успешно добавлен на вашу страницу!");
-            navigate(appRoutes.USER_PAGE);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-    } else {
-      // User is signed out
-      alert("Для добавления курса, пожалуйста, авторизуйтесь!");
+  // const addChosenCourse = async (
+  //   courseId: string,
+  //   e: React.MouseEvent<HTMLButtonElement>
+  // ) => {
+  //   e.stopPropagation();
+  //   if (user?.id) {
+  //     if (isAuth === true)
+  //       await fetchAddFavoriteCourseToUser(user.id, courseId)
+  //         .then(() => {
+  //           alert("Курс успешно добавлен на вашу страницу!");
+  //           navigate(appRoutes.USER_PAGE);
+  //         })
+  //         .catch((error) => {
+  //           console.error(error);
+  //         });
+  //   } else {
+  //     // User is signed out
+  //     alert("Для добавления курса, пожалуйста, авторизуйтесь!");
 
-      navigate(appRoutes.MAIN);
-    }
-  };
+  //     navigate(appRoutes.MAIN);
+  //   }
+  // };
 
   // function getColor(id: string) {
   //   const cosColor = courseList.find((el) => {
@@ -343,7 +343,7 @@ if (newUser) {
             )}
             {isAuth && (
               <button
-              onClick={() => addChosenCourse}
+              // onClick={() => addChosenCourse}
 
                 className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black font-bold py-2 px-4 rounded-full"
               >
@@ -404,7 +404,7 @@ if (newUser) {
              )}
              {isAuth && (
             <button 
-                onClick={() => addChosenCourse}
+                // onClick={() => addChosenCourse}
                 className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black text-base font-normal leading-[17,6px] rounded-full">
               Добавить курс
             </button>
