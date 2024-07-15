@@ -29,8 +29,7 @@ const Profile = () => {
           <div className="flex flex-col gap-y-7">
             <h2 className="text-3xl font-medium">Сергей</h2>
             <div>
-              <p>Логин:</p>
-              <p>Пароль:</p>
+              <p>Логин: {user.email}</p>
             </div>
             <div className="flex gap-2.5">
               <Button classNames="w-[192px]" type="primary">

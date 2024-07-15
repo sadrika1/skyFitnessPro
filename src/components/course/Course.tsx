@@ -18,44 +18,42 @@ import { appRoutes } from "../../route/appRoutes";
 export type CourseProps = {
   course: CourseType;
   onAddCourse?: (courseId: string) => void;
-  addedCourses?: CourseIDType[],
+  addedCourses?: CourseIDType[];
 
   isProfile?: boolean;
 };
 
 export default function Course({
   course,
-  onAddCourse,
+  // onAddCourse,
   isProfile,
   addedCourses,
 }: CourseProps) {
-
-  const { nameRU, duration, timeaday, level, src, _id } = course;
+  const { nameRU, duration, timeaday, level, src } = course;
 
   const [imageUrl, setImageUrl] = useState(fit);
-  const [isAddedCourse, setIsAddedCourse] = useState<boolean>(false)
+  const [isAddedCourse, setIsAddedCourse] = useState<boolean>(false);
   const user = useAppSelector((state) => state.user);
-
 
   console.log(isAddedCourse);
   console.log(addedCourses);
-  const isAdded = Boolean(addedCourses ? addedCourses?.find((el) => el.courseId === course._id) : [])
+  const isAdded = Boolean(
+    addedCourses ? addedCourses?.find((el) => el.courseId === course._id) : []
+  );
 
   useEffect(() => {
     if (user.id) {
-      setIsAddedCourse(isAdded)
+      setIsAddedCourse(isAdded);
     }
   }, [user.id, addedCourses]);
 
-
-
-  const handleAddCourse = () => {
-    onAddCourse(_id);
-    if(user.id){
-      setIsAddedCourse(true)
-    }
-    //не уверена,что так будет работать,когда курсы будут удаляться на странице пользователя, нужен тест,когда страница пользователя будет готова
-  };
+  // const handleAddCourse = () => {
+  //   onAddCourse(_id);
+  //   if(user.id){
+  //     setIsAddedCourse(true)
+  //   }
+  //   //не уверена,что так будет работать,когда курсы будут удаляться на странице пользователя, нужен тест,когда страница пользователя будет готова
+  // };
 
   useEffect(() => {
     fetchAndProcessImage(src).then((data) => {
@@ -66,12 +64,12 @@ export default function Course({
   return (
     <>
       <div className="relative shadow-lg max-w-[360px] mt-8 mb-2 flex flex-col self-start rounded-3xl bg-white sm:shrink-0 sm:grow sm:basis-0 box-border">
-        <div className="mx-0 mt-0" onClick={handleAddCourse}>
-            <img
-              className="rounded-3xl"
-              src={imageUrl}
-              cross-origin="use-credentials"
-            ></img>
+        <div className="mx-0 mt-0">
+          <img
+            className="rounded-3xl"
+            src={imageUrl}
+            cross-origin="use-credentials"
+          ></img>
           <div>
             {!isProfile ? (
               isAddedCourse ? (
@@ -98,7 +96,9 @@ export default function Course({
         </div>
         <Link to={appRoutes.COURSE_PAGE}>
           <div className="p-6 mb-4 text-base grid md:gap-3 ">
-            <h6 className="font-bold text-[32px] my-6 cursor-pointer">{nameRU}</h6>
+            <h6 className="font-bold text-[32px] my-6 cursor-pointer">
+              {nameRU}
+            </h6>
             <div className="flex justify-start">
               <div className="flex justify-start rounded-3xl bg-gray px-3 py-3 mr-2">
                 <img
@@ -130,7 +130,7 @@ export default function Course({
               <>
                 <div>
                   <p>Прогресс</p>
-                  <div className="w-[300px] rounded-full h-[6px] bg-custom-progress-gray overflow-hidden">
+                  <div className="w-[300px] rounded-full h-[6px] bg-custom-progress-gray overflow-hidden pb-1">
                     <div
                       className={`h-full w-[30%] bg-custom-progress-blue`}
                     ></div>

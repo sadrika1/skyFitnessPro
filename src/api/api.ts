@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getStorage, ref as storageRef, getBlob } from "firebase/storage";
-import { CourseIDType, CourseType } from "../types";
-import { getDatabase, ref, get, child, push } from "firebase/database";
+import { CourseType } from "../types";
+import { getDatabase, ref, get, child, set } from "firebase/database";
 import { compareByOrder } from "./utils"; // REALTIME DB
 
 const firebaseConfig = {
@@ -33,9 +33,10 @@ export const fetchAddFavoriteCourseToUser = async (
   userId: string,
   courseId: string
 ) => {
-  push(ref(database, `users/${userId}/courses`), {
-    courseId,
-  });
+  const snapshot = await get(child(ref(database), `scheme/${courseId}`));
+  if (snapshot.exists()) {
+    set(ref(database, `users/${userId}/${courseId}`), snapshot.val());
+  }
 };
 
 // export function writeUserData(userId, name, email, imageUrl) {
@@ -83,27 +84,25 @@ export const getCourse = async (courseId: string) => {
 };
 
 export const getFavoriteCourseOfUser = async (userId: string) => {
-  let result: any[] = [];
-
   try {
     const snapshot = await get(child(ref(database), `users/${userId}`));
 
     if (snapshot.exists()) {
-      Object.keys(snapshot.val()).forEach(async (key) => {
+      const promises = Object.keys(snapshot.val()).map(async (key) => {
         const data = await getCourse(key);
         const dataWithProgress = {
           ...data,
           progress: snapshot.val()[key].progress,
         };
-        result.push(dataWithProgress);
-        console.log(dataWithProgress);
+        return dataWithProgress;
       });
+
+      const result = await Promise.all(promises);
+      return result;
     }
   } catch (e) {
     console.error(e);
   }
-  console.log(result);
-  return result;
 };
 
 export const deleteCourses = async () => {};

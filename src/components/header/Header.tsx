@@ -18,8 +18,8 @@ export default function Header() {
   const user = useAppSelector((state) => state.user);
 
   return (
-    <div className="flex justify-center">
-      <div className="flex justify-between center items-center h-[145px] w-[1440px]">
+    <div className="flex justify-center bg-slate-50">
+      <div className="flex justify-between center items-center h-[145px] w-full max-w-screen-xl mx-4">
         <div>
           <Link to="/">
             <img src="/images/logo.svg" alt="Logo" />
