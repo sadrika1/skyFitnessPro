@@ -4,6 +4,10 @@ import { useContext, useState } from "react";
 import { LoginModalContext } from "../../contexts";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import UserModal from "../userModal/UserModal";
+// import { useAuth } from "../../hooks/use-auth";
+// import UserName from "./UserName";
+// import { getAuth } from "firebase/auth";
+// import { firebaseApp } from "../../api/api";
 
 export default function Header() {
   const { isLoginModalOpened, setIsLoginModalOpened } =
@@ -17,7 +21,10 @@ export default function Header() {
 
   const user = useAppSelector((state) => state.user);
 
+  // const { isAuth } = useAuth();
+  // const auth = getAuth(firebaseApp);
   return (
+    <>
     <div className="flex justify-center">
       <div className="flex justify-between center items-center h-[145px] w-[1440px]">
         <div>
@@ -28,7 +35,8 @@ export default function Header() {
             Онлайн-тренировки для занятий дома
           </p>
         </div>
-        {user.email ? (
+        {/* {!auth.currentUser?.emailVerified ? ( */}
+          {user.email ? (
           <div className="flex justify-between items-center w-[168px]">
             <div className="rounded-full overflow-hidden">
               <img
@@ -68,10 +76,14 @@ export default function Header() {
             type="primary"
             onClick={() => setIsLoginModalOpened(!isLoginModalOpened)}
           >
-            Войти
-          </Button>
+              Войти
+            </Button>
         )}
+        {/* ) : (
+          <UserName />
+        )} */}
       </div>
     </div>
+    </>
   );
 }

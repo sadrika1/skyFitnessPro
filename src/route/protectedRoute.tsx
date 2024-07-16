@@ -1,7 +1,7 @@
-import { getAuth } from "firebase/auth";
 import { Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "../hooks/use-auth";
 
 export default function ProtectedRoute() {
-  const auth = getAuth();
-  return auth ? <Outlet /> : <Navigate to="/" />;
+  const { isAuth } = useAuth();
+  return isAuth ? <Outlet /> : <Navigate to="/" />;
 }
