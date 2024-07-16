@@ -83,27 +83,25 @@ export const getCourse = async (courseId: string) => {
 };
 
 export const getFavoriteCourseOfUser = async (userId: string) => {
-  let result: any[] = [];
-
   try {
     const snapshot = await get(child(ref(database), `users/${userId}`));
 
     if (snapshot.exists()) {
-      Object.keys(snapshot.val()).forEach(async (key) => {
+      const promises = Object.keys(snapshot.val()).map(async (key) => {
         const data = await getCourse(key);
         const dataWithProgress = {
           ...data,
           progress: snapshot.val()[key].progress,
         };
-        result.push(dataWithProgress);
-        console.log(dataWithProgress);
+        return dataWithProgress;
       });
+
+      const result = await Promise.all(promises);
+      return result;
     }
   } catch (e) {
     console.error(e);
   }
-  console.log(result);
-  return result;
 };
 
 export const deleteCourses = async () => {};
