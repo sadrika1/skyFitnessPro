@@ -58,8 +58,8 @@ const ModalLogin = () => {
       <div className="bg-white p-10 rounded-3xl flex flex-col gap-5 items-center">
 
         <img src="/images/logo.svg" alt="Logo" className="pb-5" />
-<!-- 
-        <img src="../public/images/logo.svg" alt="Logo" className="pb-5" /> -->
+{/* <!-- 
+        <img src="../public/images/logo.svg" alt="Logo" className="pb-5" /> --> */}
 
         {!isReg ? (
           <>

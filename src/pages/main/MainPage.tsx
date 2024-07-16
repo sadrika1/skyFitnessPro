@@ -1,5 +1,9 @@
 import Course from "../../components/course/Course";
-import { fetchAddFavoriteCourseToUser, getCourses, getFavoriteCourseOfUser } from "../../api/api";
+import {
+  fetchAddFavoriteCourseToUser,
+  getCourses,
+  getFavoriteCourseOfUser,
+} from "../../api/api";
 
 import { SetStateAction, useContext, useEffect, useState } from "react";
 import { CourseIDType } from "../../types";
@@ -11,47 +15,38 @@ import "react-toastify/dist/ReactToastify.css";
 import { setCourses } from "../../store/slices/courseSlice";
 
 export default function MainPage() {
-
-
   const [addedCourses, setAddedCourses] = useState<CourseIDType[]>([]);
   const dispatch = useAppDispatch();
   const { setIsLoginModalOpened } = useContext(LoginModalContext);
   const user = useAppSelector((state) => state.user);
 
-
   const courses = useAppSelector((state) => state.course.courses);
-console.log(courses);
+  console.log(courses);
   useEffect(() => {
     getCourses().then((data) => {
-      dispatch(setCourses({
-        courses: data
-      }))
-
+      dispatch(
+        setCourses({
+          courses: data,
+        })
+      );
     });
   }, []);
 
   useEffect(() => {
-
-      getFavoriteCourseOfUser(user.id).then((data: SetStateAction<CourseIDType[]>) => {
-
-        setAddedCourses(data)
-      })
-   
-  },[user.id]);
+    getFavoriteCourseOfUser(user.id).then(
+      (data: SetStateAction<CourseIDType[]>) => {
+        setAddedCourses(data);
+      }
+    );
+  }, [user.id]);
 
   const addCourse = (courseId: string) => {
-
     if (user.id) {
-
       console.log("сейчас кликаем на этот курс", courseId);
 
-
       getFavoriteCourseOfUser(user.id).then((data: any[]) => {
-
-
-
         const element = data?.some(function (el) {
-          return el.courseId == courseId
+          return el.courseId == courseId;
         });
         console.log(element);
 
@@ -59,21 +54,16 @@ console.log(courses);
           console.log("элемента нет");
           // // делаем запрос на добавление курса юзеру
           fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
-          
-              toast("Курс добавлен!");
-
-          })
+            toast("Курс добавлен!");
+          });
         } else {
-
           console.log("вот он уже добавлен был и нашелся в массиве", element);
-
         }
-      })
+      });
     } else {
       setIsLoginModalOpened(true);
     }
   };
-
 
   return (
     <>
@@ -98,35 +88,40 @@ console.log(courses);
                 addedCourses={addedCourses}
                 key={course._id}
                 onAddCourse={addCourse}
-                isChosenCourse={false}              />
-            ))}
-              <ToastContainer 
-                style={{ width: "300px", }}
-                bodyClassName={() => "text-[26px]"}
-                position="bottom-center"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={true}
-                closeOnClick
-                rtl={false}
-                transition={Bounce}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
+                isChosenCourse={false}
               />
+            ))}
+            <ToastContainer
+              style={{ width: "300px" }}
+              bodyClassName={() => "text-[26px]"}
+              position="bottom-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={true}
+              closeOnClick
+              rtl={false}
+              transition={Bounce}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
           </div>
-          <div className="flex justify-center mt-6 mb-20"
-                x-data="{ isVisible: false }"
-                x-init="window.addEventListener('scroll', () => { isVisible = window.scrollY > 100; })"
-                x-show="isVisible"
-                x-transition:enter="transition ease-out duration-300"
-                x-transition:enter-start="opacity-0 transform translate-y-2"
-                x-transition:enter-end="opacity-100 transform translate-y-0"
-                x-transition:leave="transition ease-in duration-300"
-                x-transition:leave-start="opacity-100 transform translate-y-0"
-                x-transition:leave-end="opacity-0 transform translate-y-2 ">
-            <Button  
-              onClick={()=>window.scrollTo({ top: 0, behavior: 'smooth' })} type="primary">
+          <div
+            className="flex justify-center mt-6 mb-20"
+            x-data="{ isVisible: false }"
+            x-init="window.addEventListener('scroll', () => { isVisible = window.scrollY > 100; })"
+            x-show="isVisible"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform translate-y-2"
+            x-transition:enter-end="opacity-100 transform translate-y-0"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 transform translate-y-0"
+            x-transition:leave-end="opacity-0 transform translate-y-2 "
+          >
+            <Button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              type="primary"
+            >
               Наверх ↑
             </Button>
           </div>

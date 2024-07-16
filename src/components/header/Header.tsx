@@ -1,23 +1,13 @@
 import Button from "../button/Button";
 import { Link } from "react-router-dom";
-
-import {useContext} from "react";
-import {LoginModalContext} from "../../contexts";
-
 import { useContext, useState } from "react";
 import { LoginModalContext } from "../../contexts";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import UserModal from "../userModal/UserModal";
-// import { useAuth } from "../../hooks/use-auth";
-// import UserName from "./UserName";
-// import { getAuth } from "firebase/auth";
-// import { firebaseApp } from "../../api/api";
-
 
 export default function Header() {
   const { isLoginModalOpened, setIsLoginModalOpened } =
     useContext(LoginModalContext);
-
 
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
 
@@ -25,16 +15,11 @@ export default function Header() {
     setIsUserModalOpen((prev) => !prev);
   }
 
-
   const user = useAppSelector((state) => state.user);
 
-  // const { isAuth } = useAuth();
-  // const auth = getAuth(firebaseApp);
   return (
-
-    <>
-    <div className="flex justify-center">
-      <div className="flex justify-between center items-center h-[145px] w-[1440px]">
+    <div className="flex justify-center bg-slate-50">
+      <div className="flex justify-between center items-center h-[145px] w-full max-w-screen-xl mx-4">
         <div>
           <Link to="/">
             <img src="/images/logo.svg" alt="Logo" />
@@ -43,15 +28,7 @@ export default function Header() {
             Онлайн-тренировки для занятий дома
           </p>
         </div>
-
-        <Button classNames="w-[103px]" type="primary" onClick={() => setIsLoginModalOpened(!isLoginModalOpened)}>
-          Войти
-        </Button>
-      </div>
-    </div>
-
-        {/* {!auth.currentUser?.emailVerified ? ( */}
-          {user.email ? (
+        {user.email ? (
           <div className="flex justify-between items-center w-[168px]">
             <div className="rounded-full overflow-hidden">
               <img
@@ -91,17 +68,10 @@ export default function Header() {
             type="primary"
             onClick={() => setIsLoginModalOpened(!isLoginModalOpened)}
           >
-              Войти
-            </Button>
+            Войти
+          </Button>
         )}
-        {/* ) : (
-          <UserName />
-        )} */}
-
       </div>
     </div>
-
-    </>
-
   );
 }

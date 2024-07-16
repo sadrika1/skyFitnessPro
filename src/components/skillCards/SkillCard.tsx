@@ -1,29 +1,21 @@
 import { useEffect, useState } from "react";
 import { CourseType } from "../../types";
 
-import { useNavigate } from "react-router-dom";
-import { appRoutes } from "../../route/appRoutes";
-import { getAuth } from "firebase/auth";
 import {
-  fetchAddFavoriteCourseToUser,
   fetchAndProcessImage,
   fetchAndProcessImageLaptop,
-  getCourses,
+
 } from "../../api/api";
 import fit from "/images/bgYellow.jpg";
 
 import BoyAd from "./boyAd";
 
-
 type SkillCardType = {
   course: CourseType;
-
 };
 
 export default function SkillCard({ course }: SkillCardType) {
-  const {  fitting, directions, src, src_laptop } = course;
-
-  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const { fitting, directions, src, src_laptop } = course;
   const [imageUrl, setImageUrl] = useState(fit);
   const [imageUrlLaptop, setImageUrlLaptop] = useState(fit);
 
@@ -39,7 +31,7 @@ export default function SkillCard({ course }: SkillCardType) {
       setImageUrlLaptop(data);
     });
   }, []);
-console.log(directions)
+  console.log(directions);
   return (
     <>
       <div className="h-[19.38rem]  sm:hidden lg:flex rounded-[2rem]">
@@ -98,222 +90,27 @@ console.log(directions)
           <div className="flex flex-col gap-[34px]">
             <div className="flex flex-row">
               <div className="text-2xl font-normal leading-[26,4px]">
-                {directions.map((el) => 
-                <div><div className="h-[30px] w-[30px]">
-                <svg>
-                  <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
-                </svg>
-              </div>{el}</div>
-                )}
-              </div>
-            </div>
-
-           {/* <div className="flex flex-row">
-              <div className="h-[30px] w-[30px]">
-                <svg>
-                  <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
-                </svg>
-              </div>
-              <div className="text-2xl font-normal leading-[26,4px]">
-                {directions[1]}
-              </div>
-            </div> */}
-          </div>
-
-          {/* <div className="flex flex-col gap-[34px]">
-            <div className="flex flex-row">
-              <div className="h-[30px] w-[30px]">
-                <svg>
-                  <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
-                </svg>
-              </div>
-              <div className="text-2xl font-normal leading-[26,4px]">
-                {directions[2]}
-              </div>
-            </div>
-            <div className="flex flex-row">
-              <div className="h-[30px] w-[30px]">
-                <svg>
-                  <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
-                </svg>
-              </div>
-              <div className="text-2xl font-normal leading-[26,4px]">
-                {directions[3]}
-              </div>
-            </div>
-          </div> */}
-
-          {/* <div className="flex flex-col gap-[34px]">
-            <div className="flex flex-row">
-              <div className="h-[30px] w-[30px]">
-                <svg>
-                  <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
-                </svg>
-              </div>
-              <div className="text-2xl font-normal leading-[26,4px]">
-                {directions[4]}
-              </div>
-            </div>
-            <div className="flex flex-row">
-              <div className="h-[30px] w-[30px]">
-                <svg>
-                  <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
-                </svg>
-              </div>
-              <div className="text-2xl font-normal leading-[26,4px]">
-                {directions[5]}
-              </div>
-            </div>
-          </div> */}
-        </div> 
-
-
-        {/* мобильная версия дива с directions */}
-        <div className=" mt-6 lg:mt-10 p-[30px] flex lg:hidden flex-col gap-[30px] bg-custom-green text-black-400 rounded-[2rem]">
-          <div className="flex flex-col gap-[30px]">
-            <div className="flex flex-row">
-              <div className="h-[30px] w-[30px]">
-                <svg>
-                  <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
-                </svg>
-              </div>
-              <div className="text-lg font-normal leading-5">
-                {/* Йога для новичков */}
-                {directions[0]}
-              </div>
-            </div>
-
-            <div className="flex flex-row">
-              <div className="h-[30px] w-[30px]">
-                <svg>
-                  <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
-                </svg>
-              </div>
-              <div className="text-lg font-normal leading-5">
-                {/* Классическая йога */}
-                {directions[1]}
+                {directions.map((el) => (
+                  <div>
+                    <div className="h-[30px] w-[30px]">
+                      <svg>
+                        <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
+                      </svg>
+                    </div>
+                    {el}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col gap-[34px]">
-            <div className="flex flex-row">
-              <div className="h-[30px] w-[30px]">
-                <svg>
-                  <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
-                </svg>
-              </div>
-              <div className="text-lg font-normal leading-5">
-                {/* Кундалини-йога */}
-                {directions[2]}
-              </div>
-            </div>
-            <div className="flex flex-row">
-              <div className="h-[30px] w-[30px]">
-                <svg>
-                  <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
-                </svg>
-              </div>
-              <div className="text-lg font-normal leading-5">
-                {/* Йогатерапия */}
-                {directions[3]}
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-[34px]">
-            <div className="flex flex-row">
-              <div className="h-[30px] w-[30px]">
-                <svg>
-                  <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
-                </svg>
-              </div>
-              <div className="text-lg font-normal leading-5">
-                {/* Хатха-йога */}
-                {directions[4]}
-              </div>
-            </div>
-            <div className="flex flex-row">
-              <div className="h-[30px] w-[30px]">
-                <svg>
-                  <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
-                </svg>
-              </div>
-              <div className="text-lg font-normal leading-5">
-                {/* Аштанга-йога */}
-                {directions[5]}
-              </div>
-            </div>
-          </div>
+          {/* мобильная версия дива с directions */}
         </div>
       </div>
 
       {/* див с рекламой */}
-      <div className="sm:hidden lg:flex flex-row justify-between bg-white shadow-2xl rounded-[2rem] ">
-        <div className="h-[486px] p-10 flex flex-row justify-between">
-          <div className="flex flex-col gap-7">
-            <p className="text-6xl font-medium leading-[60px]">
-              Начните путь <br />к новому телу
-            </p>
-            <img
-              className=""
-              src="/images/text_advert.png"
-              alt="course_advert"
-              width="437px"
-              height="178px"
-            />
-            {!isAuth && (
-              <button
-                onClick={() => setIsAuth(true)}
-                className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black font-bold py-2 px-4 rounded-full"
-              >
-                Войдите, чтобы добавить курс
-              </button>
-            )}
-            {isAuth && (
-              <button
-              // onClick={() => addChosenCourse}
 
-                className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black font-bold py-2 px-4 rounded-full"
-              >
-                Добавить курс
-              </button>
-            )}
-          </div>
-        </div>
-
-        <div className="relative">
-          <div className="z-0 -right-[10px] top-[40px]">
-            <img
-              className="rotate-[355deg]"
-              src="/images/Vector_Green.png"
-              alt="course_advert"
-              width="670.18px"
-              height="390.98px"
-            />
-          </div>
-          <div className="absolute z-10 -top-[145px] left-[150px]">
-            <img
-              className="rotate-[357deg] "
-              src="/images/crouching_man.png"
-              alt="course_advert"
-              width="487px"
-              height="542.49px"
-            />
-          </div>
-          <div className="absolute z-10 -top-[10px] left-[220px]">
-            <img
-              className="rotate-[350deg]"
-              src="/images/Vector Black.png"
-              alt="course_advert"
-              width="50px"
-              height="42.5px"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="lg:hidden relative bg-gray-100">
+      {/* <div className="lg:hidden relative bg-gray-100">
         <div className="absolute z-10 -top-[52px] lg:hidden  h-[412px] p-[30px] sm:flex flex-row justify-between  bg-white shadow-2xl rounded-[2rem]">
           <div className=" flex flex-col gap-7">
             <p className="text-[32px] lg:text-6xl font-medium leading-[35,2px] lg:leading-15">
@@ -348,10 +145,9 @@ console.log(directions)
             alt="course_advert"
           />
         </div>
-      </div>
-=
+      </div> */}
+
       <BoyAd />
->>
     </>
   );
 }

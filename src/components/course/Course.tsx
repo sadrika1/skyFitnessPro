@@ -47,8 +47,6 @@ export default function Course({
     }
   }, [user.id, addedCourses]);
 
-
-
   const handleAddCourse = () => {
     onAddCourse(_id);
     if(user.id){
@@ -64,7 +62,6 @@ export default function Course({
   }, []);
 
   return (
-    <>
       <div className="relative shadow-lg max-w-[360px] mt-8 mb-2 flex flex-col self-start rounded-3xl bg-white sm:shrink-0 sm:grow sm:basis-0 box-border">
         <div className="mx-0 mt-0" onClick={handleAddCourse}>
             <img
@@ -97,7 +94,7 @@ export default function Course({
           </div>
         </div>
 
-        <Link to={`skillcard/${_id}`}
+        <Link to={`skillcard/${_id}`}>
           <div className="p-6 mb-4 text-base grid md:gap-3 ">
             <h6 className="font-bold text-[32px] my-6 cursor-pointer">{nameRU}</h6>
             <div className="flex justify-start">
@@ -126,7 +123,8 @@ export default function Course({
               />
               <div className="pl-2 ">{level}</div>
             </div>
-
+            </div>
+            
             {isProfile && (
               <>
                 <div>
@@ -142,9 +140,7 @@ export default function Course({
                 </Button>
               </>
             )}
-          </div>
-        </Link>
-      </div>
-    </>
+            </Link>
+       </div>
   );
 }
