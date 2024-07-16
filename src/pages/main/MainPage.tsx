@@ -1,42 +1,28 @@
 import Course from "../../components/course/Course";
 import { fetchAddFavoriteCourseToUser, getCourses, getFavoriteCourseOfUser } from "../../api/api";
 import { SetStateAction, useContext, useEffect, useState } from "react";
-import { CourseIDType, CourseType } from "../../types";
+import { CourseIDType } from "../../types";
 import { LoginModalContext } from "../../contexts";
-import { useAppSelector } from "../../hooks/redux-hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import Button from "../../components/button/Button";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { setCourses } from "../../store/slices/courseSlice";
 
 export default function MainPage() {
 
-  const [courses, setCourses] = useState<CourseType[]>();
   const [addedCourses, setAddedCourses] = useState<CourseIDType[]>([]);
-
-
+  const dispatch = useAppDispatch();
   const { setIsLoginModalOpened } = useContext(LoginModalContext);
   const user = useAppSelector((state) => state.user);
-  // const navigate = useNavigate();
 
-
-  // const addCourse = (courseId: string) => {
-  //   if (user.id) {
-  //     // делаем запрос на добавление курса юзеру
-  //     fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
-  //       console.log("Курс добавлен в избранное!");
-  //     })
-  //     .then(() => {
-  //       navigate(appRoutes.USER_PAGE);
-    
-  //     });
-  //   } else {
-  //     setIsLoginModalOpened(true);
-  //   }
-  // };
-
+  const courses = useAppSelector((state) => state.course.courses);
+console.log(courses);
   useEffect(() => {
     getCourses().then((data) => {
-      setCourses(data);
+      dispatch(setCourses({
+        courses: data
+      }))
     });
   }, []);
 
@@ -55,29 +41,17 @@ export default function MainPage() {
 
       getFavoriteCourseOfUser(user.id).then((data: any[]) => {
 
-        // dispatch(setAddedCourses(data))
-        // console.log(dispatch(setAddedCourses(data)));
-        // console.log("это данные вернувшиеся с бэкенда по избранным курсам этого пользователя", data);
-        // console.log("длина массива", data.length);
-
         const element = data?.some(function (el) {
           return el.courseId == courseId
         });
         console.log(element);
 
         if (!element) {
-
-
           console.log("элемента нет");
           // // делаем запрос на добавление курса юзеру
           fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
           
               toast("Курс добавлен!");
-          
-        
-            //   console.log("Курс добавлен в избранное!");
-            // dispatch(setAddedCourses(courseId))
-            // console.log(dispatch(setAddedCourses(courseId)));
           })
         } else {
 
@@ -85,13 +59,10 @@ export default function MainPage() {
 
         }
       })
-
-
     } else {
       setIsLoginModalOpened(true);
     }
   };
-
 
   return (
     <>

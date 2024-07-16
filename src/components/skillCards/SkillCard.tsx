@@ -10,11 +10,6 @@ import {
   getCourses,
 } from "../../api/api";
 import fit from "/images/bgYellow.jpg";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
-import clsx from "clsx";
-import { bgColors, courseColor } from "./bgColors";
-import { courseList } from "./courseData";
-import { setChosenCourse } from "../../store/slices/courseSlice";
 
 type SkillCardType = {
   course: CourseType;
@@ -22,34 +17,11 @@ type SkillCardType = {
 };
 
 export default function SkillCard({ course }: SkillCardType) {
-  const { nameRU, fitting, directions, src, src_laptop, _id, color } = course;
+  const {  fitting, directions, src, src_laptop } = course;
 
   const [isAuth, setIsAuth] = useState<boolean>(false);
-  const navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState(fit);
   const [imageUrlLaptop, setImageUrlLaptop] = useState(fit);
-
-  // Проверка аутентификации пользователя
-//   const user = useAppSelector((state) => state.user);
-
-//   const auth = getAuth();
-//   const newUser = auth.currentUser;
-
-//   useEffect(() => {
-// if (newUser) {
-//   setIsAuth(true);
-// }
-//   }, []);
-
-// Попытка брать directions из массива курса
-
-// const dispatch = useAppDispatch();
-//   const isChosen = useAppSelector((state) => state.course.isChosenCourse);
-//   const handleDirectionsChange =() => {
-//     if (isChosen === true) {
-//       dispatch(set())
-//     }
-//   }
 
   //Добавление картинок курсов из Firestore и Storage
   useEffect(() => {
@@ -63,55 +35,10 @@ export default function SkillCard({ course }: SkillCardType) {
       setImageUrlLaptop(data);
     });
   }, []);
-
-  
-  // const addChosenCourse = async (
-  //   courseId: string,
-  //   e: React.MouseEvent<HTMLButtonElement>
-  // ) => {
-  //   e.stopPropagation();
-  //   if (user?.id) {
-  //     if (isAuth === true)
-  //       await fetchAddFavoriteCourseToUser(user.id, courseId)
-  //         .then(() => {
-  //           alert("Курс успешно добавлен на вашу страницу!");
-  //           navigate(appRoutes.USER_PAGE);
-  //         })
-  //         .catch((error) => {
-  //           console.error(error);
-  //         });
-  //   } else {
-  //     // User is signed out
-  //     alert("Для добавления курса, пожалуйста, авторизуйтесь!");
-
-  //     navigate(appRoutes.MAIN);
-  //   }
-  // };
-
-  // function getColor(id: string) {
-  //   const cosColor = courseList.find((el) => {
-  //     el._id === id;
-  //   })
-  //     ? courseList.find((el) => {
-  //         el._id === id;
-  //       })
-  //     : {
-  //         _id: "ab1c3f",
-  //         nameRU: "Йога",
-  //       };
-  //       return courseColor[cosColor.nameRU];
-  // }
-
+console.log(directions)
   return (
     <>
       <div className="h-[19.38rem]  sm:hidden lg:flex rounded-[2rem]">
-      {/* <div className={clsx("h-[19.38rem] sm:hidden lg:flex flex-row justify-between rounded-[2rem]", {color})}> */}
-
-        {/* <div className="mt-10 ml-10">
-          <p className="text-white text-6xl font-medium leading-[4rem]">
-            {nameRU}
-          </p>
-        </div> */}
         <img
           className="rounded-[2rem] "
           src={imageUrlLaptop}
@@ -166,31 +93,30 @@ export default function SkillCard({ course }: SkillCardType) {
         <div className="mt-6 lg:mt-10 p-[30px] sm:hidden lg:flex flex-row justify-around gap-[124px] bg-custom-green text-black-400 rounded-[2rem]">
           <div className="flex flex-col gap-[34px]">
             <div className="flex flex-row">
-              <div className="h-[30px] w-[30px]">
+              <div className="text-2xl font-normal leading-[26,4px]">
+                {directions.map((el) => 
+                <div><div className="h-[30px] w-[30px]">
                 <svg>
                   <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
                 </svg>
-              </div>
-              <div className="text-2xl font-normal leading-[26,4px]">
-                {/* Йога для новичков */}
-                {directions[0]}
+              </div>{el}</div>
+                )}
               </div>
             </div>
 
-            <div className="flex flex-row">
+           {/* <div className="flex flex-row">
               <div className="h-[30px] w-[30px]">
                 <svg>
                   <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                {/* Классическая йога */}
                 {directions[1]}
               </div>
-            </div>
+            </div> */}
           </div>
 
-          <div className="flex flex-col gap-[34px]">
+          {/* <div className="flex flex-col gap-[34px]">
             <div className="flex flex-row">
               <div className="h-[30px] w-[30px]">
                 <svg>
@@ -198,7 +124,6 @@ export default function SkillCard({ course }: SkillCardType) {
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                {/* Кундалини-йога */}
                 {directions[2]}
               </div>
             </div>
@@ -209,13 +134,12 @@ export default function SkillCard({ course }: SkillCardType) {
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                {/* Йогатерапия */}
                 {directions[3]}
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="flex flex-col gap-[34px]">
+          {/* <div className="flex flex-col gap-[34px]">
             <div className="flex flex-row">
               <div className="h-[30px] w-[30px]">
                 <svg>
@@ -223,7 +147,6 @@ export default function SkillCard({ course }: SkillCardType) {
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                {/* Хатха-йога */}
                 {directions[4]}
               </div>
             </div>
@@ -234,12 +157,13 @@ export default function SkillCard({ course }: SkillCardType) {
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                {/* Аштанга-йога */}
                 {directions[5]}
               </div>
             </div>
-          </div>
-        </div>
+          </div> */}
+        </div> 
+
+
         {/* мобильная версия дива с directions */}
         <div className=" mt-6 lg:mt-10 p-[30px] flex lg:hidden flex-col gap-[30px] bg-custom-green text-black-400 rounded-[2rem]">
           <div className="flex flex-col gap-[30px]">

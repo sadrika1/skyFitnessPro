@@ -1,5 +1,4 @@
 export interface CourseType {
-  map(arg0: (course: CourseType) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode;
   duration: number;
   level: string;
   nameRU: string;
@@ -9,8 +8,7 @@ export interface CourseType {
   src_laptop: string;
   _id: string;
   fitting: string;
-  directions: string;
-  color: string;
+  directions: string[];
 }
 
 export interface CourseIDType {
