@@ -10,11 +10,6 @@ import Layout from "./components/layout/Layout";
 import { useState } from "react";
 import { LoginModalContext } from "./contexts";
 import { ModalLogin } from "./components/modalItem/Modal";
-import Yoga from "./components/skillCards/Yoga";
-import Stretching from "./components/skillCards/Stretching";
-import StepAerobics from "./components/skillCards/StepAerobics";
-// import Zumba from "./components/skillCards/Zumba";
-// import Stretching from "./components/skillCards/Stretching";
 
 export default function App() {
   const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
@@ -35,7 +30,7 @@ export default function App() {
 
           <Route
             path={appRoutes.COURSE_PAGE}
-            element={<StepAerobics />}
+            element={<ChosenCoursePage />}
           ></Route>
           <Route path={appRoutes.MAIN} element={<MainPage />}></Route>
         </Route>

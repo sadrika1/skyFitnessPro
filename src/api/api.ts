@@ -18,66 +18,132 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const database = getDatabase(firebaseApp);
 
+
 export const fetchAndProcessImage = async (src: string) => {
-  const storage = getStorage();
-  const stRef = storageRef(storage, `gs://fitnes-bro.appspot.com/${src}`);
-  const blob = await getBlob(stRef);
+
+    const storage = getStorage();
+    const stRef = storageRef(storage, `gs://fitnes-bro.appspot.com/${src}`)
+    const blob = await getBlob(stRef)
 
   const url = URL.createObjectURL(blob);
-  // const url=URL.revokeObjectURL(urlBlob)
-  // window.open(url)
   return url;
 };
-
-export const fetchAddFavoriteCourseToUser = async (
-  userId: string,
-  courseId: string
-) => {
-  push(ref(database, `users/${userId}/courses`), {
-    courseId,
-  });
+export const fetchAndProcessImageLaptop = async (src_laptop: string) => {
+  const storage = getStorage();
+  const stRef_laptop = storageRef(storage, `gs://fitnes-bro.appspot.com/${src_laptop}`);
+  const blob = await getBlob(stRef_laptop);
+  const url_laptop = URL.createObjectURL(blob);
+  return url_laptop;
 };
 
-// export function writeUserData(userId, name, email, imageUrl) {
-//     set(ref(database, 'users/' + userId), {
-//         username: name,
-//         email: email,
-//         profile_picture : imageUrl
-//     });
-// }
+export const fetchAddFavoriteCourseToUser = async (userId: string, courseId: string) => {
+    push(ref(database, `users/${userId}/courses`), {
+        courseId,
+    })
+}
 
 export const getCourses = async () => {
-  let result: CourseType[] = [];
+    let result: CourseType[] = [];
 
-  try {
-    const snapshot = await get(child(ref(database), `courses`));
+    try {
+        const snapshot = await get(child(ref(database), `courses`));
+
+        if (snapshot.exists()) {
+            Object.keys(snapshot.val()).forEach((key) => {
+                result.push(snapshot.val()[key])
+            })
+
+            result = result.sort(compareByOrder);
+        }
+    } catch (e) {
+        console.error(e)
+    }
+
+    return result;
+}
+// =======
+
+// export const fetchAndProcessImage = async (src: string) => {
+//   const storage = getStorage();
+//   const stRef = storageRef(storage, `gs://fitnes-bro.appspot.com/${src}`);
+//   const blob = await getBlob(stRef);
+
+//   const url = URL.createObjectURL(blob);
+//   // const url=URL.revokeObjectURL(urlBlob)
+//   // window.open(url)
+//   return url;
+// };
+
+// export const fetchAddFavoriteCourseToUser = async (
+//   userId: string,
+//   courseId: string
+// ) => {
+//   push(ref(database, `users/${userId}/courses`), {
+//     courseId,
+//   });
+// };
+
+// // export function writeUserData(userId, name, email, imageUrl) {
+// //     set(ref(database, 'users/' + userId), {
+// //         username: name,
+// //         email: email,
+// //         profile_picture : imageUrl
+// //     });
+// // }
+
+// export const getCourses = async () => {
+//   let result: CourseType[] = [];
+
+//   try {
+//     const snapshot = await get(child(ref(database), `courses`));
+// >>>>>>> dev
 
     if (snapshot.exists()) {
       Object.keys(snapshot.val()).forEach((key) => {
         result.push(snapshot.val()[key]);
       });
 
-      result = result.sort(compareByOrder);
+
+export const getFavoriteCourseOfUser = async (userId: string) => {
+    let result: CourseIDType[] = [];
+
+
+    try {
+        const snapshot = await get(child(ref(database), `users/${userId}/courses`));
+
+        if (snapshot.exists()) {
+            Object.keys(snapshot.val()).forEach((key) => {
+                result.push(snapshot.val()[key])
+            })
+
+            result = result;
+        }
+    } catch (e) {
+        console.error(e)
+// =======
+//       result = result.sort(compareByOrder);
+//     }
+//   } catch (e) {
+//     console.error(e);
+//   }
+
+//   return result;
+// };
+
+// export const getCourse = async (courseId: string) => {
+//   let result: CourseType[] = [];
+
+//   try {
+//     const snapshot = await get(child(ref(database), `courses/${courseId}`));
+
+//     if (snapshot.exists()) {
+//       result = snapshot.val();
+// >>>>>>> dev
     }
   } catch (e) {
     console.error(e);
   }
 
-  return result;
-};
-
-export const getCourse = async (courseId: string) => {
-  let result: CourseType[] = [];
-
-  try {
-    const snapshot = await get(child(ref(database), `courses/${courseId}`));
-
-    if (snapshot.exists()) {
-      result = snapshot.val();
-    }
-  } catch (e) {
-    console.error(e);
-  }
 
   return result;
 };
@@ -105,3 +171,4 @@ export const getFavoriteCourseOfUser = async (userId: string) => {
 };
 
 export const deleteCourses = async () => {};
+

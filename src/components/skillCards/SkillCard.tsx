@@ -1,39 +1,62 @@
+import { useEffect, useState } from "react";
 import { CourseType } from "../../types";
+
+import { useNavigate } from "react-router-dom";
+import { appRoutes } from "../../route/appRoutes";
+import { getAuth } from "firebase/auth";
+import {
+  fetchAddFavoriteCourseToUser,
+  fetchAndProcessImage,
+  fetchAndProcessImageLaptop,
+  getCourses,
+} from "../../api/api";
+import fit from "/images/bgYellow.jpg";
+
 import BoyAd from "./boyAd";
 
+
 type SkillCardType = {
-  skillcard: CourseType;
+  course: CourseType;
+
 };
 
-export default function SkillCard({ skillcard }: SkillCardType) {
-  const { nameRU, fitting, directions } = skillcard;
+export default function SkillCard({ course }: SkillCardType) {
+  const {  fitting, directions, src, src_laptop } = course;
 
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [imageUrl, setImageUrl] = useState(fit);
+  const [imageUrlLaptop, setImageUrlLaptop] = useState(fit);
+
+  //Добавление картинок курсов из Firestore и Storage
+  useEffect(() => {
+    fetchAndProcessImage(src).then((data) => {
+      setImageUrl(data);
+    });
+  }, []);
+
+  useEffect(() => {
+    fetchAndProcessImageLaptop(src_laptop).then((data) => {
+      setImageUrlLaptop(data);
+    });
+  }, []);
+console.log(directions)
   return (
     <>
-      <div className=" h-[19.38rem] sm:hidden lg:flex flex-row  justify-between rounded-[2rem]  bg-custom-yellow">
-        <div className="mt-10 ml-10">
-          <p className="text-white text-6xl font-medium leading-[4rem]">
-            {nameRU}
-          </p>
-        </div>
+      <div className="h-[19.38rem]  sm:hidden lg:flex rounded-[2rem]">
         <img
-          className="rounded-[2rem]"
-          src="/images/yoga.png"
+          className="rounded-[2rem] "
+          src={imageUrlLaptop}
           alt="course_picture"
         />
       </div>
 
       <div className="lg:hidden">
-        <img
-          className="rounded-[2rem]"
-          src="/images/yoga_full.png"
-          alt="course_picture"
-        />
+        <img className="rounded-[2rem]" src={imageUrl} alt="course_picture" />
       </div>
 
       {/* див с рекламными фиттингами */}
       <div className="mt-10 lg:mt-15 flex flex-col ">
-        <p className="text-black text-2xl lg:text-4xl font-medium lg:font-semibold leading-[1.6rem] lg:leading-[2.75rem]">
+        <p className="text-black text-[24px] lg:text-4xl font-[500] lg:font-semibold leading-[1.6rem] lg:leading-[2.75rem]">
           Подойдёт для вас, если:
         </p>
         <div className="mt-6 lg:mt-10 gap-[17px] flex flex-col lg:flex-row justify-between  ">
@@ -67,38 +90,37 @@ export default function SkillCard({ skillcard }: SkillCardType) {
       </div>
 
       {/* див с directions */}
-      <div className="mt-10 lg:mt-15 flex flex-col ">
-        <p className="text-black text-2xl lg:text-4xl font-medium lg:font-semibold leading-[26,4px] lg:leading-[44px]">
+      <div className="mt-10 mb-[172px] lg:mt-15 flex flex-col ">
+        <p className="text-black text-[24px] lg:text-4xl font-[500] lg:font-semibold leading-[26,4px] lg:leading-[44px]">
           Направления
         </p>
         <div className="mt-6 lg:mt-10 p-[30px] sm:hidden lg:flex flex-row justify-around gap-[124px] bg-custom-green text-black-400 rounded-[2rem]">
           <div className="flex flex-col gap-[34px]">
             <div className="flex flex-row">
-              <div className="h-[30px] w-[30px]">
+              <div className="text-2xl font-normal leading-[26,4px]">
+                {directions.map((el) => 
+                <div><div className="h-[30px] w-[30px]">
                 <svg>
                   <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
                 </svg>
-              </div>
-              <div className="text-2xl font-normal leading-[26,4px]">
-                {/* Йога для новичков */}
-                {directions[0]}
+              </div>{el}</div>
+                )}
               </div>
             </div>
 
-            <div className="flex flex-row">
+           {/* <div className="flex flex-row">
               <div className="h-[30px] w-[30px]">
                 <svg>
                   <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                {/* Классическая йога */}
                 {directions[1]}
               </div>
-            </div>
+            </div> */}
           </div>
 
-          <div className="flex flex-col gap-[34px]">
+          {/* <div className="flex flex-col gap-[34px]">
             <div className="flex flex-row">
               <div className="h-[30px] w-[30px]">
                 <svg>
@@ -106,7 +128,6 @@ export default function SkillCard({ skillcard }: SkillCardType) {
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                {/* Кундалини-йога */}
                 {directions[2]}
               </div>
             </div>
@@ -117,13 +138,12 @@ export default function SkillCard({ skillcard }: SkillCardType) {
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                {/* Йогатерапия */}
                 {directions[3]}
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="flex flex-col gap-[34px]">
+          {/* <div className="flex flex-col gap-[34px]">
             <div className="flex flex-row">
               <div className="h-[30px] w-[30px]">
                 <svg>
@@ -131,7 +151,6 @@ export default function SkillCard({ skillcard }: SkillCardType) {
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                {/* Хатха-йога */}
                 {directions[4]}
               </div>
             </div>
@@ -142,12 +161,13 @@ export default function SkillCard({ skillcard }: SkillCardType) {
                 </svg>
               </div>
               <div className="text-2xl font-normal leading-[26,4px]">
-                {/* Аштанга-йога */}
                 {directions[5]}
               </div>
             </div>
-          </div>
-        </div>
+          </div> */}
+        </div> 
+
+
         {/* мобильная версия дива с directions */}
         <div className=" mt-6 lg:mt-10 p-[30px] flex lg:hidden flex-col gap-[30px] bg-custom-green text-black-400 rounded-[2rem]">
           <div className="flex flex-col gap-[30px]">
@@ -227,7 +247,111 @@ export default function SkillCard({ skillcard }: SkillCardType) {
           </div>
         </div>
       </div>
+
+      {/* див с рекламой */}
+      <div className="sm:hidden lg:flex flex-row justify-between bg-white shadow-2xl rounded-[2rem] ">
+        <div className="h-[486px] p-10 flex flex-row justify-between">
+          <div className="flex flex-col gap-7">
+            <p className="text-6xl font-medium leading-[60px]">
+              Начните путь <br />к новому телу
+            </p>
+            <img
+              className=""
+              src="/images/text_advert.png"
+              alt="course_advert"
+              width="437px"
+              height="178px"
+            />
+            {!isAuth && (
+              <button
+                onClick={() => setIsAuth(true)}
+                className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black font-bold py-2 px-4 rounded-full"
+              >
+                Войдите, чтобы добавить курс
+              </button>
+            )}
+            {isAuth && (
+              <button
+              // onClick={() => addChosenCourse}
+
+                className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black font-bold py-2 px-4 rounded-full"
+              >
+                Добавить курс
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="z-0 -right-[10px] top-[40px]">
+            <img
+              className="rotate-[355deg]"
+              src="/images/Vector_Green.png"
+              alt="course_advert"
+              width="670.18px"
+              height="390.98px"
+            />
+          </div>
+          <div className="absolute z-10 -top-[145px] left-[150px]">
+            <img
+              className="rotate-[357deg] "
+              src="/images/crouching_man.png"
+              alt="course_advert"
+              width="487px"
+              height="542.49px"
+            />
+          </div>
+          <div className="absolute z-10 -top-[10px] left-[220px]">
+            <img
+              className="rotate-[350deg]"
+              src="/images/Vector Black.png"
+              alt="course_advert"
+              width="50px"
+              height="42.5px"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="lg:hidden relative bg-gray-100">
+        <div className="absolute z-10 -top-[52px] lg:hidden  h-[412px] p-[30px] sm:flex flex-row justify-between  bg-white shadow-2xl rounded-[2rem]">
+          <div className=" flex flex-col gap-7">
+            <p className="text-[32px] lg:text-6xl font-medium leading-[35,2px] lg:leading-15">
+              Начните путь <br />к новому телу
+            </p>
+            <img
+              className=""
+              src="/images/text_advert.png"
+              alt="course_advert"
+            />
+             {!isAuth && (
+            <button 
+            onClick={() => setIsAuth(true)}
+            className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black text-base font-normal leading-[17,6px] rounded-full">
+              Войдите, чтобы добавить курс
+            </button>
+             )}
+             {isAuth && (
+            <button 
+                // onClick={() => addChosenCourse}
+                className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black text-base font-normal leading-[17,6px] rounded-full">
+              Добавить курс
+            </button>
+             )}
+          </div>
+        </div>
+
+        <div className="lg:hidden relative">
+          <img
+            className="absolute z-0 -top-[270px] -left-[4px]"
+            src="/images/crouching_man_vectors.png"
+            alt="course_advert"
+          />
+        </div>
+      </div>
+=
       <BoyAd />
+>>
     </>
   );
 }
