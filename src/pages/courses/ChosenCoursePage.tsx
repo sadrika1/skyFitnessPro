@@ -2,7 +2,6 @@ import SkillCard from "../../components/skillCards/SkillCard";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import { useParams } from "react-router-dom";
 
-
 export default function ChosenCoursePage() {
  const courses = useAppSelector((state) => state.course.courses);
 console.log(courses);
@@ -23,6 +22,3 @@ console.log(chosenCourse);
  )}
 
 
-// token to login on a CI server:
-//  1//0c4hH_xaMypuCCgYIARAAGAwSNwF-L9Ir1Ntd3ahs9br7CpuksmcTMQcg9LPH0WmrKQmz6XWjef2lZkp_FOJQfJmSjaxmWWrfLg0
-//  Example: firebase deploy --token "$FIREBASE_TOKEN"

@@ -1,5 +1,6 @@
 import Course from "../../components/course/Course";
 import { fetchAddFavoriteCourseToUser, getCourses, getFavoriteCourseOfUser } from "../../api/api";
+
 import { SetStateAction, useContext, useEffect, useState } from "react";
 import { CourseIDType } from "../../types";
 import { LoginModalContext } from "../../contexts";
@@ -11,10 +12,12 @@ import { setCourses } from "../../store/slices/courseSlice";
 
 export default function MainPage() {
 
+
   const [addedCourses, setAddedCourses] = useState<CourseIDType[]>([]);
   const dispatch = useAppDispatch();
   const { setIsLoginModalOpened } = useContext(LoginModalContext);
   const user = useAppSelector((state) => state.user);
+
 
   const courses = useAppSelector((state) => state.course.courses);
 console.log(courses);
@@ -23,11 +26,14 @@ console.log(courses);
       dispatch(setCourses({
         courses: data
       }))
+
     });
   }, []);
 
   useEffect(() => {
+
       getFavoriteCourseOfUser(user.id).then((data: SetStateAction<CourseIDType[]>) => {
+
         setAddedCourses(data)
       })
    
@@ -39,7 +45,10 @@ console.log(courses);
 
       console.log("сейчас кликаем на этот курс", courseId);
 
+
       getFavoriteCourseOfUser(user.id).then((data: any[]) => {
+
+
 
         const element = data?.some(function (el) {
           return el.courseId == courseId
@@ -52,6 +61,7 @@ console.log(courses);
           fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
           
               toast("Курс добавлен!");
+
           })
         } else {
 
@@ -63,6 +73,7 @@ console.log(courses);
       setIsLoginModalOpened(true);
     }
   };
+
 
   return (
     <>

@@ -14,12 +14,14 @@ import Button from "../button/Button";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import { Link } from "react-router-dom";
 
+
 export type CourseProps = {
   course: CourseType;
   courses: CourseType[];
   isChosenCourse: boolean;
   onAddCourse: (courseId: string) => void;
   addedCourses: CourseIDType[],
+
 
   isProfile?: boolean;
 };
@@ -36,6 +38,7 @@ export default function Course({
   const [imageUrl, setImageUrl] = useState(fit);
   const [isAddedCourse, setIsAddedCourse] = useState<boolean>(false)
   const user = useAppSelector((state) => state.user);
+
   const isAdded = Boolean(addedCourses ? addedCourses?.find((el) => el.courseId === course._id) : [])
 
   useEffect(() => {
@@ -93,8 +96,8 @@ export default function Course({
             )}
           </div>
         </div>
-        <Link to={`skillcard/${_id}`}>
-        
+
+        <Link to={`skillcard/${_id}`}
           <div className="p-6 mb-4 text-base grid md:gap-3 ">
             <h6 className="font-bold text-[32px] my-6 cursor-pointer">{nameRU}</h6>
             <div className="flex justify-start">

@@ -16,3 +16,9 @@ export interface CourseIDType {
     courseId: string;
     
 }
+
+export interface CourseIDType {
+   
+    courseId: string;
+    
+}

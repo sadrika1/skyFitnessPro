@@ -18,6 +18,7 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const database = getDatabase(firebaseApp);
 
+
 export const fetchAndProcessImage = async (src: string) => {
 
     const storage = getStorage();
@@ -60,6 +61,47 @@ export const getCourses = async () => {
 
     return result;
 }
+// =======
+
+// export const fetchAndProcessImage = async (src: string) => {
+//   const storage = getStorage();
+//   const stRef = storageRef(storage, `gs://fitnes-bro.appspot.com/${src}`);
+//   const blob = await getBlob(stRef);
+
+//   const url = URL.createObjectURL(blob);
+//   // const url=URL.revokeObjectURL(urlBlob)
+//   // window.open(url)
+//   return url;
+// };
+
+// export const fetchAddFavoriteCourseToUser = async (
+//   userId: string,
+//   courseId: string
+// ) => {
+//   push(ref(database, `users/${userId}/courses`), {
+//     courseId,
+//   });
+// };
+
+// // export function writeUserData(userId, name, email, imageUrl) {
+// //     set(ref(database, 'users/' + userId), {
+// //         username: name,
+// //         email: email,
+// //         profile_picture : imageUrl
+// //     });
+// // }
+
+// export const getCourses = async () => {
+//   let result: CourseType[] = [];
+
+//   try {
+//     const snapshot = await get(child(ref(database), `courses`));
+// >>>>>>> dev
+
+    if (snapshot.exists()) {
+      Object.keys(snapshot.val()).forEach((key) => {
+        result.push(snapshot.val()[key]);
+      });
 
 
 export const getFavoriteCourseOfUser = async (userId: string) => {
@@ -78,8 +120,55 @@ export const getFavoriteCourseOfUser = async (userId: string) => {
         }
     } catch (e) {
         console.error(e)
+// =======
+//       result = result.sort(compareByOrder);
+//     }
+//   } catch (e) {
+//     console.error(e);
+//   }
+
+//   return result;
+// };
+
+// export const getCourse = async (courseId: string) => {
+//   let result: CourseType[] = [];
+
+//   try {
+//     const snapshot = await get(child(ref(database), `courses/${courseId}`));
+
+//     if (snapshot.exists()) {
+//       result = snapshot.val();
+// >>>>>>> dev
     }
+  } catch (e) {
+    console.error(e);
+  }
 
-    return result
 
-}
+  return result;
+};
+
+export const getFavoriteCourseOfUser = async (userId: string) => {
+  try {
+    const snapshot = await get(child(ref(database), `users/${userId}`));
+
+    if (snapshot.exists()) {
+      const promises = Object.keys(snapshot.val()).map(async (key) => {
+        const data = await getCourse(key);
+        const dataWithProgress = {
+          ...data,
+          progress: snapshot.val()[key].progress,
+        };
+        return dataWithProgress;
+      });
+
+      const result = await Promise.all(promises);
+      return result;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const deleteCourses = async () => {};
+

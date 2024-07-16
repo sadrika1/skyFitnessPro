@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { CourseType } from "../../types";
+
 import { useNavigate } from "react-router-dom";
 import { appRoutes } from "../../route/appRoutes";
 import { getAuth } from "firebase/auth";
@@ -10,6 +11,9 @@ import {
   getCourses,
 } from "../../api/api";
 import fit from "/images/bgYellow.jpg";
+
+import BoyAd from "./boyAd";
+
 
 type SkillCardType = {
   course: CourseType;
@@ -243,6 +247,7 @@ console.log(directions)
           </div>
         </div>
       </div>
+
       {/* див с рекламой */}
       <div className="sm:hidden lg:flex flex-row justify-between bg-white shadow-2xl rounded-[2rem] ">
         <div className="h-[486px] p-10 flex flex-row justify-between">
@@ -344,6 +349,9 @@ console.log(directions)
           />
         </div>
       </div>
+=
+      <BoyAd />
+>>
     </>
   );
 }
