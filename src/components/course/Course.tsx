@@ -17,8 +17,8 @@ import { appRoutes } from "../../route/appRoutes";
 
 export type CourseProps = {
   course: CourseType;
-  onAddCourse: (courseId: string) => void;
-  addedCourses: CourseIDType[],
+  onAddCourse?: (courseId: string) => void;
+  addedCourses?: CourseIDType[],
 
   isProfile?: boolean;
 };

@@ -6,7 +6,7 @@ import { appRoutes } from "./route/appRoutes";
 import ProtectedRoute from "./route/protectedRoute";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import Layout from "./components/layout/Layout";
-import ChosenCoursePage from "./pages/courses/ChosenCoursePage";
+
 import { useState } from "react";
 import { LoginModalContext } from "./contexts";
 import { ModalLogin } from "./components/modalItem/Modal";
@@ -30,7 +30,7 @@ export default function App() {
 
           <Route
             path={appRoutes.COURSE_PAGE}
-            element={<ChosenCoursePage />}
+            // element={<ChosenCoursePage />}
           ></Route>
           <Route path={appRoutes.MAIN} element={<MainPage />}></Route>
         </Route>

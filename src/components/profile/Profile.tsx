@@ -1,54 +1,21 @@
 import Course from "../course/Course";
 import Button from "../button/Button";
 import Heading from "../heading/Heading";
-import imgYoga from "/images/yoga_main.png";
-import imgStretching from "/images/stretching_main.png";
-import imgZumba from "/images/zumba_main.png";
-import { fetchAddFavoriteCourseToUser } from "../../api/api";
 import { useAppSelector } from "../../hooks/redux-hooks";
+import { useEffect, useState } from "react";
+import { getFavoriteCourseOfUser } from "../../api/api";
+import { CourseType } from "../../types";
 
 const Profile = () => {
-  const courses = [
-    {
-      _id: "1",
-      nameRU: "Йога",
-      src: imgYoga,
-      duration: 25,
-      timeaday: "20-25 минут/день",
-      level: "Средняя сложность",
-      order: 3,
-    },
-    {
-      _id: "2",
-      nameRU: "Стретчинг",
-      src: imgStretching,
-      duration: 25,
-      timeaday: "20-25 минут/день",
-      level: "Средняя сложность",
-      order: 3,
-    },
-    {
-      _id: "3",
-      nameRU: "Зумба",
-      src: imgZumba,
-      duration: 25,
-      timeaday: "20-25 минут/день",
-      level: "Низкая сложность",
-      order: 3,
-    },
-  ];
+  const [userCourses, setUserCourses] = useState<CourseType[]>([]);
 
   const user = useAppSelector((state) => state.user);
 
-  const addCourse = (courseId: string) => {
-    if (user.id) {
-      // делаем запрос на добавление курса юзеру
-      fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
-        console.log("Курс добавлен в избранное!");
-      });
-    } else {
-    }
-  };
+  useEffect(() => {
+    getFavoriteCourseOfUser(user.id).then((data) => {
+      setUserCourses(data);
+    });
+  }, [user]);
   return (
     <div className="bg-slate-50 flex justify-center h-screen">
       <div className="w-full max-w-screen-xl mx-4">
@@ -78,13 +45,8 @@ const Profile = () => {
         <Heading classNames="mb-2">Мои курсы</Heading>
         <div className="mb-10 gap-x-16">
           <div className="grid-cols-1 sm:grid md:grid-cols-3 -mr-10">
-            {courses.map((course) => (
-              <Course
-                isProfile
-                course={course}
-                key={course._id}
-                onAddCourse={addCourse}
-              />
+            {userCourses.map((course) => (
+              <Course isProfile course={course} key={course._id} />
             ))}
           </div>
         </div>
