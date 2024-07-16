@@ -4,11 +4,11 @@ import { CourseType } from "../../types";
 // import SkillCard from "../../components/skillCards/SkillCard";
 import Yoga from "../../components/skillCards/Yoga";
 
-type ChosenCoursePageType = {
-  skillcard: CourseType;
-};
+// type ChosenCoursePageType = {
+//   skillcard: CourseType;
+// };
 
-export default function ChosenCoursePage({}: ChosenCoursePageType) {
+export default function ChosenCoursePage() {
   //  const [chosenCourse, setChosenCourse] = useState<CourseType[]>()
 
   //  useEffect(() => {

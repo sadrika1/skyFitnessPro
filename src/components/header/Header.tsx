@@ -1,8 +1,13 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Button from "../button/Button";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/use-auth";
+import UserName from "./UserName";
+import { getAuth } from "firebase/auth";
+import { firebaseApp } from "../../api/api";
 
 export default function Header() {
+  const { isAuth } = useAuth();
+  const auth = getAuth(firebaseApp);
   return (
     // указать проверку авторизации и условие
 
@@ -16,21 +21,14 @@ export default function Header() {
             Онлайн-тренировки для занятий дома
           </p>
         </div>
-        <Button classNames="w-[103px]" type="primary">
-          Войти
-        </Button>
+        {!auth.currentUser?.emailVerified ? (
+          <Button classNames="w-[103px]" type="primary">
+            Войти
+          </Button>
+        ) : (
+          <UserName />
+        )}
       </div>
     </div>
-
-    // если пользователь авторизован показываем это:
-    /*
-    <div className="flex justify-around items-center">
-      <div>
-        <img src="../public/images/logo.svg" alt="Logo" />
-      </div>
-    <UserName />
-    </div>
-    
-    */
   );
 }

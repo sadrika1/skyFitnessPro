@@ -30,7 +30,7 @@ export default function MainPage() {
 
   return (
     <>
-      <div className="font-roboto bg-gray-100 grid place-content-center">
+      <div className="font-roboto grid place-content-center">
         <div className="mx-[140px] max-w-[1440px]">
           <div className="flex justify-between my-[50px] relative">
             <div className="font-semibold text-[60px] h-[120px] text-pretty inline-block align-middle">
