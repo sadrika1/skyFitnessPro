@@ -15,9 +15,26 @@ import "react-toastify/dist/ReactToastify.css";
 export default function MainPage() {
   const [courses, setCourses] = useState<CourseType[]>();
   const [addedCourses, setAddedCourses] = useState<CourseIDType[]>([]);
-
   const { setIsLoginModalOpened } = useContext(LoginModalContext);
   const user = useAppSelector((state) => state.user);
+
+  // const isAdded = Boolean(
+  //   addedCourses ? addedCourses?.find((el) => el.courseId === course._id) : []
+  // );
+
+  // useEffect(() => {
+  //   if (user.id) {
+  //     setIsAddedCourse(isAdded);
+  //   }
+  // }, [user.id, addedCourses]);
+
+  // const handleAddCourse = () => {
+  //   addCourse(_id);
+  //   if (user.id) {
+  //     setAddedCourses(true);
+  //   }
+  //   //не уверена,что так будет работать,когда курсы будут удаляться на странице пользователя, нужен тест,когда страница пользователя будет готова
+  // };
 
   useEffect(() => {
     getCourses().then((data) => {

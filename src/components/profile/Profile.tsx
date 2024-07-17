@@ -26,7 +26,7 @@ const Profile = () => {
             src="/images/person.jpg"
             alt="картинка пользователя"
           />
-          <div className="flex flex-col gap-y-7">
+          <div className="flex flex-col justify-between gap-y-7">
             <h2 className="text-3xl font-medium">Сергей</h2>
             <div>
               <p>Логин: {user.email}</p>

@@ -19,7 +19,6 @@ export type CourseProps = {
   course: CourseType;
   onAddCourse?: (courseId: string) => void;
   addedCourses?: CourseIDType[];
-
   isProfile?: boolean;
 };
 
@@ -49,8 +48,8 @@ export default function Course({
 
   // const handleAddCourse = () => {
   //   onAddCourse(_id);
-  //   if(user.id){
-  //     setIsAddedCourse(true)
+  //   if (user.id) {
+  //     setIsAddedCourse(true);
   //   }
   //   //не уверена,что так будет работать,когда курсы будут удаляться на странице пользователя, нужен тест,когда страница пользователя будет готова
   // };
