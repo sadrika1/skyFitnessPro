@@ -111,3 +111,42 @@ export const deleteFavoriteCourse = async (
 ) => {
   set(ref(database, `users/${userId}/${courseId}`), {});
 };
+
+export const getUserWorkouts = async (userId: string, courseId: string) => {
+  try {
+    const workoutIdsSnapshot = await get(
+      child(ref(database), `courses/${courseId}/workouts`)
+    );
+
+    if (workoutIdsSnapshot.exists()) {
+      const workoutIds = workoutIdsSnapshot.val();
+      let workouts = [];
+
+      for (let id of workoutIds) {
+        const workoutDataSnapshot = await get(
+          child(ref(database), `workouts/${id}/name`)
+        );
+
+        if (workoutDataSnapshot.exists()) {
+          const progressSnapshot = await get(
+            child(ref(database), `users/${userId}/${courseId}/${id}/done`)
+          );
+
+          if (progressSnapshot.exists()) {
+            workouts.push({
+              name: workoutDataSnapshot.val(),
+              progress: progressSnapshot.val(),
+            });
+          }
+        }
+      }
+
+      return workouts; // Возвращаем готовый массив тренировок
+    }
+
+    return []; // Возвращаем пустой массив, если workoutIds не существует
+  } catch (e) {
+    console.error(e);
+    return []; // Возвращаем пустой массив в случае ошибки
+  }
+};

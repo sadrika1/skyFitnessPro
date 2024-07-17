@@ -5,6 +5,7 @@ import { useAppSelector } from "../../hooks/redux-hooks";
 import { useEffect, useState } from "react";
 import { getFavoriteCourseOfUser } from "../../api/api";
 import { CourseType } from "../../types";
+import { Outlet } from "react-router-dom";
 
 const Profile = () => {
   const [userCourses, setUserCourses] = useState<CourseType[]>([]);
@@ -55,6 +56,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      <Outlet />
     </div>
   );
 };
