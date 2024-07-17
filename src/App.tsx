@@ -10,6 +10,8 @@ import Layout from "./components/layout/Layout";
 import { useState } from "react";
 import { LoginModalContext } from "./contexts";
 import { ModalLogin } from "./components/modalItem/Modal";
+import ChosenCoursePage from "./pages/courses/ChosenCoursePage";
+import PopBrowseWorkout from "./components/popBrowseWorkout/PopBrowseWorkout";
 
 export default function App() {
   const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
@@ -21,7 +23,12 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route element={<ProtectedRoute />}>
-            <Route path={appRoutes.USER_PAGE} element={<ProfilePage />}></Route>
+            <Route path={appRoutes.USER_PAGE} element={<ProfilePage />}>
+              <Route
+                path={appRoutes.WORKOUT_MODAL}
+                element={<PopBrowseWorkout />}
+              />
+            </Route>
             <Route
               path={appRoutes.WORKOUT_VIDEO_PAGE}
               element={<WorkoutVideoPage />}
@@ -30,7 +37,7 @@ export default function App() {
 
           <Route
             path={appRoutes.COURSE_PAGE}
-            // element={<ChosenCoursePage />}
+            element={<ChosenCoursePage />}
           ></Route>
           <Route path={appRoutes.MAIN} element={<MainPage />}></Route>
         </Route>

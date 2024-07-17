@@ -10,7 +10,6 @@ const UserModal = () => {
   return (
     <div className="bg-white p-10 rounded-3xl flex flex-col gap-5 items-center absolute top-10 drop-shadow-md z-[1]">
       <div className="flex flex-col gap-3 text-center">
-        <span>{user.id}</span>
         <span>{user.email}</span>
       </div>
       <div className="flex flex-col gap-3">

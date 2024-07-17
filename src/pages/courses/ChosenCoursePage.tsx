@@ -1,31 +1,22 @@
-// import { useEffect, useState } from "react";
-import { CourseType } from "../../types";
-// import { getCourses } from "../../api/api";
-// import SkillCard from "../../components/skillCards/SkillCard";
-import Yoga from "../../components/skillCards/Yoga";
+import SkillCard from "../../components/skillCards/SkillCard";
+import { useAppSelector } from "../../hooks/redux-hooks";
+import { useParams } from "react-router-dom";
 
-type ChosenCoursePageType = {
-  skillcard: CourseType;
-};
+export default function ChosenCoursePage() {
+  const courses = useAppSelector((state) => state.course.courses);
+  console.log(courses);
+  const { id } = useParams();
+  const chosenCourse = courses?.find((course) => id === course._id);
 
-export default function ChosenCoursePage({}: ChosenCoursePageType) {
-  //  const [chosenCourse, setChosenCourse] = useState<CourseType[]>()
-
-  //  useEffect(() => {
-  //   getCourses().then((data) => {
-  //     setChosenCourse(data);
-  //   })
-  //  })
+  console.log(chosenCourse);
 
   return (
-    <div className="flex justify-center h-screen">
-      <div className="flex flex-col px-[30px] lg:px-[140px] py-[16px] lg:py-[50px] font-roboto">
-        <Yoga />
-
-        {/* {chosenCourse?.map((skillcard) => 
-        <SkillCard skillcard={skillcard} key={skillcard._id} />
-        )} */}
+    <>
+      <div className="place-content-center flex">
+        <div className="max-w-[1440px]  flex flex-col px-[30px] lg:px-[140px] py-[16px] lg:py-[50px] font-roboto bg-gray-100 ">
+          <SkillCard course={chosenCourse} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
