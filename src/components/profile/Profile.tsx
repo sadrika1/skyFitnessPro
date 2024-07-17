@@ -5,6 +5,7 @@ import { useAppSelector } from "../../hooks/redux-hooks";
 import { useEffect, useState } from "react";
 import { getFavoriteCourseOfUser } from "../../api/api";
 import { CourseType } from "../../types";
+import { Outlet } from "react-router-dom";
 
 const Profile = () => {
   const [userCourses, setUserCourses] = useState<CourseType[]>([]);
@@ -15,8 +16,7 @@ const Profile = () => {
     getFavoriteCourseOfUser(user.id).then((data) => {
       setUserCourses(data);
     });
-  }, [user]);
-  
+  }, []);
   return (
     <div className="bg-slate-50 flex justify-center h-screen">
       <div className="w-full max-w-screen-xl mx-4">
@@ -45,12 +45,18 @@ const Profile = () => {
         <Heading classNames="mb-2">Мои курсы</Heading>
         <div className="mb-10 gap-x-16">
           <div className="grid-cols-1 sm:grid md:grid-cols-3 -mr-10">
-            {userCourses.map((course) => (
-              <Course isProfile course={course} key={course._id} />
+            {userCourses?.map((course) => (
+              <Course
+                setAddedCourses={setUserCourses}
+                isProfile
+                course={course}
+                key={course._id}
+              />
             ))}
           </div>
         </div>
       </div>
+      <Outlet />
     </div>
   );
 };

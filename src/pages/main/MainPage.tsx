@@ -5,8 +5,10 @@ import {
   getFavoriteCourseOfUser,
 } from "../../api/api";
 
+import { CourseIDType, CourseType } from "../../types";
+
 import { SetStateAction, useContext, useEffect, useState } from "react";
-import { CourseIDType } from "../../types";
+
 import { LoginModalContext } from "../../contexts";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import Button from "../../components/button/Button";
@@ -55,6 +57,12 @@ export default function MainPage() {
           // // делаем запрос на добавление курса юзеру
           fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
             toast("Курс добавлен!");
+            getFavoriteCourseOfUser(user.id).then(
+              (data: SetStateAction<CourseIDType[]>) => {
+                console.log(data);
+                setAddedCourses(data);
+              }
+            );
           });
         } else {
           console.log("вот он уже добавлен был и нашелся в массиве", element);
@@ -67,7 +75,7 @@ export default function MainPage() {
 
   return (
     <>
-      <div className="font-roboto bg-gray-100 grid place-content-center">
+      <div className="font-roboto bg-slate-50 grid place-content-center">
         <div className="ml-2 md:mx-[140px] max-w-[1440px]">
           <div className="flex justify-between my-[50px] relative">
             <div className="font-semibold text-[30px] lg:text-[60px] h-[120px] text-pretty inline-block align-middle text-left min-w-[280px]">
@@ -83,6 +91,7 @@ export default function MainPage() {
           <div className="grid place-content-center md:grid-cols-2 md:gap-6 lg:grid-cols-3  sm:grid-cols-1 -mr-10">
             {courses?.map((course) => (
               <Course
+                setAddedCourses={setAddedCourses}
                 courses={courses}
                 course={course}
                 addedCourses={addedCourses}
