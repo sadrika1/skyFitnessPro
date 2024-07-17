@@ -18,7 +18,7 @@ export function WorkoutVideoPage() {
 
   return (
     <>
-      <div className="bg-slate-50 flex justify-center h-screen">
+      <div className="flex justify-center h-screen">
         <div className="w-full max-w-screen-xl mx-4">
           {modalMyProgress && (
             <div
@@ -30,7 +30,6 @@ export function WorkoutVideoPage() {
                 onClick={(e) => e.stopPropagation()}
               >
                 <h2 className="text-4xl font-normal mb-12">Мой прогресс</h2>
-
                 <div className="flex flex-col gap-5 mb-9 pr-5 h-80 w-w340px overflow-auto">
                   <div className="flex flex-col gap-2.5">
                     <span className="text-lg font-normal">

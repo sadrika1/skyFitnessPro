@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "./index.html"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     fontSize: {
       "4xl": "40px",
@@ -37,8 +37,7 @@ module.exports = {
         "w-88": "26.75rem" /* 431px */,
         container: "22rem" /*353px*/,
 
-        "w340px": "21.25rem"
-
+        w340px: "21.25rem",
       },
       rounded: {
         radiusVideo: "30px",
@@ -66,7 +65,6 @@ module.exports = {
       },
       fontSize: {
         // "text-3-1xl": "1.975rem" /* 32px */,
-        
       },
       // fontWeight: {
       //   'font-medium': "500",
@@ -81,15 +79,15 @@ module.exports = {
         // "leading-26": "6.3rem" /*101.25px */,
       },
       colors: {
-        "custom-yellow": "#FFC700",
+        // "custom-yellow": "#FFC700",
         "custom-black1": "#151720",
         "custom-black2": "#1E212E",
         "custom-green": "#BCEC30",
         "custom-green-hover": "#C6FF00",
-        "custom-purple": "#7D458C",
-        "custom-pink": "#FF7E65",
-        "custom-orange": "#F7A012",
-        "custom-blue": "#2491D2",
+        // "custom-purple": "#7D458C",
+        // "custom-pink": "#FF7E65",
+        // "custom-orange": "#F7A012",
+        // "custom-blue": "#2491D2",
         white: "#ffffff",
         gray: "#FAFAFA",
         "custom-progress-gray": "#F7F7F7",
@@ -97,5 +95,4 @@ module.exports = {
       },
     },
   },
-  // plugins: [require("tailwind-scrollbar")],
 };
