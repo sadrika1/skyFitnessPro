@@ -24,8 +24,6 @@ export const fetchAndProcessImage = async (src: string) => {
   const blob = await getBlob(stRef);
 
   const url = URL.createObjectURL(blob);
-  // const url=URL.revokeObjectURL(urlBlob)
-  // window.open(url)
   return url;
 };
 
@@ -38,14 +36,16 @@ export const fetchAddFavoriteCourseToUser = async (
     set(ref(database, `users/${userId}/${courseId}`), snapshot.val());
   }
 };
-
-// export function writeUserData(userId, name, email, imageUrl) {
-//     set(ref(database, 'users/' + userId), {
-//         username: name,
-//         email: email,
-//         profile_picture : imageUrl
-//     });
-// }
+export const fetchAndProcessImageLaptop = async (src_laptop: string) => {
+  const storage = getStorage();
+  const stRef_laptop = storageRef(
+    storage,
+    `gs://fitnes-bro.appspot.com/${src_laptop}`
+  );
+  const blob = await getBlob(stRef_laptop);
+  const url_laptop = URL.createObjectURL(blob);
+  return url_laptop;
+};
 
 export const getCourses = async () => {
   let result: CourseType[] = [];
@@ -105,4 +105,9 @@ export const getFavoriteCourseOfUser = async (userId: string) => {
   }
 };
 
-export const deleteCourses = async () => {};
+export const deleteFavoriteCourse = async (
+  userId: string,
+  courseId: string
+) => {
+  set(ref(database, `users/${userId}/${courseId}`), {});
+};

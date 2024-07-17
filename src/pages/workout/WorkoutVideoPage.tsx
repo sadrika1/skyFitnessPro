@@ -18,7 +18,7 @@ export function WorkoutVideoPage() {
 
   return (
     <>
-      <div className="bg-slate-50 flex justify-center h-screen">
+      <div className="flex justify-center h-screen">
         <div className="w-full max-w-screen-xl mx-4">
           {modalMyProgress && (
             <div

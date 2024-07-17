@@ -4,60 +4,49 @@ import {
   getCourses,
   getFavoriteCourseOfUser,
 } from "../../api/api";
-import { useContext, useEffect, useState } from "react";
+
 import { CourseIDType, CourseType } from "../../types";
+
+import { SetStateAction, useContext, useEffect, useState } from "react";
+
 import { LoginModalContext } from "../../contexts";
-import { useAppSelector } from "../../hooks/redux-hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import Button from "../../components/button/Button";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { setCourses } from "../../store/slices/courseSlice";
 
 export default function MainPage() {
-  const [courses, setCourses] = useState<CourseType[]>();
   const [addedCourses, setAddedCourses] = useState<CourseIDType[]>([]);
+  const dispatch = useAppDispatch();
   const { setIsLoginModalOpened } = useContext(LoginModalContext);
   const user = useAppSelector((state) => state.user);
 
-  // const isAdded = Boolean(
-  //   addedCourses ? addedCourses?.find((el) => el.courseId === course._id) : []
-  // );
-
-  // useEffect(() => {
-  //   if (user.id) {
-  //     setIsAddedCourse(isAdded);
-  //   }
-  // }, [user.id, addedCourses]);
-
-  // const handleAddCourse = () => {
-  //   addCourse(_id);
-  //   if (user.id) {
-  //     setAddedCourses(true);
-  //   }
-  //   //не уверена,что так будет работать,когда курсы будут удаляться на странице пользователя, нужен тест,когда страница пользователя будет готова
-  // };
-
+  const courses = useAppSelector((state) => state.course.courses);
+  console.log(courses);
   useEffect(() => {
     getCourses().then((data) => {
-      setCourses(data);
+      dispatch(
+        setCourses({
+          courses: data,
+        })
+      );
     });
   }, []);
 
   useEffect(() => {
-    getFavoriteCourseOfUser(user.id).then((data) => {
-      setAddedCourses(data);
-    });
+    getFavoriteCourseOfUser(user.id).then(
+      (data: SetStateAction<CourseIDType[]>) => {
+        setAddedCourses(data);
+      }
+    );
   }, [user.id]);
 
   const addCourse = (courseId: string) => {
     if (user.id) {
       console.log("сейчас кликаем на этот курс", courseId);
 
-      getFavoriteCourseOfUser(user.id).then((data) => {
-        // dispatch(setAddedCourses(data))
-        // console.log(dispatch(setAddedCourses(data)));
-        // console.log("это данные вернувшиеся с бэкенда по избранным курсам этого пользователя", data);
-        // console.log("длина массива", data.length);
-
+      getFavoriteCourseOfUser(user.id).then((data: any[]) => {
         const element = data?.some(function (el) {
           return el.courseId == courseId;
         });
@@ -68,10 +57,12 @@ export default function MainPage() {
           // // делаем запрос на добавление курса юзеру
           fetchAddFavoriteCourseToUser(user.id, courseId).then(() => {
             toast("Курс добавлен!");
-
-            //   console.log("Курс добавлен в избранное!");
-            // dispatch(setAddedCourses(courseId))
-            // console.log(dispatch(setAddedCourses(courseId)));
+            getFavoriteCourseOfUser(user.id).then(
+              (data: SetStateAction<CourseIDType[]>) => {
+                console.log(data);
+                setAddedCourses(data);
+              }
+            );
           });
         } else {
           console.log("вот он уже добавлен был и нашелся в массиве", element);
@@ -100,10 +91,13 @@ export default function MainPage() {
           <div className="grid place-content-center md:grid-cols-2 md:gap-6 lg:grid-cols-3  sm:grid-cols-1 -mr-10">
             {courses?.map((course) => (
               <Course
+                setAddedCourses={setAddedCourses}
+                courses={courses}
                 course={course}
                 addedCourses={addedCourses}
                 key={course._id}
                 onAddCourse={addCourse}
+                isChosenCourse={false}
               />
             ))}
             <ToastContainer
