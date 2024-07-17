@@ -1,7 +1,7 @@
 import Button from "../button/Button";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
-import { LoginModalContext } from "../../contexts";
+import { LoginModalContext, UserModalContext } from "../../contexts";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import UserModal from "../userModal/UserModal";
 import { getValueFromLocalStorage } from "../../lib/getValueFromLS";
@@ -10,10 +10,13 @@ export default function Header() {
   const { isLoginModalOpened, setIsLoginModalOpened } =
     useContext(LoginModalContext);
 
-  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+    const { isUserModalOpen, setIsUserModalOpen } =
+    useContext(UserModalContext);
+
 
   function handleUserModal() {
     setIsUserModalOpen((prev) => !prev);
+    console.log(isUserModalOpen);
   }
 
   //const user = useAppSelector((state) => state.user);

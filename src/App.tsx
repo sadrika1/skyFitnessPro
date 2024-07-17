@@ -8,15 +8,18 @@ import ProfilePage from "./pages/profilePage/ProfilePage";
 import Layout from "./components/layout/Layout";
 
 import { useState } from "react";
-import { LoginModalContext } from "./contexts";
+import { LoginModalContext, UserModalContext } from "./contexts";
 import { ModalLogin } from "./components/modalItem/Modal";
 import ChosenCoursePage from "./pages/courses/ChosenCoursePage";
 import PopBrowseWorkout from "./components/popBrowseWorkout/PopBrowseWorkout";
 
 export default function App() {
   const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
 
   return (
+    <UserModalContext.Provider
+    value={{ isUserModalOpen, setIsUserModalOpen }}>
     <LoginModalContext.Provider
       value={{ isLoginModalOpened, setIsLoginModalOpened }}
     >
@@ -45,5 +48,6 @@ export default function App() {
 
       {isLoginModalOpened && <ModalLogin />}
     </LoginModalContext.Provider>
+    </UserModalContext.Provider>
   );
 }
