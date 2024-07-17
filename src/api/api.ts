@@ -15,7 +15,7 @@ const firebaseConfig = {
   appId: "1:863868276370:web:289ae91c6ceddf3387604b",
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
+export const firebaseApp = initializeApp(firebaseConfig);
 const database = getDatabase(firebaseApp);
 
 export const fetchAndProcessImage = async (src: string) => {

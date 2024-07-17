@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { LoginModalContext } from "../../contexts";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import UserModal from "../userModal/UserModal";
+import { getValueFromLocalStorage } from "../../lib/getValueFromLS";
 
 export default function Header() {
   const { isLoginModalOpened, setIsLoginModalOpened } =
@@ -15,7 +16,12 @@ export default function Header() {
     setIsUserModalOpen((prev) => !prev);
   }
 
-  const user = useAppSelector((state) => state.user);
+  //const user = useAppSelector((state) => state.user);
+  const email = getValueFromLocalStorage("email");
+
+  
+
+  
 
   return (
     <div className="flex justify-center">
@@ -28,7 +34,7 @@ export default function Header() {
             Онлайн-тренировки для занятий дома
           </p>
         </div>
-        {user.email ? (
+        {email ? (
           <div className="flex justify-between items-center w-[168px]">
             <div className="rounded-full overflow-hidden">
               <img
@@ -39,7 +45,7 @@ export default function Header() {
               />
             </div>
             <div className="text-2xl flex items-center gap-3 relative">
-              {user.email}
+              {email}
               <Button
                 type="icon"
                 classNames="w-3.5 px-0"
