@@ -3,13 +3,9 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import Button from "../button/Button";
 import { appRoutes } from "../../route/appRoutes";
 import { removeUser } from "../../store/slices/userSlice";
-import { useContext } from "react";
-import { UserModalContext } from "../../contexts";
 
 const UserModal = () => {
   const dispatch = useAppDispatch();
-  const { setIsUserModalOpen } =
-    useContext(UserModalContext);
   const user = useAppSelector((state) => state.user);
   return (
     <div className="bg-white p-10 rounded-3xl flex flex-col gap-5 items-center absolute top-10 drop-shadow-md z-[1]">
@@ -25,7 +21,6 @@ const UserModal = () => {
           classNames="w-[206px]"
           onClick={() => {
             dispatch(removeUser());
-            setIsUserModalOpen((prev) => !prev);
           }}
         >
           Выйти
