@@ -1,20 +1,36 @@
 import SkillCard from "../../components/skillCards/SkillCard";
-import { useAppSelector } from "../../hooks/redux-hooks";
-import { useParams } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {getCourseById} from "../../api/api";
+import {useParams} from "react-router-dom";
+import {CourseType} from "../../types";
 
 export default function ChosenCoursePage() {
-  const courses = useAppSelector((state) => state.course.courses);
-  console.log(courses);
-  const { id } = useParams();
-  const chosenCourse = courses?.find((course) => id === course._id);
+  const [course, setCourse] = useState<CourseType | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  console.log(chosenCourse);
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+
+    setIsLoading(true)
+    getCourseById(id).then((data) => {
+      setCourse(data);
+    }).finally(() => setIsLoading(false));
+  }, []);
+
+  if (isLoading) {
+    return <span>Загрузка...</span>;
+  }
+
 
   return (
-    <>
+      <>
       <div className="place-content-center flex">
         <div className="max-w-[1440px]  flex flex-col px-[30px] lg:px-[140px] py-[16px] lg:py-[50px] font-roboto bg-gray-100 ">
-          <SkillCard course={chosenCourse} />
+          {course ? <SkillCard course={course} /> : <span>Такого курса нет в базе данных</span>}
         </div>
       </div>
     </>

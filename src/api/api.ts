@@ -135,7 +135,7 @@ export const getUserWorkouts = async (userId: string, courseId: string) => {
           if (progressSnapshot.exists()) {
             workouts.push({
               name: workoutDataSnapshot.val(),
-              progress: progressSnapshot.val(),
+              progress: progressSnapshot.val(), 
             });
           }
         }
@@ -149,4 +149,20 @@ export const getUserWorkouts = async (userId: string, courseId: string) => {
     console.error(e);
     return []; // Возвращаем пустой массив в случае ошибки
   }
+};
+
+export const getCourseById = async (courseId: string) => {
+  let result: CourseType | null = null;
+
+  try {
+    const snapshot = await get(child(ref(database), `courses/${courseId}`));
+
+    if (snapshot.exists()) {
+      result = snapshot.val();
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
+  return result;
 };
