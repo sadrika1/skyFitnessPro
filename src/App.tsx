@@ -32,6 +32,10 @@ export default function App() {
                 />
               </Route>
               <Route
+                path={appRoutes.WORKOUT_VIDEO_PAGE}
+                element={<WorkoutVideoPage />}
+              />
+              <Route
                 path={appRoutes.WORKOUT_MODAL}
                 element={<PopBrowseWorkout />}
               />
