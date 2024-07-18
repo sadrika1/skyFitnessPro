@@ -26,6 +26,10 @@ export default function App() {
           <Route element={<ProtectedRoute />}>
             <Route path={appRoutes.USER_PAGE} element={<ProfilePage />}>
               <Route
+                path={appRoutes.WORKOUT_VIDEO_PAGE}
+                element={<WorkoutVideoPage />}
+              />
+              <Route
                 path={appRoutes.WORKOUT_MODAL}
                 element={<PopBrowseWorkout />}
               />

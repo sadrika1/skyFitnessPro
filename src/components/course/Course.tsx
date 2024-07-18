@@ -8,7 +8,7 @@ import minusIcon from "/icons/icon-minus.svg";
 import { CourseIDType, CourseType } from "../../types";
 import fit from "/images/bgYellow.jpg";
 
-import { SetStateAction, useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 import {
   deleteFavoriteCourse,
   fetchAndProcessImage,
@@ -49,7 +49,7 @@ export default function Course({
     if (isProfile) {
       deleteFavoriteCourse(user.id, _id).then(() => {
         getFavoriteCourseOfUser(user.id).then(
-          (data: SetStateAction<CourseIDType[]>) => {
+          (data) => {
             setAddedCourses(data);
           }
         );
@@ -138,7 +138,8 @@ export default function Course({
 
         {isProfile && (
 
-          <div>
+          <>
+
             <div className="mb-3">
               <p>Прогресс</p>
               <div className="w-[300px] rounded-full h-[6px] bg-custom-progress-gray overflow-hidden pb-1">
@@ -154,7 +155,7 @@ export default function Course({
                 Начать тренировку
               </Button>
             </Link>
-          </div>
+          </>
         )}
       </Link>
     </div>

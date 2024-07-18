@@ -1,7 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getStorage, ref as storageRef, getBlob } from "firebase/storage";
 import { CourseType, WorkoutType } from "../types";
-import { getDatabase, ref, get, child, set, update } from "firebase/database";
+
+import { getDatabase, ref, get, child, set } from "firebase/database";
+
 import { compareByOrder } from "./utils"; // REALTIME DB
 import { getAuth, updatePassword } from "firebase/auth";
 
