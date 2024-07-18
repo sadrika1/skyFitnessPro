@@ -30,7 +30,6 @@ export default function SkillCard({ course }: SkillCardType) {
       setImageUrlLaptop(data);
     });
   }, []);
-  console.log(directions);
   return (
     <>
       <div className="h-[19.38rem]  sm:hidden lg:flex rounded-[2rem]">
@@ -81,18 +80,18 @@ export default function SkillCard({ course }: SkillCardType) {
       </div>
 
       {/* див с directions */}
-      <div className="mt-10 mb-[172px] lg:mt-15 flex flex-col ">
-        <p className="text-black text-[24px] lg:text-4xl font-[500] lg:font-semibold leading-[26,4px] lg:leading-[44px]">
+      <div className="mt-10 mb-[50px] lg:mt-15 flex flex-col ">
+        <p className="text-black text-[24px] lg:text-4xl font-[500] lg:font-semibold leading-[26.4px] lg:leading-[44px]">
           Направления
         </p>
         <div className="mt-6 lg:mt-10 p-[30px] sm:hidden lg:flex flex-row justify-around gap-[124px] bg-custom-green text-black-400 rounded-[2rem]">
           <div className="flex flex-col gap-[34px]">
             <div className="flex flex-row">
-              <div className="text-2xl font-normal leading-[26,4px]">
+              <div className="grid grid-cols-3 gap-5 gap-x-52 text-2xl font-normal leading-[26.4px]">
                 {directions.map((el) => (
-                  <div>
-                    <div className="h-[30px] w-[30px]">
-                      <svg>
+                  <div className="flex flex-row ">
+                    <div className="h-[30px] w-[30px] ">
+                      <svg className="h-[30px] w-[30px]">
                         <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
                       </svg>
                     </div>
@@ -103,6 +102,27 @@ export default function SkillCard({ course }: SkillCardType) {
             </div>
           </div>
         </div>
+
+        {/* мобильная версия дива с directions */}
+        <div className=" mt-6 p-[30px] lg:hidden sm:flex flex-col gap-[30px] bg-custom-green text-black-400 rounded-[2rem]">
+          <div className="flex flex-col">
+            <div className="flex flex-col">
+              <div className=" text-lg font-normal leading-5">
+                {directions.map((el) => (
+                  <div className="flex flex-row pb-[24px]">
+                    <div className="h-[30px] w-[30px]">
+                      <svg className="h-[30px] w-[30px]">
+                        <use xlinkHref="/images/icons/sprite.svg#icon-sparcle" />
+                      </svg>
+                    </div>
+                    {el}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <BoyAd />

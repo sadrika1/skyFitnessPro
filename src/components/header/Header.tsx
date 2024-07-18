@@ -12,6 +12,7 @@ export default function Header() {
   const { isUserModalOpen, setIsUserModalOpen } = useContext(UserModalContext);
 
   function handleUserModal() {
+    console.log("click");
     setIsUserModalOpen((prev) => !prev);
   }
   const user = useAppSelector((state) => state.user);
@@ -55,7 +56,9 @@ export default function Header() {
                   />
                 </svg>
               </Button>
-              {isUserModalOpen && <UserModal />}
+              {isUserModalOpen && (
+                <UserModal handleUserModal={handleUserModal} />
+              )}
             </div>
           </div>
         ) : (

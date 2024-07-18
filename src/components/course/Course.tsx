@@ -97,8 +97,11 @@ export default function Course({
         </div>
       </div>
 
-      <Link to={`skillcard/${_id}`}>
-        <div className="p-6 mb-4 text-base grid md:gap-3 ">
+      <Link
+        className="flex flex-col items-center"
+        to={isProfile ? "#" : `skillcard/${_id}`}
+      >
+        <div className=" text-base grid md:gap-3 ">
           <h6 className="font-bold text-[32px] my-6 cursor-pointer">
             {nameRU}
           </h6>
@@ -131,6 +134,7 @@ export default function Course({
         </div>
 
         {isProfile && (
+
           <div className="flex flex-col items-center gap-5 mb-7">
             <p className="text-xl">Прогресс 30%</p>
             <div className="w-[300px] rounded-full h-[6px] bg-custom-progress-gray overflow-hidden pb-1">
@@ -139,6 +143,20 @@ export default function Course({
 
             <Link to={`/user/workout-modal/${_id}`}>
               <Button type="primary" classNames="w-[300px]">
+
+<!--           <>
+            <div className="mb-10">
+              <p>Прогресс</p>
+              <div className="w-[300px] rounded-full h-[6px] bg-custom-progress-gray overflow-hidden pb-1">
+                <div className={`h-full w-[30%] bg-custom-progress-blue`}></div>
+              </div>
+            </div>
+            <Link
+              className="m-auto block mb-3"
+              to={`/user/workout-modal/${_id}`}
+            >
+              <Button type="primary" classNames="m-auto w-[300px]"> -->
+
                 Начать тренировку
               </Button>
             </Link>
