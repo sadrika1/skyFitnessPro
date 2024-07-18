@@ -12,6 +12,7 @@ import { LoginModalContext } from "./contexts";
 import { ModalLogin } from "./components/modalItem/Modal";
 import ChosenCoursePage from "./pages/courses/ChosenCoursePage";
 import PopBrowseWorkout from "./components/popBrowseWorkout/PopBrowseWorkout";
+import UpdatePasswordModal from "./components/updatePasswordModal/UpdatePasswordModal";
 
 export default function App() {
   const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
@@ -28,13 +29,20 @@ export default function App() {
                 path={appRoutes.WORKOUT_MODAL}
                 element={<PopBrowseWorkout />}
               />
-            </Route>
+              
            
+              <Route
+                  path={appRoutes.WORKOUT_VIDEO_PAGE}
+                  element={<WorkoutVideoPage />}
+                />
+              <Route
+                path={appRoutes.CHANGE_PASSWORD}
+                element={<UpdatePasswordModal />}
+              />
+            </Route>
+
           </Route>
-          <Route
-              path={appRoutes.WORKOUT_VIDEO_PAGE}
-              element={<WorkoutVideoPage />}
-            ></Route>
+
           <Route
             path={appRoutes.COURSE_PAGE}
             element={<ChosenCoursePage />}

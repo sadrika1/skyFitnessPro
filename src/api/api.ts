@@ -3,6 +3,7 @@ import { getStorage, ref as storageRef, getBlob } from "firebase/storage";
 import { CourseType, WorkoutType } from "../types";
 import { getDatabase, ref, get, child, set } from "firebase/database";
 import { compareByOrder } from "./utils"; // REALTIME DB
+import { getAuth, updatePassword } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCZ-T7GGXFj79VGYQYB6Ff4E-vddPHVb8Q",
@@ -17,6 +18,18 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 const database = getDatabase(firebaseApp);
+const auth = getAuth(firebaseApp);
+
+export const changePassword = async (password: string) => {
+  try {
+    if (!auth.currentUser) {
+      throw new Error("Нет авторизации");
+    }
+    await updatePassword(auth.currentUser, password);
+  } catch (error) {
+    if (error instanceof Error) throw new Error(error.message);
+  }
+};
 
 export const fetchAndProcessImage = async (src: string) => {
   const storage = getStorage();
@@ -36,6 +49,7 @@ export const fetchAddFavoriteCourseToUser = async (
     set(ref(database, `users/${userId}/${courseId}`), snapshot.val());
   }
 };
+
 export const fetchAndProcessImageLaptop = async (src_laptop: string) => {
   const storage = getStorage();
   const stRef_laptop = storageRef(
@@ -135,7 +149,10 @@ export const getUserWorkouts = async (userId: string, courseId: string) => {
           if (progressSnapshot.exists()) {
             workouts.push({
               name: workoutDataSnapshot.val(),
-              progress: progressSnapshot.val(), 
+
+              id,
+              progress: progressSnapshot.val(),
+
             });
           }
         }

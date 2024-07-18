@@ -5,7 +5,7 @@ import {
   getFavoriteCourseOfUser,
 } from "../../api/api";
 
-import { CourseIDType, CourseType } from "../../types";
+import { CourseIDType } from "../../types";
 
 import { SetStateAction, useContext, useEffect, useState } from "react";
 

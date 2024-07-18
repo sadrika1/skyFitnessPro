@@ -9,6 +9,7 @@ export interface CourseType {
   _id: string;
   fitting: string;
   directions: string[];
+
 }
 
 export interface WorkoutType {
