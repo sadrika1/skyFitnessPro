@@ -12,6 +12,7 @@ export default function Header() {
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
 
   function handleUserModal() {
+    console.log("click");
     setIsUserModalOpen((prev) => !prev);
   }
 
@@ -59,7 +60,9 @@ export default function Header() {
                   />
                 </svg>
               </Button>
-              {isUserModalOpen && <UserModal />}
+              {isUserModalOpen && (
+                <UserModal handleUserModal={handleUserModal} />
+              )}
             </div>
           </div>
         ) : (
