@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getStorage, ref as storageRef, getBlob } from "firebase/storage";
-import { CourseType } from "../types";
+import { CourseType, WorkoutType } from "../types";
 import { getDatabase, ref, get, child, set } from "firebase/database";
 import { compareByOrder } from "./utils"; // REALTIME DB
 
@@ -156,6 +156,29 @@ export const getCourseById = async (courseId: string) => {
 
   try {
     const snapshot = await get(child(ref(database), `courses/${courseId}`));
+
+    if (snapshot.exists()) {
+      result = snapshot.val();
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
+  return result;
+};
+
+
+export const getWorkoutById = async (
+  workoutId: string,
+  userId: string,
+  courseId: string
+) => {
+  let result: WorkoutType | null = null;
+
+  try {
+    const snapshot = await get(
+      child(ref(database), `users/${userId}/${courseId}/${workoutId}`)
+    );
 
     if (snapshot.exists()) {
       result = snapshot.val();

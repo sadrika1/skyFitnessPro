@@ -29,12 +29,12 @@ export default function App() {
                 element={<PopBrowseWorkout />}
               />
             </Route>
-            <Route
+           
+          </Route>
+          <Route
               path={appRoutes.WORKOUT_VIDEO_PAGE}
               element={<WorkoutVideoPage />}
             ></Route>
-          </Route>
-
           <Route
             path={appRoutes.COURSE_PAGE}
             element={<ChosenCoursePage />}
