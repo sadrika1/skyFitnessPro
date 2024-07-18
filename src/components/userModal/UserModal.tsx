@@ -2,15 +2,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
 import Button from "../button/Button";
 import { appRoutes } from "../../route/appRoutes";
+
 import { useContext } from "react";
 import { UserModalContext } from "../../contexts";
+
 import { removeUser } from "../../store/slices/userSlice";
 import { useOutsideClick } from "../../hooks/use-outside-click";
 
 const UserModal = ({ handleUserModal }) => {
   const user = useAppSelector((state) => state.user);
 
+
   const { setIsUserModalOpen } = useContext(UserModalContext);
+
 
   const { ref } = useOutsideClick(handleUserModal);
 
@@ -19,8 +23,10 @@ const UserModal = ({ handleUserModal }) => {
   function onLogout() {
     dispatch(removeUser());
     navigate(appRoutes.MAIN);
+
     setIsUserModalOpen(false);
   }
+
 
   return (
     <div
