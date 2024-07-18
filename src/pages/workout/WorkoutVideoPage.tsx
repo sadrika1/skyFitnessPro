@@ -3,33 +3,43 @@
 
 import { useEffect, useState } from "react";
 import { WorkoutType } from "../../types";
-import { getWorkoutById } from "../../api/api";
+import { getCourseById, getWorkoutById } from "../../api/api";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import { useParams } from "react-router-dom";
+import ModalSuccess from "../../components/WorkoutVideoBranch/ModalSuccess.tsx";
+import ModalProgress from "../../components/WorkoutVideoBranch/ModalProgress.tsx";
 
 export function WorkoutVideoPage() {
   const [modalMyProgress, setModalMyProgress] = useState(false);
   const [progressIsSave, setProgressIsSave] = useState(false);
+  const [courseName, setcourseName] = useState("");
+
 
   const [workout, setWorkout] = useState<WorkoutType | null>(null);
-  // const { workoutId, courseId } = useParams();
-
-  const courseId = "ab1c3f"
-  const workoutId = "kcx5ai"
-  console.log("воркаут ID", workoutId);
-  console.log("курс ID", courseId);
+  const { workoutId, courseId } = useParams();
 
 
-  // const user = useAppSelector((state) => state.user);
-  const userID = '1hkq7zdUv1TpKPJ9lnaNqbExWj33'
-  console.log("юзер ID", userID);
+  const user = useAppSelector((state) => state.user);
+
+
   useEffect(() => {
-    getWorkoutById(workoutId, userID, courseId).then((data) => {
-      setWorkout(data);
-    });
+    if (workoutId && courseId) {
+      getWorkoutById(workoutId, user.id, courseId).then((data) => {
+        setWorkout(data);
+      });
+    }
   }, []);
 
-  console.log("ОБЪЕКТ С ДАННЫМИ О ВОРКАУТЕ", workout);
+  useEffect(() => {
+    if (courseId) {
+      getCourseById(courseId).then((data) => {
+        console.log("!!!!!!", data);
+        if (data?.nameRU) {
+          setcourseName(data?.nameRU)
+        }
+      });
+    }
+  }, []);
 
 
   const handleSetModalMyProgress = () => {
@@ -45,110 +55,12 @@ export function WorkoutVideoPage() {
     <>
       <div className="flex justify-center h-screen">
         <div className="w-full max-w-screen-xl mx-4">
-          {modalMyProgress && (
-            <div
-              onClick={handleSetModalMyProgress}
-              className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex items-center justify-center"
-            >
-              <div
-                className="bg-white p-10 rounded-3xl"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <h2 className="text-4xl font-normal mb-12">Мой прогресс</h2>
-                <div className="flex flex-col gap-5 mb-9 pr-5 h-80 w-w340px overflow-auto">
-                  <div className="flex flex-col gap-2.5">
-                    <span className="text-lg font-normal">
-                      Сколько раз вы сделали наклоны вперед?
-                    </span>
-                    <input
-                      className="py-4 px-5 outline-none border-slate-300 border-2 rounded-lg text-lg"
-                      type="number"
-                      placeholder="0"
-                    />
-                  </div>
 
-                  <div className="flex flex-col gap-2.5">
-                    <span className="text-lg font-normal">
-                      Сколько раз вы сделали наклоны назад?
-                    </span>
-                    <input
-                      className="py-4 px-5 outline-none border-solid border-slate-300 border-2 rounded-lg text-lg"
-                      type="number"
-                      placeholder="0"
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-2.5">
-                    <span className="text-lg font-normal">
-                      Сколько раз вы сделали поднятие ног, согнутых в коленях?
-                    </span>
-                    <input
-                      className="py-4 px-5 outline-none border-solid border-slate-300 border-2 rounded-lg text-lg"
-                      type="number"
-                      placeholder="0"
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-2.5">
-                    <span className="text-lg font-normal">
-                      Сколько раз вы сделали поднятие ног, согнутых в коленях?
-                    </span>
-                    <input
-                      className="py-4 px-5 outline-none border-solid border-slate-300 border-2 rounded-lg text-lg"
-                      type="number"
-                      placeholder="0"
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-2.5">
-                    <span className="text-lg font-normal">
-                      Сколько раз вы сделали поднятие ног, согнутых в коленях?
-                    </span>
-                    <input
-                      className="py-4 px-5 outline-none border-solid border-slate-300 border-2 rounded-lg text-lg"
-                      type="number"
-                      placeholder="0"
-                    />
-                  </div>
-                </div>
-
-                <button
-                  onClick={handleSetProgressIsSave}
-                  className="w-full bg-lime-400 py-4 font-normal rounded-full"
-                >
-                  Сохранить
-                </button>
-              </div>
-            </div>
-          )}
-
-          {progressIsSave && (
-            <div
-              onClick={handleSetProgressIsSave}
-              className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex items-center justify-center"
-            >
-              <div
-                className="bg-white p-10 rounded-3xl"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="flex flex-col justify-center items-center">
-                  <h1 className="text-5xl w-80 text-center mb-8">
-                    Ваш прогресс засчитан!
-                  </h1>
-                  <img
-                    className="w-16 h-16"
-                    src="./progressDone.png"
-                    alt="progressDone"
-                  />
-                </div>
-              </div>
-            </div>
-          )}
 
           <section className="mb-10 mt-5">
             <div>
               {/* workoutHeader */}
-              <h1 className="text-6xl mb-6 font-medium">Йога</h1>
+              <h1 className="text-6xl mb-6 font-medium">{courseName}</h1>
               <div>
                 <span className="text-3xl font-normal">
                   {workout?.name}
@@ -166,8 +78,7 @@ export function WorkoutVideoPage() {
               </h3>
 
               <div className="grid  grid-flow-col grid-rows-3 gap-x-10 mb-8 justify-start">
-                {workout?.exercises.map((el) => (
-
+                {workout?.exercises ? workout?.exercises?.map((el) => (
                   <div className="mb-4 ">
                     <div className="flex gap-2 ">
                       <div className="mb-2.5">
@@ -179,8 +90,7 @@ export function WorkoutVideoPage() {
                       <div className="h-1.5 rounded-full"></div>
                     </div>
                   </div>
-
-                ))}
+                )) : <span>Упражнений нет</span>}
               </div>
 
 
@@ -193,8 +103,15 @@ export function WorkoutVideoPage() {
             </section>
           </div>
 
-          {/* <WorkoutVideo /> */}
-          {/* <WorkoutProgressBars /> */}
+
+          <ModalProgress modalMyProgress={modalMyProgress}
+            handleSetModalMyProgress={handleSetModalMyProgress}
+            handleSetProgressIsSave={handleSetProgressIsSave} />
+
+
+          <ModalSuccess progressIsSave={progressIsSave}
+            handleSetProgressIsSave={handleSetProgressIsSave} />
+
         </div>
       </div>
     </>
