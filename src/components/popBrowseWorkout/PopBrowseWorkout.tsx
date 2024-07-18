@@ -7,12 +7,14 @@ import { useAppSelector } from "../../hooks/redux-hooks";
 const PopBrowseWorkout = () => {
   const [workouts, setWorkouts] = useState([]);
   const user = useAppSelector((state) => state.user);
-  const { id } = useParams();
+  const { courseId } = useParams();
+
+
 
   useEffect(() => {
-    getUserWorkouts(user.id, id).then((data) => {
+    getUserWorkouts(user.id, courseId).then((data) => {
       setWorkouts(data);
-      console.log(data);
+
     });
   }, []);
 
@@ -28,7 +30,8 @@ const PopBrowseWorkout = () => {
                 name="progress"
                 checked={workout.progress}
               />
-              <Link to={`/workoutvideo/${workout.id}`}>{workout.name}</Link>
+              <Link to={`/workout-modal/${courseId}/workout-video/${workout.id}`}>{workout.name}</Link>
+
             </div>
           ))}
         </div>

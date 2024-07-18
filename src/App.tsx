@@ -35,22 +35,31 @@ export default function App() {
                 path={appRoutes.WORKOUT_MODAL}
                 element={<PopBrowseWorkout />}
               />
+
               <Route
                 path={appRoutes.CHANGE_PASSWORD}
                 element={<UpdatePasswordModal />}
               />
             </Route>
 
-            <Route
-              path={appRoutes.COURSE_PAGE}
-              element={<ChosenCoursePage />}
-            ></Route>
-            <Route path={appRoutes.MAIN} element={<MainPage />}></Route>
           </Route>
         </Routes>
 
-        {isLoginModalOpened && <ModalLogin />}
-      </LoginModalContext.Provider>
-    </UserModalContext.Provider>
+          <Route
+            path={appRoutes.COURSE_PAGE}
+            element={<ChosenCoursePage />}
+          ></Route>
+          <Route path={appRoutes.MAIN} element={<MainPage />}></Route>
+          <Route
+            path={appRoutes.WORKOUT_VIDEO_PAGE}
+            element={<WorkoutVideoPage />}
+        />
+        </Route>
+       
+      </Routes>
+
+      {isLoginModalOpened && <ModalLogin />}
+    </LoginModalContext.Provider>
+
   );
 }
