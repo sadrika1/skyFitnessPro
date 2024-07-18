@@ -138,7 +138,7 @@ export default function Course({
 
         {isProfile && (
 
-          <>
+          <div>
             <div className="mb-3">
               <p>Прогресс</p>
               <div className="w-[300px] rounded-full h-[6px] bg-custom-progress-gray overflow-hidden pb-1">
