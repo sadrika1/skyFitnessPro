@@ -41,7 +41,8 @@ export default function Header() {
               />
             </div>
             <div className="text-2xl flex items-center relative cursor-pointer ">
-              <span className="sm:hidden lg:block">{email}</span>
+              {/* {email} - ппоявляется ошибка если добавляем ниже*/}
+              <span className="sm:hidden lg:block"></span>
               <Button type="icon" classNames="w-3.5 px-0">
                 <svg
                   width="14"
