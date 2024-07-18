@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { LoginModalContext, UserModalContext } from "../../contexts";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import UserModal from "../userModal/UserModal";
+import { getValueFromLocalStorage } from "../../lib/getvaluefromLS";
 
 export default function Header() {
   const { isLoginModalOpened, setIsLoginModalOpened } =
@@ -15,7 +16,8 @@ export default function Header() {
     console.log("click");
     setIsUserModalOpen((prev) => !prev);
   }
-  const user = useAppSelector((state) => state.user);
+  // const user = useAppSelector((state) => state.user);
+  const email = getValueFromLocalStorage("email");
 
   return (
     <div className="flex justify-center bg-slate-50">
@@ -28,9 +30,8 @@ export default function Header() {
             Онлайн-тренировки для занятий дома
           </p>
         </div>
-        {user.email ? (
+        {email ? (
           <div className="flex items-center lg:gap-5" onClick={handleUserModal}>
-            {/* нужно добавить, чтобы при клике на иконку сразу открывался профиль в мобилке*/}
             <div className="overflow-hidden">
               <img
                 width={40}
@@ -40,7 +41,7 @@ export default function Header() {
               />
             </div>
             <div className="text-2xl flex items-center relative cursor-pointer ">
-              <span className="sm:hidden lg:block">{user.email}</span>
+              <span className="sm:hidden lg:block">{email}</span>
               <Button type="icon" classNames="w-3.5 px-0">
                 <svg
                   width="14"
