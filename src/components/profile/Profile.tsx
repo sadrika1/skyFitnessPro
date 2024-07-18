@@ -43,7 +43,7 @@ const Profile = () => {
             <div>
               <p>Логин: {user.email}</p>
             </div>
-            <div className="flex gap-2.5 sm:flex-col lg:flex-row5">
+            <div className="flex gap-2.5 sm:flex-col lg:flex-row">
               <Link to={"/user/" + appRoutes.CHANGE_PASSWORD}>
                 <Button classNames="w-[192px]" type="primary">
                   Изменить пароль
