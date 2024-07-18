@@ -38,23 +38,21 @@ const Profile = () => {
             alt="картинка пользователя"
           />
 
-          <div className="flex flex-col sm:justify-between lg:justify-evenly ml-5 sm:gap-3">
-
+          <div className="flex flex-col justify-between  ml-5 sm:gap-3">
             <h2 className="text-3xl font-medium">{user.email}</h2>
             <div>
               <p>Логин: {user.email}</p>
             </div>
 
             <div className="flex gap-2.5 sm:flex-col lg:flex-row">
-
               <Link to={"/user/" + appRoutes.CHANGE_PASSWORD}>
-                <Button classNames="w-[192px]" type="primary">
+                <Button classNames="w-[192px] sm:w-[248px]" type="primary">
                   Изменить пароль
                 </Button>
               </Link>
 
               <Button
-                classNames="w-[192px]"
+                classNames="w-[192px] sm:w-[248px]"
                 type="secondary"
                 onClick={onLogout}
               >

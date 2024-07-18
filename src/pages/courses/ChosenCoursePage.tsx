@@ -28,8 +28,8 @@ export default function ChosenCoursePage() {
 
   return (
       <>
-      <div className="place-content-center flex">
-        <div className="max-w-[1440px]  flex flex-col px-[30px] lg:px-[140px] py-[16px] lg:py-[50px] font-roboto bg-gray-100 ">
+      <div className="place-content-center flex bg-slate-50">
+        <div className="max-w-[1440px]  flex flex-col px-[30px] lg:px-[140px] py-[16px] lg:py-[50px] font-roboto">
           {course ? <SkillCard course={course} /> : <span>Такого курса нет в базе данных</span>}
         </div>
       </div>

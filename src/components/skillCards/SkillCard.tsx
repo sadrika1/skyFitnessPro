@@ -45,7 +45,7 @@ export default function SkillCard({ course }: SkillCardType) {
       </div>
 
       {/* див с рекламными фиттингами */}
-      <div className="mt-10 lg:mt-15 flex flex-col ">
+      <div className="mt-10 lg:mt-15 flex flex-col">
         <p className="text-black text-[24px] lg:text-4xl font-[500] lg:font-semibold leading-[1.6rem] lg:leading-[2.75rem]">
           Подойдёт для вас, если:
         </p>

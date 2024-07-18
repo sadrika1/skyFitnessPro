@@ -137,17 +137,15 @@ export default function Course({
         </div>
 
         {isProfile && (
-
           <>
-
             <div className="mb-3">
               <p>Прогресс</p>
               <div className="w-[300px] rounded-full h-[6px] bg-custom-progress-gray overflow-hidden pb-1">
-                <div className={`h-full w-[30%] bg-custom-progress-blue`}></div>
+                <div className={`h-[6px] w-[30%] bg-custom-progress-blue`}></div>
               </div>
             </div>
             <Link
-              className="m-auto block mb-3"
+              className="m-auto block mb-10"
               to={`/user/workout-modal/${_id}`}
             >
               <Button type="primary" classNames="m-auto w-[300px]">
