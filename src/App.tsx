@@ -25,10 +25,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route element={<ProtectedRoute />}>
             <Route path={appRoutes.USER_PAGE} element={<ProfilePage />}>
-              <Route
-                path={appRoutes.WORKOUT_VIDEO_PAGE}
-                element={<WorkoutVideoPage />}
-              />
+             
               <Route
                 path={appRoutes.WORKOUT_MODAL}
                 element={<PopBrowseWorkout />}
@@ -39,6 +36,10 @@ export default function App() {
                 element={<UpdatePasswordModal />}
               />
             </Route>
+            <Route
+                path={appRoutes.WORKOUT_VIDEO_PAGE}
+                element={<WorkoutVideoPage />}
+              />
           </Route>
 
           <Route
