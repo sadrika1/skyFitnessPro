@@ -102,6 +102,7 @@ export default function SkillCard({ course }: SkillCardType) {
             </div>
           </div>
         </div>
+
         {/* мобильная версия дива с directions */}
         <div className=" mt-6 p-[30px] lg:hidden sm:flex flex-col gap-[30px] bg-custom-green text-black-400 rounded-[2rem]">
           <div className="flex flex-col">
@@ -121,6 +122,7 @@ export default function SkillCard({ course }: SkillCardType) {
             </div>
           </div>
         </div>
+
       </div>
 
       <BoyAd />
