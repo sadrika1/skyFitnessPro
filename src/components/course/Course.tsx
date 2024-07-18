@@ -17,7 +17,7 @@ import {
 import Button from "../button/Button";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import { Link } from "react-router-dom";
-import { appRoutes } from "../../route/appRoutes";
+
 
 export type CourseProps = {
   course: CourseType;
