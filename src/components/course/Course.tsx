@@ -99,7 +99,9 @@ export default function Course({
       </div>
 
       <Link
+
         className="flex flex-col items-center gap-3"
+
         to={isProfile ? "#" : `skillcard/${_id}`}
       >
         <div className=" text-base grid md:gap-3 ">
@@ -135,6 +137,7 @@ export default function Course({
         </div>
 
         {isProfile && (
+
           <>
             <div className="mb-3">
               <p>Прогресс</p>
@@ -147,10 +150,11 @@ export default function Course({
               to={`/user/workout-modal/${_id}`}
             >
               <Button type="primary" classNames="m-auto w-[300px]">
+
                 Начать тренировку
               </Button>
             </Link>
-          </>
+          </div>
         )}
       </Link>
     </div>
