@@ -10,9 +10,11 @@ const PopBrowseWorkout = () => {
   const { courseId } = useParams();
 
 
+
   useEffect(() => {
     getUserWorkouts(user.id, courseId).then((data) => {
       setWorkouts(data);
+
     });
   }, []);
 
@@ -29,6 +31,7 @@ const PopBrowseWorkout = () => {
                 checked={workout.progress}
               />
               <Link to={`/workout-modal/${courseId}/workout-video/${workout.id}`}>{workout.name}</Link>
+
             </div>
           ))}
         </div>

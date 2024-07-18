@@ -8,7 +8,7 @@ import ProfilePage from "./pages/profilePage/ProfilePage";
 import Layout from "./components/layout/Layout";
 
 import { useState } from "react";
-import { LoginModalContext } from "./contexts";
+import { LoginModalContext, UserModalContext } from "./contexts";
 import { ModalLogin } from "./components/modalItem/Modal";
 import ChosenCoursePage from "./pages/courses/ChosenCoursePage";
 import PopBrowseWorkout from "./components/popBrowseWorkout/PopBrowseWorkout";
@@ -16,15 +16,21 @@ import UpdatePasswordModal from "./components/updatePasswordModal/UpdatePassword
 
 export default function App() {
   const [isLoginModalOpened, setIsLoginModalOpened] = useState(false);
-
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   return (
-    <LoginModalContext.Provider
-      value={{ isLoginModalOpened, setIsLoginModalOpened }}
-    >
-      <Routes>
-        <Route element={<Layout />}>
-          <Route element={<ProtectedRoute />}>
-            <Route path={appRoutes.USER_PAGE} element={<ProfilePage />}>
+    <UserModalContext.Provider value={{ isUserModalOpen, setIsUserModalOpen }}>
+      <LoginModalContext.Provider
+        value={{ isLoginModalOpened, setIsLoginModalOpened }}
+      >
+        <Routes>
+          <Route element={<Layout />}>
+            <Route element={<ProtectedRoute />}>
+              <Route path={appRoutes.USER_PAGE} element={<ProfilePage />}>
+                <Route
+                  path={appRoutes.WORKOUT_MODAL}
+                  element={<PopBrowseWorkout />}
+                />
+              </Route>
               <Route
                 path={appRoutes.WORKOUT_MODAL}
                 element={<PopBrowseWorkout />}
@@ -35,7 +41,9 @@ export default function App() {
                 element={<UpdatePasswordModal />}
               />
             </Route>
+
           </Route>
+        </Routes>
 
           <Route
             path={appRoutes.COURSE_PAGE}
@@ -52,5 +60,6 @@ export default function App() {
 
       {isLoginModalOpened && <ModalLogin />}
     </LoginModalContext.Provider>
+
   );
 }
