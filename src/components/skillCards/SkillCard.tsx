@@ -4,7 +4,6 @@ import { CourseType } from "../../types";
 import {
   fetchAndProcessImage,
   fetchAndProcessImageLaptop,
-
 } from "../../api/api";
 import fit from "/images/bgYellow.jpg";
 
@@ -103,49 +102,8 @@ export default function SkillCard({ course }: SkillCardType) {
               </div>
             </div>
           </div>
-
-          {/* мобильная версия дива с directions */}
         </div>
       </div>
-
-      {/* див с рекламой */}
-
-      {/* <div className="lg:hidden relative bg-gray-100">
-        <div className="absolute z-10 -top-[52px] lg:hidden  h-[412px] p-[30px] sm:flex flex-row justify-between  bg-white shadow-2xl rounded-[2rem]">
-          <div className=" flex flex-col gap-7">
-            <p className="text-[32px] lg:text-6xl font-medium leading-[35,2px] lg:leading-15">
-              Начните путь <br />к новому телу
-            </p>
-            <img
-              className=""
-              src="/images/text_advert.png"
-              alt="course_advert"
-            />
-             {!isAuth && (
-            <button 
-            onClick={() => setIsAuth(true)}
-            className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black text-base font-normal leading-[17,6px] rounded-full">
-              Войдите, чтобы добавить курс
-            </button>
-             )}
-             {isAuth && (
-            <button 
-                // onClick={() => addChosenCourse}
-                className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black text-base font-normal leading-[17,6px] rounded-full">
-              Добавить курс
-            </button>
-             )}
-          </div>
-        </div>
-
-        <div className="lg:hidden relative">
-          <img
-            className="absolute z-0 -top-[270px] -left-[4px]"
-            src="/images/crouching_man_vectors.png"
-            alt="course_advert"
-          />
-        </div>
-      </div> */}
 
       <BoyAd />
     </>

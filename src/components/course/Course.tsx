@@ -17,7 +17,6 @@ import {
 import Button from "../button/Button";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import { Link } from "react-router-dom";
-import { appRoutes } from "../../route/appRoutes";
 
 export type CourseProps = {
   course: CourseType;
@@ -132,19 +131,18 @@ export default function Course({
         </div>
 
         {isProfile && (
-          <>
-            <div>
-              <p>Прогресс</p>
-              <div className="w-[300px] rounded-full h-[6px] bg-custom-progress-gray overflow-hidden pb-1">
-                <div className={`h-full w-[30%] bg-custom-progress-blue`}></div>
-              </div>
+          <div className="flex flex-col items-center gap-5 mb-7">
+            <p className="text-xl">Прогресс 30%</p>
+            <div className="w-[300px] rounded-full h-[6px] bg-custom-progress-gray overflow-hidden pb-1">
+              <div className={`h-[6px] w-[30%] bg-custom-progress-blue`}></div>
             </div>
+
             <Link to={`/user/workout-modal/${_id}`}>
-              <Button type="primary" classNames="m-auto w-[300px]">
+              <Button type="primary" classNames="w-[300px]">
                 Начать тренировку
               </Button>
             </Link>
-          </>
+          </div>
         )}
       </Link>
     </div>
