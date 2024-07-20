@@ -1,7 +1,7 @@
-import { useAppSelector } from "../../hooks/redux-hooks";
+import { Link } from "react-router-dom";
+import { appRoutes } from "../../route/appRoutes";
 
 export default function BoyAd() {
-  const user = useAppSelector((state) => state.user);
   return (
     <>
       <div className="sm:hidden lg:flex flex-row pt-[102px]">
@@ -17,15 +17,11 @@ export default function BoyAd() {
               width="437px"
               height="178px"
             />
-            {user ? (
+            <Link to={appRoutes.MAIN}>
               <button className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black font-bold py-2 px-4 rounded-full">
-                Войдите, чтобы добавить курс
+                Вернуться на главную страницу
               </button>
-            ) : (
-              <button className="h-[52px] bg-custom-green hover:bg-custom-green-hover text-black font-bold py-2 px-4 rounded-full">
-                Добавить курс
-              </button>
-            )}
+            </Link>
           </div>
 
           <div className="relative">
@@ -71,15 +67,11 @@ export default function BoyAd() {
               src="/images/text_advert.png"
               alt="course_advert"
             />
-            {user ? (
+            <Link to={appRoutes.MAIN}>
               <button className=" h-[52px] bg-custom-green hover:bg-custom-green-hover text-black text-base font-normal leading-[17,6px] rounded-full">
-                Войдите, чтобы добавить курс
+                Вернуться на главную
               </button>
-            ) : (
-              <button className="  h-[52px] bg-custom-green hover:bg-custom-green-hover text-black text-base font-normal leading-[17,6px] rounded-full">
-                Добавить курс
-              </button>
-            )}
+            </Link>
           </div>
         </div>
 

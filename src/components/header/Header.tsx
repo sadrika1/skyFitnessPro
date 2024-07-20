@@ -19,7 +19,7 @@ export default function Header() {
 
   return (
     <div className="flex justify-center bg-slate-50">
-      <div className="flex justify-between center items-center sm:h-0 min-h-[140px] w-full max-w-[1440px] mx-4 pr-5">
+      <div className="flex justify-between center items-center sm:h-[140px]  w-full max-w-[1440px] mx-4 pr-5">
         <div className="flex flex-col ">
           <Link to="/">
             <img src="/images/logo.svg" alt="Logo" />
@@ -30,7 +30,6 @@ export default function Header() {
         </div>
         {user.email ? (
           <div className="flex items-center lg:gap-5" onClick={handleUserModal}>
-            {/* нужно добавить, чтобы при клике на иконку сразу открывался профиль в мобилке*/}
             <div className="overflow-hidden">
               <img
                 width={40}
@@ -52,7 +51,7 @@ export default function Header() {
                   <path
                     d="M12.3553 1.03308L6.67773 6.7107L1.00012 1.03308"
                     stroke="black"
-                    stroke-width="2"
+                    strokeWidth="2"
                   />
                 </svg>
               </Button>

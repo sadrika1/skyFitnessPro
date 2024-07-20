@@ -7,7 +7,7 @@ import { UserModalContext } from "../../contexts";
 import { removeUser } from "../../store/slices/userSlice";
 import { useOutsideClick } from "../../hooks/use-outside-click";
 
-const UserModal = ({ handleUserModal }) => {
+const UserModal = ({ handleUserModal }: any) => {
   const user = useAppSelector((state) => state.user);
 
   const { setIsUserModalOpen } = useContext(UserModalContext);

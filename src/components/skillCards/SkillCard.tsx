@@ -122,7 +122,6 @@ export default function SkillCard({ course }: SkillCardType) {
             </div>
           </div>
         </div>
-
       </div>
 
       <BoyAd />

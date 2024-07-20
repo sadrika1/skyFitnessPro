@@ -8,7 +8,7 @@ import minusIcon from "/icons/icon-minus.svg";
 import { CourseIDType, CourseType } from "../../types";
 import fit from "/images/bgYellow.jpg";
 
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   deleteFavoriteCourse,
   fetchAndProcessImage,
@@ -17,7 +17,6 @@ import {
 import Button from "../button/Button";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import { Link } from "react-router-dom";
-
 
 export type CourseProps = {
   course: CourseType;
@@ -48,11 +47,9 @@ export default function Course({
     if (isAdded) return;
     if (isProfile) {
       deleteFavoriteCourse(user.id, _id).then(() => {
-        getFavoriteCourseOfUser(user.id).then(
-          (data) => {
-            setAddedCourses(data);
-          }
-        );
+        getFavoriteCourseOfUser(user.id).then((data) => {
+          setAddedCourses(data);
+        });
       });
     } else {
       onAddCourse(_id);
@@ -99,9 +96,7 @@ export default function Course({
       </div>
 
       <Link
-
-        className="flex flex-col items-center gap-3"
-
+        className="flex flex-col items-center gap-3 mb-3"
         to={isProfile ? "#" : `skillcard/${_id}`}
       >
         <div className=" text-base grid md:gap-3 ">
@@ -141,7 +136,9 @@ export default function Course({
             <div className="mb-3">
               <p>Прогресс</p>
               <div className="w-[300px] rounded-full h-[6px] bg-custom-progress-gray overflow-hidden pb-1">
-                <div className={`h-[6px] w-[30%] bg-custom-progress-blue`}></div>
+                <div
+                  className={`h-[6px] w-[30%] bg-custom-progress-blue`}
+                ></div>
               </div>
             </div>
             <Link
@@ -149,7 +146,6 @@ export default function Course({
               to={`/user/workout-modal/${_id}`}
             >
               <Button type="primary" classNames="m-auto w-[300px]">
-
                 Начать тренировку
               </Button>
             </Link>
