@@ -1,17 +1,17 @@
 type WorkoutModalSaveProgressType = {
   progressIsSave: boolean;
-  handleSetProgressIsSave: () => void;
+  handleHideModals: () => void;
 };
 
 export default function ModalSuccess({
   progressIsSave,
-  handleSetProgressIsSave,
+  handleHideModals,
 }: WorkoutModalSaveProgressType) {
   return (
     <>
       {progressIsSave && (
         <div
-          onClick={handleSetProgressIsSave}
+          onClick={handleHideModals}
           className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex items-center justify-center"
         >
           <div

@@ -9,30 +9,26 @@ export interface CourseType {
   _id: string;
   fitting: string;
   directions: string[];
-
 }
 
 export interface WorkoutType {
   name: string;
   _id: string;
   exercises: ExerciseType[];
-  video:string;
+  video: string;
 }
 
 export interface ExerciseType {
   name: string;
+  id: string;
   progress: number;
   quantity: number;
 }
 
 export interface CourseIDType {
-   
   _id: string;
-    
 }
 
 export interface CourseIDType {
-   
-    courseId: string;
-    
+  courseId: string;
 }
