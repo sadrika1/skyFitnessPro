@@ -24,6 +24,7 @@ export function WorkoutVideoPage() {
     courseId: string;
   }>();
 
+
   const user = useAppSelector((state) => state.user);
 
   useEffect(() => {
@@ -104,12 +105,14 @@ export function WorkoutVideoPage() {
                     <div className="mb-4 ">
                       <div className="flex gap-2 ">
                         <div className="mb-2.5">{el.name}</div>
+
                         <div className="mb-2.5">{el.progress}%</div>
                       </div>
 
                       <ProgressBar
                         percentage={(100 * el.progress) / el.quantity}
                       />
+
                     </div>
                   ))
                 ) : (
@@ -127,7 +130,9 @@ export function WorkoutVideoPage() {
           </div>
 
           <ModalProgress
+
             exercises={workout?.exercises}
+
             modalMyProgress={modalMyProgress}
             handleSetModalMyProgress={handleSetModalMyProgress}
             handleSetProgressIsSave={handleSetProgressIsSave}
@@ -135,7 +140,9 @@ export function WorkoutVideoPage() {
 
           <ModalSuccess
             progressIsSave={progressIsSave}
+
             handleHideModals={handleHideModals}
+
           />
         </div>
       </div>
