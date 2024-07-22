@@ -18,6 +18,12 @@ export interface WorkoutType {
   video: string;
 }
 
+export type ProgressWorkoutType = {
+  name: string;
+  progress: number;
+  id: string;
+};
+
 export interface ExerciseType {
   name: string;
   id: string;

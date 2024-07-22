@@ -1,28 +1,38 @@
 import { useEffect, useState } from "react";
 import Heading from "../heading/Heading";
 import { getUserWorkouts } from "../../api/api";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../../hooks/redux-hooks";
+import { useOutsideClick } from "../../hooks/use-outside-click";
+import { appRoutes } from "../../route/appRoutes";
+import { ProgressWorkoutType } from "../../types";
 
 const PopBrowseWorkout = () => {
-  const [workouts, setWorkouts] = useState([]);
-  const [selectedWorkout, setSelectedWorkout] = useState(null);
-  const handleRadioChange = (workout) => {
+  const [workouts, setWorkouts] = useState<ProgressWorkoutType[]>([]);
+  const [selectedWorkout, setSelectedWorkout] =
+    useState<ProgressWorkoutType | null>(null);
+  const handleRadioChange = (workout: ProgressWorkoutType) => {
     setSelectedWorkout(workout);
   };
 
   const user = useAppSelector((state) => state.user);
   const { courseId } = useParams();
+  const navigate = useNavigate();
+  const { ref } = useOutsideClick(() => navigate(appRoutes.USER_PAGE));
 
   useEffect(() => {
-    getUserWorkouts(user.id, courseId).then((data) => {
-      setWorkouts(data);
-    });
+    if (courseId)
+      getUserWorkouts(user.id, courseId).then((data) => {
+        setWorkouts(data);
+      });
   }, []);
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 flex items-center justify-center">
-      <div className="bg-white p-10 rounded-3xl lg:w-[420px] sm:w-[320px]">
+      <div
+        ref={ref}
+        className="bg-white p-10 rounded-3xl lg:w-[420px] sm:w-[320px]"
+      >
         <Heading classNames="text-[32px] mb-4">Выберите тренировку</Heading>
         <div className="flex flex-col gap-5">
           {workouts?.map((workout) => (
