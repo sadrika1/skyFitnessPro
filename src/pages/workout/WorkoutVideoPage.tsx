@@ -1,6 +1,3 @@
-// import { WorkoutProgressBars } from "../../components/WorkoutVideoBranch/WorkoutProgressBars";
-// import { WorkoutVideo } from "../../components/WorkoutVideoBranch/WorkoutVideo";
-
 import { useEffect, useState } from "react";
 import { WorkoutType } from "../../types";
 import { getCourseById, getWorkoutById } from "../../api/api";
@@ -14,13 +11,10 @@ export function WorkoutVideoPage() {
   const [progressIsSave, setProgressIsSave] = useState(false);
   const [courseName, setcourseName] = useState("");
 
-
   const [workout, setWorkout] = useState<WorkoutType | null>(null);
   const { workoutId, courseId } = useParams();
 
-
   const user = useAppSelector((state) => state.user);
-
 
   useEffect(() => {
     if (workoutId && courseId) {
@@ -35,12 +29,11 @@ export function WorkoutVideoPage() {
       getCourseById(courseId).then((data) => {
         console.log("!!!!!!", data);
         if (data?.nameRU) {
-          setcourseName(data?.nameRU)
+          setcourseName(data?.nameRU);
         }
       });
     }
   }, []);
-
 
   const handleSetModalMyProgress = () => {
     setModalMyProgress((prev) => !prev);
@@ -55,20 +48,20 @@ export function WorkoutVideoPage() {
     <>
       <div className="flex justify-center h-screen">
         <div className="w-full max-w-screen-xl mx-4">
-
-
           <section className="mb-10 mt-5">
             <div>
               {/* workoutHeader */}
               <h1 className="text-6xl mb-6 font-medium">{courseName}</h1>
               <div>
-                <span className="text-3xl font-normal">
-                  {workout?.name}
-                </span>
+                <span className="text-3xl font-normal">{workout?.name}</span>
               </div>
             </div>
           </section>
-          <video src={workout?.video} controls className="h-h639px rounded-3xl mb-10"></video>
+          <video
+            src={workout?.video}
+            controls
+            className="h-h639px rounded-3xl mb-10"
+          ></video>
 
           <div className="bg-white w-full px-10 py-10 rounded-3xl shadow-xl">
             <section>
@@ -78,21 +71,22 @@ export function WorkoutVideoPage() {
               </h3>
 
               <div className="grid  grid-flow-col grid-rows-3 gap-x-10 mb-8 justify-start">
-                {workout?.exercises ? workout?.exercises?.map((el) => (
-                  <div className="mb-4 ">
-                    <div className="flex gap-2 ">
-                      <div className="mb-2.5">
-                        {el.name}
+                {workout?.exercises ? (
+                  workout?.exercises?.map((el) => (
+                    <div className="mb-4 ">
+                      <div className="flex gap-2 ">
+                        <div className="mb-2.5">{el.name}</div>
+                        <div className="mb-2.5">{el.progress}</div>
                       </div>
-                      <div className="mb-2.5">{el.progress}</div>
+                      <div className="w-auto bg-slate-100 rounded-full h-1.5">
+                        <div className="h-1.5 rounded-full"></div>
+                      </div>
                     </div>
-                    <div className="w-auto bg-slate-100 rounded-full h-1.5">
-                      <div className="h-1.5 rounded-full"></div>
-                    </div>
-                  </div>
-                )) : <span>Упражнений нет</span>}
+                  ))
+                ) : (
+                  <span>Упражнений нет</span>
+                )}
               </div>
-
 
               <button
                 onClick={handleSetModalMyProgress}
@@ -103,15 +97,16 @@ export function WorkoutVideoPage() {
             </section>
           </div>
 
-
-          <ModalProgress modalMyProgress={modalMyProgress}
+          <ModalProgress
+            modalMyProgress={modalMyProgress}
             handleSetModalMyProgress={handleSetModalMyProgress}
-            handleSetProgressIsSave={handleSetProgressIsSave} />
+            handleSetProgressIsSave={handleSetProgressIsSave}
+          />
 
-
-          <ModalSuccess progressIsSave={progressIsSave}
-            handleSetProgressIsSave={handleSetProgressIsSave} />
-
+          <ModalSuccess
+            progressIsSave={progressIsSave}
+            handleSetProgressIsSave={handleSetProgressIsSave}
+          />
         </div>
       </div>
     </>
