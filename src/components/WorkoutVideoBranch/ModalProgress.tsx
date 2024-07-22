@@ -1,5 +1,5 @@
 import { WorkoutType } from "../../types";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 type WorkoutModalType = {
   exercises?: WorkoutType["exercises"];
@@ -50,7 +50,6 @@ export default function ModalProgress({
 
             <button
               type="submit"
-              // onClick={handleSetProgressIsSave}
               className="w-full bg-lime-400 py-4 font-normal rounded-full"
             >
               Сохранить

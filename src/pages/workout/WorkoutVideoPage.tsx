@@ -1,6 +1,3 @@
-// import { WorkoutProgressBars } from "../../components/WorkoutVideoBranch/WorkoutProgressBars";
-// import { WorkoutVideo } from "../../components/WorkoutVideoBranch/WorkoutVideo";
-
 import { useEffect, useState } from "react";
 import { WorkoutType } from "../../types";
 import {
@@ -14,6 +11,7 @@ import ModalSuccess from "../../components/WorkoutVideoBranch/ModalSuccess.tsx";
 import ModalProgress, {
   Inputs,
 } from "../../components/WorkoutVideoBranch/ModalProgress.tsx";
+import ProgressBar from "../../components/ProgressBar/ProgressBar.tsx";
 
 export function WorkoutVideoPage() {
   const [modalMyProgress, setModalMyProgress] = useState(false);
@@ -27,8 +25,6 @@ export function WorkoutVideoPage() {
   }>();
 
   const user = useAppSelector((state) => state.user);
-
-  console.log(workout?.exercises);
 
   useEffect(() => {
     if (workoutId && courseId) {
@@ -108,16 +104,11 @@ export function WorkoutVideoPage() {
                     <div className="mb-4 ">
                       <div className="flex gap-2 ">
                         <div className="mb-2.5">{el.name}</div>
-                        <div className="mb-2.5">{el.progress}</div>
+                        <div className="mb-2.5">{el.progress}%</div>
                       </div>
-                      {/* <div className="w-auto bg-slate-100 rounded-full h-1.5">
-                        <div className="h-1.5 rounded-full"></div>
-                      </div> */}
-                      <HorizontalProgressWithIndicator
-                        percentage={percentage}
-                        strokeWidth={2}
-                        strokeColor={percentage > 0 ? "#00C1FF" : "#F7F7F7"}
-                        bgStrokeColor="#F7F7F7"
+
+                      <ProgressBar
+                        percentage={(100 * el.progress) / el.quantity}
                       />
                     </div>
                   ))
