@@ -3,6 +3,7 @@ import { changePassword } from "../../api/api";
 import Button from "../button/Button";
 import { useNavigate } from "react-router-dom";
 import { appRoutes } from "../../route/appRoutes";
+import { useOutsideClick } from "../../hooks/use-outside-click";
 
 const UpdatePasswordModal = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const UpdatePasswordModal = () => {
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { ref } = useOutsideClick(() => navigate(appRoutes.USER_PAGE));
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
     const { value, name } = event.target;
@@ -40,7 +42,10 @@ const UpdatePasswordModal = () => {
 
   return (
     <div className="absolute z-50  top-0 left-0 w-full h-full bg-black bg-opacity-20 flex items-center justify-center">
-      <div className="bg-white p-10 rounded-3xl flex flex-col gap-5 items-center">
+      <div
+        ref={ref}
+        className="bg-white p-10 rounded-3xl flex flex-col gap-5 items-center"
+      >
         <img src="/images/logo.svg" alt="Logo" className="pb-5" />
         <input
           name="password"

@@ -20,11 +20,11 @@ import { Link } from "react-router-dom";
 
 export type CourseProps = {
   course: CourseType;
-  courses: CourseType[];
-  isChosenCourse: boolean;
-  onAddCourse: (courseId: string) => void;
-  addedCourses: CourseIDType[];
-  setAddedCourses: (param: any) => void;
+  courses?: CourseType[];
+  isChosenCourse?: boolean;
+  onAddCourse?: (courseId: string) => void;
+  addedCourses?: CourseIDType[];
+  setAddedCourses?: (param: any) => void;
 
   isProfile?: boolean;
 };
@@ -48,11 +48,11 @@ export default function Course({
     if (isProfile) {
       deleteFavoriteCourse(user.id, _id).then(() => {
         getFavoriteCourseOfUser(user.id).then((data) => {
-          setAddedCourses(data);
+          if (setAddedCourses) setAddedCourses(data);
         });
       });
     } else {
-      onAddCourse(_id);
+      if (onAddCourse) onAddCourse(_id);
     }
   };
 

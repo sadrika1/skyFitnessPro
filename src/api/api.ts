@@ -84,22 +84,22 @@ export const getCourses = async () => {
 };
 
 export const getCourse = async (courseId: string) => {
-  let result: CourseType[] = [];
+  // let result: CourseType | null = null;
 
   try {
     const snapshot = await get(child(ref(database), `courses/${courseId}`));
 
     if (snapshot.exists()) {
-      result = snapshot.val();
+      return snapshot.val();
     }
   } catch (e) {
     console.error(e);
   }
-
-  return result;
 };
 
-export const getFavoriteCourseOfUser = async (userId: string) => {
+export const getFavoriteCourseOfUser = async (
+  userId: string
+): Promise<CourseType[]> => {
   try {
     const snapshot = await get(child(ref(database), `users/${userId}`));
 
@@ -116,8 +116,10 @@ export const getFavoriteCourseOfUser = async (userId: string) => {
       const result = await Promise.all(promises);
       return result;
     }
+    return [];
   } catch (e) {
     console.error(e);
+    return [];
   }
 };
 
@@ -154,7 +156,6 @@ export const getUserWorkouts = async (userId: string, courseId: string) => {
 
               id,
               progress: progressSnapshot.val(),
-
             });
           }
         }
@@ -186,13 +187,12 @@ export const getCourseById = async (courseId: string) => {
   return result;
 };
 
-
 export const getWorkoutById = async (
   workoutId: string,
   userId: string,
   courseId: string
 ) => {
-  console.log('getWorkoutById', workoutId, userId, courseId)
+  console.log("getWorkoutById", workoutId, userId, courseId);
   let result: WorkoutType | null = null;
 
   try {
@@ -210,10 +210,18 @@ export const getWorkoutById = async (
   return result;
 };
 
-export const fetchUpdateExercisesProgress = async (userId: string, courseId: string, workoutId: string, newExercisesList: any) => {
+export const fetchUpdateExercisesProgress = async (
+  userId: string,
+  courseId: string,
+  workoutId: string,
+  newExercisesList: any
+) => {
   try {
-    set(ref(database, `users/${userId}/${courseId}/${workoutId}`), newExercisesList);
+    set(
+      ref(database, `users/${userId}/${courseId}/${workoutId}`),
+      newExercisesList
+    );
   } catch (e) {
     console.error(e);
   }
-}
+};

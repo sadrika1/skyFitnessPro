@@ -30,6 +30,10 @@ export default function App() {
                   path={appRoutes.WORKOUT_MODAL}
                   element={<PopBrowseWorkout />}
                 />
+                <Route
+                  path={appRoutes.CHANGE_PASSWORD}
+                  element={<UpdatePasswordModal />}
+                />
               </Route>
               <Route
                 path={appRoutes.WORKOUT_VIDEO_PAGE}
@@ -38,10 +42,6 @@ export default function App() {
               <Route
                 path={appRoutes.WORKOUT_MODAL}
                 element={<PopBrowseWorkout />}
-              />
-              <Route
-                path={appRoutes.CHANGE_PASSWORD}
-                element={<UpdatePasswordModal />}
               />
             </Route>
 
