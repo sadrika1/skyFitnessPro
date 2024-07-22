@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import { WorkoutType } from "../../types";
-import { getCourseById, getWorkoutById } from "../../api/api";
+import {
+  fetchUpdateExercisesProgress,
+  getCourseById,
+  getWorkoutById,
+} from "../../api/api";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import { useParams } from "react-router-dom";
 import ModalSuccess from "../../components/WorkoutVideoBranch/ModalSuccess.tsx";
-import ModalProgress from "../../components/WorkoutVideoBranch/ModalProgress.tsx";
+import ModalProgress, {
+  Inputs,
+} from "../../components/WorkoutVideoBranch/ModalProgress.tsx";
+import ProgressBar from "../../components/ProgressBar/ProgressBar.tsx";
 
 export function WorkoutVideoPage() {
   const [modalMyProgress, setModalMyProgress] = useState(false);
@@ -12,7 +19,11 @@ export function WorkoutVideoPage() {
   const [courseName, setcourseName] = useState("");
 
   const [workout, setWorkout] = useState<WorkoutType | null>(null);
-  const { workoutId, courseId } = useParams();
+  const { workoutId, courseId } = useParams<{
+    workoutId: string;
+    courseId: string;
+  }>();
+
 
   const user = useAppSelector((state) => state.user);
 
@@ -39,7 +50,25 @@ export function WorkoutVideoPage() {
     setModalMyProgress((prev) => !prev);
   };
 
-  const handleSetProgressIsSave = () => {
+  const handleSetProgressIsSave = async (data: Inputs) => {
+    let newData: Record<string, unknown> = {};
+    const keys = Object.keys(data).map((key) => {
+      return { key, value: Number(data[key]) };
+    });
+    keys.forEach((obj) => {
+      newData[obj.key] = obj.value;
+    });
+    await fetchUpdateExercisesProgress(
+      user.id,
+      courseId as string,
+      workoutId as string,
+      data
+    );
+    console.log(newData);
+    handleHideModals();
+  };
+
+  const handleHideModals = () => {
     setModalMyProgress(false);
     setProgressIsSave((prev) => !prev);
   };
@@ -76,11 +105,14 @@ export function WorkoutVideoPage() {
                     <div className="mb-4 ">
                       <div className="flex gap-2 ">
                         <div className="mb-2.5">{el.name}</div>
-                        <div className="mb-2.5">{el.progress}</div>
+
+                        <div className="mb-2.5">{el.progress}%</div>
                       </div>
-                      <div className="w-auto bg-slate-100 rounded-full h-1.5">
-                        <div className="h-1.5 rounded-full"></div>
-                      </div>
+
+                      <ProgressBar
+                        percentage={(100 * el.progress) / el.quantity}
+                      />
+
                     </div>
                   ))
                 ) : (
@@ -98,6 +130,9 @@ export function WorkoutVideoPage() {
           </div>
 
           <ModalProgress
+
+            exercises={workout?.exercises}
+
             modalMyProgress={modalMyProgress}
             handleSetModalMyProgress={handleSetModalMyProgress}
             handleSetProgressIsSave={handleSetProgressIsSave}
@@ -105,7 +140,9 @@ export function WorkoutVideoPage() {
 
           <ModalSuccess
             progressIsSave={progressIsSave}
-            handleSetProgressIsSave={handleSetProgressIsSave}
+
+            handleHideModals={handleHideModals}
+
           />
         </div>
       </div>
