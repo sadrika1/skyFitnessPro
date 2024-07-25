@@ -210,6 +210,29 @@ export const getWorkoutById = async (
   return result;
 };
 
+export const getProgressById = async (
+  workoutId: string,
+  userId: string,
+  courseId: string
+) => {
+  console.log("getWorkoutById", workoutId, userId, courseId);
+  let result: WorkoutType | null = null;
+
+  try {
+    const snapshot = await get(
+      child(ref(database), `progress/${userId}/${courseId}/${workoutId}`)
+    );
+
+    if (snapshot.exists()) {
+      result = snapshot.val();
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
+  return result;
+};
+
 export const fetchUpdateExercisesProgress = async (
   userId: string,
   courseId: string,
@@ -218,10 +241,26 @@ export const fetchUpdateExercisesProgress = async (
 ) => {
   try {
     set(
-      ref(database, `users/${userId}/${courseId}/${workoutId}`),
+      ref(database, `progress/${userId}/${courseId}/${workoutId}`),
       newExercisesList
     );
   } catch (e) {
     console.error(e);
   }
+};
+
+export const getVideo = async (workoutId: string) => {
+  let result: WorkoutType | null = null;
+
+  try {
+    const snapshot = await get(child(ref(database), `workouts/${workoutId}`));
+
+    if (snapshot.exists()) {
+      result = snapshot.val();
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
+  return result?.video;
 };
