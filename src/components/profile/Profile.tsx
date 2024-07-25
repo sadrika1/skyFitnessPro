@@ -27,7 +27,7 @@ const Profile = () => {
     });
   }, []);
   return (
-    <div className="bg-slate-50 flex justify-center h-screen">
+    <div className="bg-slate-50 flex justify-center h-full">
       <div className="w-full max-w-screen-xl mx-4">
         <Heading classNames="mb-10">Профиль</Heading>
 

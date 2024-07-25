@@ -41,6 +41,8 @@ export default function ModalProgress({
                       className="py-4 px-5 outline-none border-solid border-slate-300 border-2 rounded-lg text-lg"
                       type="number"
                       placeholder="0"
+                      max={el.quantity}
+                      min={0}
                       {...inputProps}
                     />
                   </div>
